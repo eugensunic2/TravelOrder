@@ -125,3 +125,12 @@
   border: 1px solid grey;
   margin: 0 auto;
 }
+.box-border {
+  box-shadow: 1px 1px 1px #6b6969;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.total-value {
+  color: #3273dc;
+  font-size: 18px;
+}
