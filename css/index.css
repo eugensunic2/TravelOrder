@@ -7,9 +7,18 @@
 .flt-clr-lft {
   clear: left;
 }
+.input-number {
+  background-color: #ffdd57;
+  border-radius: 4px;
+  padding: 0px 3px;
+}
 .mg-btm-30 {
   margin-bottom: 30px;
 }
+.inline-block {
+  display: inline-block;
+}
+
 .toggle-button {
   border-radius: 2px;
   border: 1px solid grey;
@@ -47,7 +56,7 @@
 }
 
 .svg-language {
-  width: 60px;
+  width: 40px;
 }
 .svg-language:hover {
   opacity: 0.6;
@@ -85,24 +94,22 @@
 }
 .left-corner-text {
   position: relative;
+  border-radius: 2px;
   margin-right: 10px;
   color: #353636;
-  border: 1px solid #c5c5c5;
-  border-left: 0px;
-  border-top: 0px;
+  /* border: 1px solid #c5c5c5; */
   padding-right: 2px;
   padding-left: 2px;
-  box-shadow: 0px 0px 1px 0 #bbb4b4;
+  box-shadow: 0px 0px 1px 0 #4a4a4a;
 }
 
 .left-corner-text-main {
-  font-size: 11px;
-  border: 1px solid grey;
-  border-top: 0px;
-  border-left: 0px;
+  font-size: 18px;
+  border: 1px solid #00d1b2;
   float: left;
   border-radius: 2px;
-  padding: 0px 2px;
+  /* padding: 0px 2px; */
+  padding: 4px;
   margin-right: 20px;
   margin-bottom: 10px;
 }
@@ -122,11 +129,9 @@
 }
 .box-center {
   width: 50%;
-  border: 1px solid grey;
   margin: 0 auto;
 }
 .box-border {
-  box-shadow: 1px 1px 1px #6b6969;
   border-radius: 2px;
   margin-bottom: 20px;
 }
