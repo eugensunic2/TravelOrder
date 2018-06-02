@@ -5,6 +5,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulmaswatch/0.6.2/default/bulmaswatch.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/typeheading.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+  <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+
+
 </head>
 
 <body>
@@ -13,7 +20,7 @@
     <img class="flt-rgt info" src="./image/info.png" alt="Info">
     <h1 id="main-heading" class="content-center">Travel order</h1>
   </div>
-  <div class="container is-fluid">
+  <div class="container">
     <span class="flt-lft toggle-button">hide</span>
     <div id="settings-section" class="columns flt-clr-lft">
 
@@ -105,10 +112,10 @@
 
       </div>
       <div id="color-mode" class="settings-section column">
-        <span class="flt-lft left-corner-text">Color mode</span>
+        <span class="flt-lft left-corner-text">Tech</span>
       </div>
-      <div id="text-preference" class="settings-section column cancel-mg-rgt">
-        <span class="flt-lft left-corner-text">Text preference</span>
+      <div id="style-preference" class="settings-section column cancel-mg-rgt">
+        <span class="flt-lft left-corner-text">Style preference</span>
         <div id="zooms">
           <?xml version="1.0" encoding="iso-8859-1"?>
           <svg version="1.1" class="svg-zoom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 52.966 52.966" style="enable-background:new 0 0 52.966 52.966;" xml:space="preserve">
@@ -142,93 +149,97 @@
         <div id="remove-content">
           <span class="remove-content-text">remove content</span>
         </div>
-
-
+        <span class="inline-block hlt">hlt</span>
+        <span class="inline-block colorize">color</span>
       </div>
-
     </div>
+
+
     <div id="main-date-section" class="box-center box-border">
       <span class="left-corner-text-main">date section</span>
-      <p>Content description here, some text to explain what this section is about</p>
+      <p class="flt-clr-lft">Content description here, some text to explain what this section is about</p>
       <div class="field inline-block order-number">
         <div class="control">
-          <input class="input is-medium" type="text" placeholder="Input date dd/mm/yyy">
+          <input class="input is-medium" type="text" placeholder="R.br">
         </div>
       </div>
       <div class="inline-block">
         <div class="field">
           <div class="control">
-            <input class="input is-medium" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-medium" type="text" placeholder=" dd.mm.yyyy">
           </div>
         </div>
       </div>
     </div>
 
-    <div id="obracun-dnevnica" class="box-center box-border">
+
+    <div id="obracun-dnevnica" class="box-center flt-clr-bth">
       <span class="left-corner-text-main">obracun dnevnica</span>
-      <span class="flt-lft flt-clr-lft input-number">#1</span>
-      <span class="flt-clr-lft flt-lft">Datum</span>
-      <div class="">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+      <div id="plus-minus-dnevnica-holder">
+        <span id="add-extra-obracun" class="inline-block add-remove-icon">+</span>
+        <span id="remove-extra-obracun" class="inline-block add-remove-icon">-</span>
+      </div>
+      <div class="add-obracun">
+        <span class="flt-lft flt-clr-lft input-number numberize-dnevnica">#1</span>
+        <span class="flt-clr-lft flt-lft">Datum</span>
+        <div class="date-width">
+          <div class="field">
+            <div class="control">
+              <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy">
+            </div>
+          </div>
+        </div>
+        <span>Drzava</span>
+        <div id="" class="mg-btm-10 the-country">
+          <input class="typeahead flag-obracun" type="text" placeholder="Select country">
+        </div>
+        <span class="inline-block">Polazak</span>
+        <div class="inline-block">
+          <div class="field">
+            <div class="control">
+              <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy">
+            </div>
+          </div>
+        </div>
+        <span class="inline-block">Povratak</span>
+        <div class="inline-block">
+          <div class="field">
+            <div class="control">
+              <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy">
+            </div>
           </div>
         </div>
       </div>
-      <span>Drzava</span>
-      <div class="">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
-          </div>
-        </div>
-      </div>
-      <span class="inline-block">Polazak</span>
-      <div class="inline-block">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
-          </div>
-        </div>
-      </div>
-      <span class="inline-block">Povratak</span>
-      <div class="inline-block">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
-          </div>
-        </div>
-      </div>
-      <div class="account-result flt-rgt">
-        <span>Total:</span>
-        <span class="total-value">188$</span>
-      </div>
+      <br/>
+    </div>
+    <div class="account-result flt-rgt pdg-rgt-15">
+      <span class="ft-sz-20">Total:</span>
+      <span class="total-value">188$</span>
     </div>
 
-    <div id="obracun-prjevoznih-troskova" class="box-center box-border">
+
+
+    <div id="obracun-prjevoznih-troskova" class="box-center box-border flt-clr-bth">
       <span class="left-corner-text-main">prjevozni troskovi</span>
+      <span class="inline-block add-remove-icon">+</span>
       <span class="flt-lft flt-clr-lft input-number">#1</span>
       <span class="flt-clr-lft flt-lft">Datum</span>
-      <div class="">
+      <div class="date-width">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="dd.mm.yyyy">
           </div>
         </div>
       </div>
       <span>Vrsta prjevoza</span>
-      <div class="">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
-          </div>
-        </div>
+      <div id="" class="the-transport mg-btm-10">
+        <input class="typeahead" type="text" placeholder="Select prjevoz">
       </div>
       <span class="inline-block">Od</span>
       <div class="inline-block">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="dd.mm.yyyy">
           </div>
         </div>
       </div>
@@ -236,7 +247,7 @@
       <div class="inline-block">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="dd.mm.yyyy">
           </div>
         </div>
       </div>
@@ -244,64 +255,69 @@
       <div class="inline-block">
         <div class="field">
           <div class="control path-amount">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="Km">
           </div>
         </div>
       </div>
-      <div class="account-result flt-rgt">
-        <span>Total:</span>
-        <span class="total-value">188$</span>
-      </div>
+      <br/>
+    </div>
+    <div class="account-result flt-rgt pdg-rgt-15">
+      <span class="ft-sz-20">Total:</span>
+      <span class="total-value">188$</span>
     </div>
 
-    <div id="obracun-ostalih-troskova" class="box-center box-border">
+
+    <div id="obracun-ostalih-troskova" class="box-center box-border flt-clr-bth">
       <span class="left-corner-text-main">ostali troskovi</span>
+      <span class="inline-block add-remove-icon">+</span>
       <span class="flt-lft flt-clr-lft input-number">#1</span>
       <span class="flt-clr-lft flt-lft">Datum</span>
-      <div class="">
+      <div class="date-width">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="dd.mm.yyyy">
           </div>
         </div>
       </div>
       <span>Vrsta troska</span>
-      <div class="">
-        <div class="field">
-          <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
-          </div>
-        </div>
+      <div id="" class="the-spending mg-btm-10">
+        <input class="typeahead" type="text" placeholder="Select trosak">
       </div>
       <span class="">Iznos</span>
       <div class="inline-block">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="dd.mm.yyyy">
           </div>
         </div>
       </div>
-      <span class="">Valuta</span>
-      <div class="inline-block">
+      <div class="inline-block width-70">
         <div class="field">
           <div class="control">
-            <input class="input is-small" type="text" placeholder="Input date dd/mm/yyy">
+            <input class="input is-small" type="text" placeholder="$,eur,HRK">
           </div>
         </div>
       </div>
-      <div class="account-result flt-rgt">
-        <span>Total:</span>
-        <span class="total-value">188$</span>
-      </div>
+      <br/>
+    </div>
+    <div class="account-result flt-rgt pdg-rgt-15">
+      <span class="ft-sz-20">Total:</span>
+      <span class="total-value">188$</span>
     </div>
 
-    <div id="izvjesce" class="content-center mg-btm-30">
+    <div id="izvjesce" class="content-center mg-btm-30 mg-tp-100">
       Some extra description of the trip
     </div>
-    <a class="button is-primary preview-mode">Preview mode</a>
+    <hr>
+    <div class="account-result overall">
+      <span class="ft-sz-20">Overall:</span>
+      <span class="total-value">300$</span>
+    </div>
+
+    <a id="preview-mode" class="button is-primary preview-mode">Preview mode</a>
   </div>
-
-
+  <script src="./js/autocomplete.js"></script>
+  <script src="./js/sample.js"></script>
 
 </body>
 

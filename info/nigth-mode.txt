@@ -1,0 +1,28 @@
+body -->
+    background: #363636d4;
+    color: white;
+
+.input-number{
+background-color: #ffdd57e0;
+border-radius: 4px;
+padding: 1px 5px;
+box-shadow: 1px 1px 1px #949494;
+color: black;
+}
+
+-total-value{
+color: #90baff;
+font-size: 20px;
+font-weight: 600;
+}
+
+.left-corner{
+    border: 1px solid #b9b6b6
+}
+
+
+
+#main-heading {
+    font-size: 28px;
+    color: #e4e4e4;
+    text-decoration: underline;
