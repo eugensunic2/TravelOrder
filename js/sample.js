@@ -9,6 +9,9 @@
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
+    html2canvas(document.querySelector('#capture')).then(canvas => {
+      document.body.appendChild(canvas);
+    });
   });
 
   // plus button obracun (1)
