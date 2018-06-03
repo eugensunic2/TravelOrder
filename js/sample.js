@@ -9,8 +9,21 @@
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
+
     html2canvas(document.querySelector('#capture')).then(canvas => {
-      document.body.appendChild(canvas);
+      var imgData = canvas.toDataURL('image/jpeg', 1.0);
+      var pdf = new jsPDF();
+      pdf.text('somet text', 10, 10);
+      //pdf.addImage('../image/country/croatia.png', 'JPEG', 0, 0);
+      pdf.lines([[2, 2], [-2, 2], [1, 1, 2, 2, 3, 3], [2, 1]], 212, 110, 10); // line, line, bezier curve, line
+      pdf.rect(100, 100, 100, 100, '');
+      pdf.addPage();
+      //  pdf.imageLoadFromUrl('../image/country/croatia.png');
+      // place this mage at given X, Y coordinates on the page
+      //pdf.imagePlace(20, 40);
+      console.log(pdf.x);
+      pdf.addImage('', 'JPEG', 15, 40, 180, 160);
+      pdf.save('download.pdf');
     });
   });
 

@@ -224,3 +224,15 @@
     margin-left: 10px;
   }
 }
+@media print {
+  @page {
+  }
+  .header {
+    position: fixed;
+  }
+
+  .container {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
