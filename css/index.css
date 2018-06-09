@@ -51,6 +51,10 @@
   margin-bottom: 2px;
   font-size: 12px;
 }
+.toggle-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
 .hlt {
   border: 1px solid gray;
   border-radius: 3px;
@@ -67,10 +71,15 @@
   cursor: pointer;
   opacity: 0.8;
 }
-.colorize:hover {
+.columns-inline {
+  background-color: #80808045;
+}
+.colorize,
+.columns-inline:hover {
   cursor: pointer;
   opacity: 0.8;
 }
+
 .cancel-mg-rgt {
   margin-right: 0px !important;
 }
@@ -235,4 +244,32 @@
     margin-top: 100px;
     margin-bottom: 100px;
   }
+}
+.input-number2 {
+  background-color: #ffdd57e0;
+  border-radius: 4px;
+  padding: 1px 5px;
+  box-shadow: 1px 1px 1px #949494;
+  color: black;
+}
+.night-logo {
+  background: #ededed;
+  border: 1px solid #f4ecec;
+}
+.body2 {
+  background: #363636d4;
+  color: white;
+}
+.total-value2 {
+  color: #90baff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.left-corner2 {
+  border: 1px solid #b9b6b6;
+}
+#main-heading2 {
+  font-size: 28px;
+  color: #e4e4e4;
+  text-decoration: underline;
 }

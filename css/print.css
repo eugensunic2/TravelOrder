@@ -1,0 +1,57 @@
+td {
+  border-bottom: 1pt solid black;
+}
+html,
+body {
+  /* width: 210mm; */
+  height: 297mm;
+}
+
+#logo {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  right: 18px;
+}
+.center {
+  text-align: center;
+}
+.blc {
+  display: block;
+}
+.float-right {
+  float: right;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.intro-header-container {
+  background: #efefef;
+  border: 1px solid #dedcdc;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+span.intro-header {
+  text-align: center;
+}
+span.travel-txt {
+  font-size: 25px;
+  font-weight: 600;
+}
+span.travel-rest {
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  text-align: center;
+  border: 1px solid rgb(216, 212, 212);
+}

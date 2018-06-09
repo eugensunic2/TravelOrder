@@ -9,23 +9,31 @@
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
-
-    html2canvas(document.querySelector('#capture')).then(canvas => {
-      var imgData = canvas.toDataURL('image/jpeg', 1.0);
-      var pdf = new jsPDF();
-      pdf.text('somet text', 10, 10);
-      //pdf.addImage('../image/country/croatia.png', 'JPEG', 0, 0);
-      pdf.lines([[2, 2], [-2, 2], [1, 1, 2, 2, 3, 3], [2, 1]], 212, 110, 10); // line, line, bezier curve, line
-      pdf.rect(100, 100, 100, 100, '');
-      pdf.addPage();
-      //  pdf.imageLoadFromUrl('../image/country/croatia.png');
-      // place this mage at given X, Y coordinates on the page
-      //pdf.imagePlace(20, 40);
-      console.log(pdf.x);
-      pdf.addImage('', 'JPEG', 15, 40, 180, 160);
-      pdf.save('download.pdf');
-    });
+    generateObracunTable();
   });
+
+  //settings
+  document.querySelector('#night-mode').addEventListener('click', function() {
+    document.querySelector('body').classList.add('body2');
+    document.querySelector('.logo').classList.add('night-logo');
+    document.querySelector('#night-mode').innerHTML = 'night';
+    // document.querySelector('#main-heading')
+
+    for (var i = 0; i < document.querySelectorAll('.input-number').length; i++) {
+      document.querySelectorAll('.input-number')[i].classList.add('input-number2');
+      document.querySelectorAll('.input-number')[i].classList.remove('input-number');
+    }
+    for (var i = 0; i < document.querySelectorAll('.total-value').length; i++) {
+      document.querySelectorAll('.total-value')[i].classList.add('total-value2');
+      document.querySelectorAll('.total-value')[i].classList.remove('total-value');
+    }
+    for (var i = 0; i < document.querySelectorAll('.left-corner').length; i++) {
+      document.querySelectorAll('.left-corner')[i].classList.add('left-corner2');
+      document.querySelectorAll('.left-corner')[i].classList.remove('left-corner');
+    }
+  });
+  document.querySelector('#highlight-heading').addEventListener('click', function() {});
+  document.querySelector('#row-column').addEventListener('click', function() {});
 
   // plus button obracun (1)
   document.querySelector('#add-extra-obracun').addEventListener('click', function() {
