@@ -12,6 +12,13 @@
 
   var fontSize = 15;
 
+  appendLinkTag();
+  appendScriptTag();
+  // better solution callback;
+  setTimeout(function() {
+    hidePrintPage();
+  }, 500);
+
   hideMinusIcon('#remove-extra-obracun');
   hideMinusIcon('#remove-extra-prijevozni');
   hideMinusIcon('#remove-extra-ostali');
@@ -24,22 +31,17 @@
 
     document.querySelector('#parent-heading').style.display = 'none';
     document.querySelector('#parent-container').style.display = 'none';
+    document.body.style.visibility = 'visible';
+    document.body.classList.remove('body2');
+    document.querySelector('#main-print-container').style.display = '';
 
-    appendLinkTag();
-    appendScriptTag();
+    window.print();
 
-    setTimeout(function() {
-      document.querySelector('.back-button').addEventListener('click', function() {
-        document.querySelector('#parent-heading').style.display = '';
-        document.querySelector('#parent-container').style.display = '';
-        document.querySelector('#main-print-container').style.display = 'none';
-      });
-      document.body.style.visibility = 'visible';
-      document.body.classList.remove('body2');
-      document.querySelector('#main-print-container').style.display = '';
-
-      window.print();
-    }, 200);
+    document.querySelector('.back-button').addEventListener('click', function() {
+      document.querySelector('#parent-heading').style.display = '';
+      document.querySelector('#parent-container').style.display = '';
+      document.querySelector('#main-print-container').style.display = 'none';
+    });
   });
 
   //SETTINGS BEGIN
@@ -227,4 +229,7 @@ function appendLinkTag() {
   link.rel = 'stylesheet';
   link.href = './css/print.css';
   head.appendChild(link);
+}
+function hidePrintPage() {
+  document.querySelector('#main-print-container').style.display = 'none';
 }
