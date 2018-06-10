@@ -161,7 +161,6 @@
   border: 1px solid #00d1b2;
   float: left;
   border-radius: 2px;
-  /* padding: 0px 2px; */
   padding: 4px;
   margin-right: 20px;
   margin-bottom: 10px;
@@ -268,8 +267,33 @@
 .left-corner2 {
   border: 1px solid #b9b6b6;
 }
-#main-heading2 {
-  font-size: 28px;
-  color: #e4e4e4;
-  text-decoration: underline;
+.left-corner-text2 {
+  color: white;
+  position: relative;
+  border-radius: 2px;
+  margin-right: 10px;
+  border: 1px solid #c5c5c5;
+  padding-right: 2px;
+  padding-left: 2px;
+  box-shadow: 0px 0px 1px 0 #4a4a4a;
+}
+.font-element2 {
+  background: #6d6d6d;
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+}
+.left-corner-text-main2 {
+  font-size: 18px;
+  background: #00d1b236;
+  border: 1px solid #00d1b2;
+  float: left;
+  border-radius: 2px;
+  padding: 4px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.new-font {
+  font-family: 'Happy Monkey', cursive;
 }
