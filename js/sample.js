@@ -31,7 +31,6 @@
 
     document.querySelector('#parent-heading').style.display = 'none';
     document.querySelector('#parent-container').style.display = 'none';
-    document.body.style.visibility = 'visible';
     document.body.classList.remove('body2');
     document.querySelector('#main-print-container').style.display = '';
 
@@ -106,6 +105,7 @@
         : document.querySelectorAll('.left-corner-text-main')[i].classList.remove('left-corner-text-main2');
     }
   });
+
   //night-mode
   document.querySelector('#night-mode').addEventListener('click', function() {
     nigth_mode_toggle = !nigth_mode_toggle;
