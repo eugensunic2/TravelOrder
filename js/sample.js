@@ -18,35 +18,28 @@
 
   // open sheet in preview mode
   document.querySelector('#preview-mode').addEventListener('click', function() {
-    console.log('here');
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
-    tempMain = document.body.innerHTML;
+
     document.querySelector('#parent-heading').style.display = 'none';
     document.querySelector('#parent-container').style.display = 'none';
 
-    if (!justOnce) {
-      appendLinkTag();
-      appendScriptTag();
-      appendBackButton();
-      appendPrintButton();
-    } else {
-      console.log('here');
-      document.body.innerHTML = tempPrint;
-    }
+    appendLinkTag();
+    appendScriptTag();
 
     setTimeout(function() {
       document.querySelector('.back-button').addEventListener('click', function() {
-        tempPrint = document.body.innerHTML;
-        document.body.innerHTML = tempMain;
+        document.querySelector('#parent-heading').style.display = '';
+        document.querySelector('#parent-container').style.display = '';
+        document.querySelector('#main-print-container').style.display = 'none';
       });
       document.body.style.visibility = 'visible';
       document.body.classList.remove('body2');
+      document.querySelector('#main-print-container').style.display = '';
 
       window.print();
     }, 200);
-    justOnce = true;
   });
 
   //SETTINGS BEGIN
@@ -234,23 +227,4 @@ function appendLinkTag() {
   link.rel = 'stylesheet';
   link.href = './css/print.css';
   head.appendChild(link);
-}
-function appendBackButton() {
-  var newdiv = document.createElement('div');
-  newdiv.innerHTML = 'go back';
-  newdiv.setAttribute('class', 'print-only back-button');
-  newdiv.style = 'display:inline-block;';
-
-  document.body.appendChild(newdiv);
-}
-function appendPrintButton() {
-  var newdiv = document.createElement('div');
-  newdiv.innerHTML = 'print';
-  newdiv.setAttribute('class', 'print-only back-button');
-  newdiv.style = 'background: #3273dc;display: inline-block;text-align:center';
-  newdiv.addEventListener('click', function() {
-    window.print();
-  });
-
-  document.body.appendChild(newdiv);
 }

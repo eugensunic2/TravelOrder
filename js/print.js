@@ -1,5 +1,10 @@
 (function() {
   // ligth blue color: background-color:#209cee30;
+  var mainContainer = document.createElement('div');
+  mainContainer.setAttribute('id', 'main-print-container');
+  document.body.appendChild(mainContainer);
+  appendBackButton();
+  appendPrintButton();
   setCompanyLogo('https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg');
   setCompanyAddress('Comsysto d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; www.comsysto.com &#8226; kontakt@comsysto.com');
 
@@ -16,6 +21,25 @@
   setSignatureForm();
 })();
 
+function appendBackButton() {
+  var newdiv = document.createElement('div');
+  newdiv.innerHTML = 'go back';
+  newdiv.setAttribute('class', 'print-only back-button');
+  newdiv.style = 'display:inline-block;';
+
+  document.querySelector('#main-print-container').appendChild(newdiv);
+}
+function appendPrintButton() {
+  var newdiv = document.createElement('div');
+  newdiv.innerHTML = 'print';
+  newdiv.setAttribute('class', 'print-only back-button');
+  newdiv.style = 'background: #3273dc;display: inline-block;text-align:center';
+  newdiv.addEventListener('click', function() {
+    window.print();
+  });
+
+  document.querySelector('#main-print-container').appendChild(newdiv);
+}
 function generateTable(rowNum, data, totalValue, headerNamesArray) {
   // id= .add-obracun
   var cnt = 0;
@@ -43,7 +67,7 @@ function generateTable(rowNum, data, totalValue, headerNamesArray) {
       tr.appendChild(td);
     }
   }
-  document.body.appendChild(table);
+  document.querySelector('#main-print-container').appendChild(table);
   setResultFooter('Ukupno', '183 HRK');
 }
 
@@ -51,7 +75,7 @@ function setTableTitle(titleTxt) {
   var title = document.createElement('h2');
   title.innerHTML = titleTxt;
   title.style = 'font-size: 17px;font-weight: 600;margin-bottom:10px;';
-  document.body.appendChild(title);
+  document.querySelector('#main-print-container').appendChild(title);
 }
 
 function setCompanyLogo(imgPath) {
@@ -59,7 +83,7 @@ function setCompanyLogo(imgPath) {
   image.setAttribute('src', imgPath);
   image.setAttribute('id', 'logo');
 
-  document.body.appendChild(image);
+  document.querySelector('#main-print-container').appendChild(image);
 }
 function setCompanyAddress(address) {
   var adr = document.createElement('p');
@@ -67,7 +91,7 @@ function setCompanyAddress(address) {
   adr.style = 'color:grey;margin-top:10px;font-size:13px;margin-bottom:30px';
   adr.innerHTML = address;
 
-  document.body.appendChild(adr);
+  document.querySelector('#main-print-container').appendChild(adr);
 }
 function setIntroHeader(titleTxt, dateTxt, numberTxt) {
   // parent
@@ -90,7 +114,7 @@ function setIntroHeader(titleTxt, dateTxt, numberTxt) {
   container.appendChild(date);
   container.appendChild(number);
 
-  document.body.appendChild(container);
+  document.querySelector('#main-print-container').appendChild(container);
 }
 function setIntermediateHeader() {
   var container = document.createElement('div');
@@ -109,7 +133,7 @@ function setIntermediateHeader() {
 
   container.appendChild(div_1);
   container.appendChild(div_2);
-  document.body.appendChild(container);
+  document.querySelector('#main-print-container').appendChild(container);
 }
 
 function setResultFooter(leftElementContent, rightElementContent) {
@@ -130,7 +154,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
   divElement.appendChild(leftElement);
   divElement.appendChild(rightElement);
 
-  document.body.appendChild(divElement);
+  document.querySelector('#main-print-container').appendChild(divElement);
 }
 function overallPriceDisplay() {
   container = document.createElement('div');
@@ -188,7 +212,7 @@ function overallPriceDisplay() {
   container.appendChild(leftElement);
   container.appendChild(rightElement);
 
-  document.body.appendChild(container);
+  document.querySelector('#main-print-container').appendChild(container);
 }
 function setSignatureForm() {
   var container = document.createElement('div');
@@ -238,10 +262,11 @@ function setSignatureForm() {
   container.appendChild(div_1);
   container.appendChild(div_par);
 
-  document.body.appendChild(container);
+  document.querySelector('#main-print-container').appendChild(container);
 }
 
 function displayOverallCalculation() {
   var divElement = document.createElement('table');
 }
+
 function generateFooterSignature() {}
