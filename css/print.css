@@ -55,3 +55,25 @@ td {
   text-align: center;
   border: 1px solid rgb(216, 212, 212);
 }
+.back-button {
+  font-weight: 600;
+  width: 75px;
+  padding: 3px;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  font-size: 17px;
+  color: #ffffff;
+  background: #ff3860;
+}
+.back-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.print-only {
+  display: block;
+}
+@media print {
+  .print-only {
+    display: none;
+  }
+}

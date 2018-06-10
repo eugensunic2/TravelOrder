@@ -4,6 +4,11 @@
   var highlight_mode_toggle = false;
   var hide_show_btn = false;
   var fontFlag = false;
+  var script;
+  var link;
+  var tempMain;
+  var tempPrint;
+  var justOnce = false;
 
   var fontSize = 15;
 
@@ -13,10 +18,35 @@
 
   // open sheet in preview mode
   document.querySelector('#preview-mode').addEventListener('click', function() {
+    console.log('here');
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
-    generateObracunTable();
+    tempMain = document.body.innerHTML;
+    document.querySelector('#parent-heading').style.display = 'none';
+    document.querySelector('#parent-container').style.display = 'none';
+
+    if (!justOnce) {
+      appendLinkTag();
+      appendScriptTag();
+      appendBackButton();
+      appendPrintButton();
+    } else {
+      console.log('here');
+      document.body.innerHTML = tempPrint;
+    }
+
+    setTimeout(function() {
+      document.querySelector('.back-button').addEventListener('click', function() {
+        tempPrint = document.body.innerHTML;
+        document.body.innerHTML = tempMain;
+      });
+      document.body.style.visibility = 'visible';
+      document.body.classList.remove('body2');
+
+      window.print();
+    }, 200);
+    justOnce = true;
   });
 
   //SETTINGS BEGIN
@@ -191,4 +221,36 @@ function addMinusIcon(self) {
 
 function hideMinusIcon(self) {
   document.querySelector(self).style.visibility = 'hidden';
+}
+function appendScriptTag() {
+  script = document.createElement('script');
+  script.src = './js/print.js';
+  script.async = false;
+  document.body.appendChild(script);
+}
+function appendLinkTag() {
+  var head = document.getElementsByTagName('head')[0];
+  link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = './css/print.css';
+  head.appendChild(link);
+}
+function appendBackButton() {
+  var newdiv = document.createElement('div');
+  newdiv.innerHTML = 'go back';
+  newdiv.setAttribute('class', 'print-only back-button');
+  newdiv.style = 'display:inline-block;';
+
+  document.body.appendChild(newdiv);
+}
+function appendPrintButton() {
+  var newdiv = document.createElement('div');
+  newdiv.innerHTML = 'print';
+  newdiv.setAttribute('class', 'print-only back-button');
+  newdiv.style = 'background: #3273dc;display: inline-block;text-align:center';
+  newdiv.addEventListener('click', function() {
+    window.print();
+  });
+
+  document.body.appendChild(newdiv);
 }
