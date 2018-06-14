@@ -49,10 +49,11 @@
 
   //default font size
   document.querySelector('#row-default').addEventListener('click', function() {
-    // total value hand highlight heading have different fonts, adjust that
-    for (var i = 0; i < fontSizeObject.length; i++) {
-      fontSizeObject[i].style.fontSize = '16px';
-    }
+    fontSize = 0;
+    changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
+    changeFontSizeSpan(fontSizeObject.array2, fontSizeObject.fontSize2, fontSize);
+    changeFontSizeSpan(fontSizeObject.array3, fontSizeObject.fontSize3, fontSize);
+    changeFontSizeSpan(fontSizeGeneral.array, fontSizeGeneral.fontSize, fontSize);
   });
 
   // font change
@@ -67,36 +68,26 @@
   //plus icon zoom
   document.querySelector('#zoom-plus').addEventListener('click', function() {
     fontSize = fontSize + 1;
-
-    for (var i = 0; i < fontSizeObject.array1.length; i++) {
-      fontSizeObject.array1[i].style.fontSize = (fontSizeObject.fontSize1 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeObject.array2.length; i++) {
-      fontSizeObject.array2[i].style.fontSize = (fontSizeObject.fontSize2 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeObject.array3.length; i++) {
-      fontSizeObject.array3[i].style.fontSize = (fontSizeObject.fontSize3 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeGeneral.array.length; i++) {
-      fontSizeGeneral.array[i].style.fontSize = (fontSizeGeneral.fontSize + fontSize).toString() + 'px';
+    if (fontSize < 11) {
+      changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
+      changeFontSizeSpan(fontSizeObject.array2, fontSizeObject.fontSize2, fontSize);
+      changeFontSizeSpan(fontSizeObject.array3, fontSizeObject.fontSize3, fontSize);
+      changeFontSizeSpan(fontSizeGeneral.array, fontSizeGeneral.fontSize, fontSize);
+    } else {
+      alert('Maximum size reached');
     }
   });
 
   // minus icon zoom
   document.querySelector('#zoom-minus').addEventListener('click', function() {
     fontSize = fontSize - 1;
-
-    for (var i = 0; i < fontSizeObject.array1.length; i++) {
-      fontSizeObject.array1[i].style.fontSize = (fontSizeObject.fontSize1 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeObject.array2.length; i++) {
-      fontSizeObject.array2[i].style.fontSize = (fontSizeObject.fontSize2 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeObject.array3.length; i++) {
-      fontSizeObject.array3[i].style.fontSize = (fontSizeObject.fontSize3 + fontSize).toString() + 'px';
-    }
-    for (var i = 0; i < fontSizeGeneral.array.length; i++) {
-      fontSizeGeneral.array[i].style.fontSize = (fontSizeGeneral.fontSize + fontSize).toString() + 'px';
+    if (fontSize > -5) {
+      changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
+      changeFontSizeSpan(fontSizeObject.array2, fontSizeObject.fontSize2, fontSize);
+      changeFontSizeSpan(fontSizeObject.array3, fontSizeObject.fontSize3, fontSize);
+      changeFontSizeSpan(fontSizeGeneral.array, fontSizeGeneral.fontSize, fontSize);
+    } else {
+      alert('Minimum size reached');
     }
   });
 
@@ -248,18 +239,7 @@ function appendLinkTag() {
 function hidePrintPage() {
   document.querySelector('#main-print-container').style.display = 'none';
 }
-function getAllHeading(classValue) {
-  var array = Array.prototype.slice.call(document.querySelectorAll('span'));
 
-  var arry = [];
-  for (var i = 0; i < array.length; i++) {
-    if (array[i].className.indexOf(classValue) > -1) {
-      arr.push(array[i]);
-    }
-  }
-
-  return arr;
-}
 function getSeparateSpan() {
   var array = document.querySelectorAll('span');
   var array1 = [];
@@ -281,7 +261,11 @@ function filtrateAllApart() {
     if (array[i].className.indexOf('left-corner-text-main') < 0 && array[i].className.indexOf('total-value') < 0 && array[i].className.indexOf('ft-sz-20') < 0)
       array_0.push(array[i]);
   }
-  console.log(array_0);
+
   return { array: array_0, fontSize: 16 };
 }
-function changeFontSizeSpan() {}
+function changeFontSizeSpan(array, font, fontChange) {
+  for (var i = 0; i < array.length; i++) {
+    array[i].style.fontSize = (font + fontChange).toString() + 'px';
+  }
+}

@@ -91,6 +91,9 @@
   color: #363636;
   text-decoration: underline;
 }
+#hide-show-btn {
+  font-size: 16px;
+}
 .logo {
   width: 170px;
   padding: 5px;
@@ -134,6 +137,7 @@
 }
 #zooms {
   display: inline-block;
+  margin-bottom: 5px;
 }
 #fonts {
   margin-left: 10px;
@@ -170,10 +174,12 @@
 #remove-content {
   background: #ff1f4b29;
   border-radius: 3px;
+  border: 1px solid gray;
   padding: 3px;
   display: inline-block;
   margin-left: 15px;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 .remove-content-text:hover {
   opacity: 0.7;
