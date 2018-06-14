@@ -10,7 +10,9 @@
   var tempPrint;
   var justOnce = false;
 
-  var fontSize = 15;
+  var fontSizeObject = getSeparateSpan();
+  var fontSizeGeneral = filtrateAllApart();
+  var fontSize = 0;
 
   appendLinkTag();
   appendScriptTag();
@@ -45,11 +47,11 @@
 
   //SETTINGS BEGIN
 
-  // default font size
+  //default font size
   document.querySelector('#row-default').addEventListener('click', function() {
     // total value hand highlight heading have different fonts, adjust that
-    for (var i = 0; i < document.querySelectorAll('span').length; i++) {
-      document.querySelectorAll('span')[i].style.fontSize = '16px';
+    for (var i = 0; i < fontSizeObject.length; i++) {
+      fontSizeObject[i].style.fontSize = '16px';
     }
   });
 
@@ -64,25 +66,37 @@
 
   //plus icon zoom
   document.querySelector('#zoom-plus').addEventListener('click', function() {
-    ++fontSize;
-    if (fontSize < 23) {
-      for (var i = 0; i < document.querySelectorAll('span').length; i++) {
-        document.querySelectorAll('span')[i].style.fontSize = fontSize.toString() + 'px';
-      }
-    } else {
-      alert('maximum size reached');
+    fontSize = fontSize + 1;
+
+    for (var i = 0; i < fontSizeObject.array1.length; i++) {
+      fontSizeObject.array1[i].style.fontSize = (fontSizeObject.fontSize1 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeObject.array2.length; i++) {
+      fontSizeObject.array2[i].style.fontSize = (fontSizeObject.fontSize2 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeObject.array3.length; i++) {
+      fontSizeObject.array3[i].style.fontSize = (fontSizeObject.fontSize3 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeGeneral.array.length; i++) {
+      fontSizeGeneral.array[i].style.fontSize = (fontSizeGeneral.fontSize + fontSize).toString() + 'px';
     }
   });
 
   // minus icon zoom
   document.querySelector('#zoom-minus').addEventListener('click', function() {
-    --fontSize;
-    if (fontSize > 10) {
-      for (var i = 0; i < document.querySelectorAll('span').length; i++) {
-        document.querySelectorAll('span')[i].style.fontSize = fontSize.toString() + 'px';
-      }
-    } else {
-      alert('minimum size reached');
+    fontSize = fontSize - 1;
+
+    for (var i = 0; i < fontSizeObject.array1.length; i++) {
+      fontSizeObject.array1[i].style.fontSize = (fontSizeObject.fontSize1 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeObject.array2.length; i++) {
+      fontSizeObject.array2[i].style.fontSize = (fontSizeObject.fontSize2 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeObject.array3.length; i++) {
+      fontSizeObject.array3[i].style.fontSize = (fontSizeObject.fontSize3 + fontSize).toString() + 'px';
+    }
+    for (var i = 0; i < fontSizeGeneral.array.length; i++) {
+      fontSizeGeneral.array[i].style.fontSize = (fontSizeGeneral.fontSize + fontSize).toString() + 'px';
     }
   });
 
@@ -223,6 +237,7 @@ function appendScriptTag() {
   script.async = false;
   document.body.appendChild(script);
 }
+
 function appendLinkTag() {
   var head = document.getElementsByTagName('head')[0];
   link = document.createElement('link');
@@ -233,3 +248,40 @@ function appendLinkTag() {
 function hidePrintPage() {
   document.querySelector('#main-print-container').style.display = 'none';
 }
+function getAllHeading(classValue) {
+  var array = Array.prototype.slice.call(document.querySelectorAll('span'));
+
+  var arry = [];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].className.indexOf(classValue) > -1) {
+      arr.push(array[i]);
+    }
+  }
+
+  return arr;
+}
+function getSeparateSpan() {
+  var array = document.querySelectorAll('span');
+  var array1 = [];
+  var array2 = [];
+  var array3 = [];
+
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].className.indexOf('left-corner-text-main') > -1) array1.push(array[i]);
+    else if (array[i].className.indexOf('total-value') > -1) array2.push(array[i]);
+    else if (array[i].className.indexOf('ft-sz-20') > -1) array3.push(array[i]);
+  }
+
+  return { array1: array1, fontSize1: 18, array2: array2, fontSize2: 20, array3: array3, fontSize3: 20 };
+}
+function filtrateAllApart() {
+  var array = document.querySelectorAll('span');
+  var array_0 = [];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].className.indexOf('left-corner-text-main') < 0 && array[i].className.indexOf('total-value') < 0 && array[i].className.indexOf('ft-sz-20') < 0)
+      array_0.push(array[i]);
+  }
+  console.log(array_0);
+  return { array: array_0, fontSize: 16 };
+}
+function changeFontSizeSpan() {}
