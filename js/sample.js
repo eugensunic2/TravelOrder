@@ -21,28 +21,24 @@
     hidePrintPage();
   }, 500);
 
-  hideMinusIcon('#remove-extra-obracun');
-  hideMinusIcon('#remove-extra-prijevozni');
-  hideMinusIcon('#remove-extra-ostali');
-
   // open sheet in preview mode
   document.querySelector('#preview-mode').addEventListener('click', function() {
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
 
-    document.querySelector('#parent-heading').style.display = 'none';
-    document.querySelector('#parent-container').style.display = 'none';
-    document.body.classList.remove('body2');
-    document.querySelector('#main-print-container').style.display = '';
+    // document.querySelector('#parent-heading').style.display = 'none';
+    // document.querySelector('#parent-container').style.display = 'none';
+    // document.body.classList.remove('body2');
+    // document.querySelector('#main-print-container').style.display = '';
 
-    window.print();
+    // window.print();
 
-    document.querySelector('.back-button').addEventListener('click', function() {
-      document.querySelector('#parent-heading').style.display = '';
-      document.querySelector('#parent-container').style.display = '';
-      document.querySelector('#main-print-container').style.display = 'none';
-    });
+    // document.querySelector('.back-button').addEventListener('click', function() {
+    //   document.querySelector('#parent-heading').style.display = '';
+    //   document.querySelector('#parent-container').style.display = '';
+    //   document.querySelector('#main-print-container').style.display = 'none';
+    // });
   });
 
   //SETTINGS BEGIN
@@ -60,9 +56,13 @@
   document.querySelector('#fonts').addEventListener('click', function() {
     fontFlag = !fontFlag;
     for (var i = 0; i < document.querySelectorAll('span').length; i++) {
-      fontFlag ? document.querySelectorAll('span')[i].classList.add('new-font') : document.querySelectorAll('span')[i].classList.remove('new-font');
+      fontFlag
+        ? document.querySelectorAll('span')[i].classList.add('new-font')
+        : document.querySelectorAll('span')[i].classList.remove('new-font');
     }
-    fontFlag ? (this.querySelectorAll('span')[0].innerHTML = 'font2') : (this.querySelectorAll('span')[0].innerHTML = 'font1');
+    fontFlag
+      ? (this.querySelectorAll('span')[0].innerHTML = 'font2')
+      : (this.querySelectorAll('span')[0].innerHTML = 'font1');
   });
 
   //plus icon zoom
@@ -106,8 +106,12 @@
     highlight_mode_toggle ? (this.innerHTML = 'unhlt') : (this.innerHTML = 'hlt');
     for (var i = 0; i < document.querySelectorAll('.left-corner-text-main').length; i++) {
       highlight_mode_toggle
-        ? document.querySelectorAll('.left-corner-text-main')[i].classList.add('left-corner-text-main2')
-        : document.querySelectorAll('.left-corner-text-main')[i].classList.remove('left-corner-text-main2');
+        ? document
+            .querySelectorAll('.left-corner-text-main')
+            [i].classList.add('left-corner-text-main2')
+        : document
+            .querySelectorAll('.left-corner-text-main')
+            [i].classList.remove('left-corner-text-main2');
     }
   });
 
@@ -153,36 +157,6 @@
     }
   });
   //SETTINGS END
-
-  // plus button obracun (1)
-  document.querySelector('#add-extra-obracun').addEventListener('click', function() {
-    addExtraBox('.add-obracun', '#obracun-dnevnica', '.numberize-dnevnica', '#remove-extra-obracun');
-  });
-
-  // minus button obracun (1)
-  document.querySelector('#remove-extra-obracun').addEventListener('click', function() {
-    removeExtraBox('#obracun-dnevnica', '.add-obracun', '#remove-extra-obracun');
-  });
-
-  // plus button prijevozni (2)
-  document.querySelector('#add-extra-prijevozni').addEventListener('click', function() {
-    addExtraBox('.add-prijevozni', '#obracun-prijevoznih-troskova', '.numberize-prijevozni', '#remove-extra-prijevozni');
-  });
-
-  // minus button prijevozni (2)
-  document.querySelector('#remove-extra-prijevozni').addEventListener('click', function() {
-    removeExtraBox('#obracun-prijevoznih-troskova', '.add-prijevozni', '#remove-extra-prijevozni');
-  });
-
-  // plus button ostali (3)
-  document.querySelector('#add-extra-ostali').addEventListener('click', function() {
-    addExtraBox('.add-ostali', '#obracun-ostalih-troskova', '.numberize-ostali', '#remove-extra-ostali');
-  });
-
-  // minus button ostali (3)
-  document.querySelector('#remove-extra-ostali').addEventListener('click', function() {
-    removeExtraBox('#obracun-ostalih-troskova', '.add-ostali', '#remove-extra-ostali');
-  });
 })();
 
 function getAllInputSection(selectors) {
@@ -191,37 +165,6 @@ function getAllInputSection(selectors) {
   }
 }
 
-function addExtraBox(create, appender, orderNumber, showIcon) {
-  if (document.querySelectorAll(create).length <= 9) {
-    var node = document.createElement('div');
-    node.setAttribute('class', create.substring(1));
-    node.innerHTML = document.querySelector(create).innerHTML;
-
-    document.querySelector(appender).appendChild(node);
-    document.querySelectorAll(orderNumber)[document.querySelectorAll(orderNumber).length - 1].textContent =
-      '#' + document.querySelectorAll(orderNumber).length.toString();
-    addMinusIcon(showIcon);
-  } else {
-    alert("you've reached the maximum amount of orders");
-  }
-}
-
-function removeExtraBox(appender, childNode, hideIcon) {
-  if (document.querySelectorAll(childNode).length > 1) {
-    document.querySelector(appender).removeChild(document.querySelectorAll(childNode)[document.querySelectorAll(childNode).length - 1]);
-    if (document.querySelectorAll(childNode).length === 1) {
-      hideMinusIcon(hideIcon);
-    }
-  }
-}
-
-function addMinusIcon(self) {
-  document.querySelector(self).style.visibility = 'visible';
-}
-
-function hideMinusIcon(self) {
-  document.querySelector(self).style.visibility = 'hidden';
-}
 function appendScriptTag() {
   script = document.createElement('script');
   script.src = './js/print.js';
@@ -252,13 +195,24 @@ function getSeparateSpan() {
     else if (array[i].className.indexOf('ft-sz-20') > -1) array3.push(array[i]);
   }
 
-  return { array1: array1, fontSize1: 18, array2: array2, fontSize2: 20, array3: array3, fontSize3: 20 };
+  return {
+    array1: array1,
+    fontSize1: 18,
+    array2: array2,
+    fontSize2: 20,
+    array3: array3,
+    fontSize3: 20
+  };
 }
 function filtrateAllApart() {
   var array = document.querySelectorAll('span');
   var array_0 = [];
   for (var i = 0; i < array.length; i++) {
-    if (array[i].className.indexOf('left-corner-text-main') < 0 && array[i].className.indexOf('total-value') < 0 && array[i].className.indexOf('ft-sz-20') < 0)
+    if (
+      array[i].className.indexOf('left-corner-text-main') < 0 &&
+      array[i].className.indexOf('total-value') < 0 &&
+      array[i].className.indexOf('ft-sz-20') < 0
+    )
       array_0.push(array[i]);
   }
 

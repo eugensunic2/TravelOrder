@@ -72,3 +72,8 @@ td {
     display: none !important;
   }
 }
+.save-button {
+  background: rgb(50, 115, 220);
+  display: inline-block;
+  text-align: center;
+}
