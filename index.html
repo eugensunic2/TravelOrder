@@ -171,7 +171,7 @@
       <div class="column">
         <span class="left-corner-text-main">obracun dnevnica</span>
         <div id="plus-minus-dnevnica-holder">
-          <div class="back-button save-button">save</div>
+          <div id="obracun-save" class="back-button save-button">save</div>
         </div>
         <div class="add-obracun">
           <span class="flt-clr-lft flt-lft">Datum</span>
@@ -204,19 +204,7 @@
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="data-preview">
-          <div class="modify-operation">
-            <span class="preview-edit">edit</span>
-            <span class="preview-delete">delete</span>
-            <span class="flt-rgt flt-clr-rgt input-number numberize-prijevozni">#1</span>
-          </div>
-          <span>value1</span>
-          <span>value2</span>
-          <span>value3</span>
-          <span>value4</span>
-          <span>value5</span>
-        </div>
+      <div id="data-preview-obracun" class="column">
       </div>
     </div>
     <div class="account-result flt-rgt pdg-rgt-15">
@@ -230,7 +218,7 @@
       <div class="column">
         <span class="left-corner-text-main">prijevozni troskovi</span>
         <div id="plus-minus-prijevozni-holder">
-          <div class="back-button save-button">save</div>
+          <div id="prijevozni-save" class="back-button save-button">save</div>
         </div>
         <div class="add-prijevozni">
           <span class="flt-clr-lft flt-lft">Datum</span>
@@ -271,7 +259,7 @@
           </div>
         </div>
       </div>
-      <div class="column">
+      <div id="data-preview-prijevoz" class="column">
         <div class="data-preview">
           <div class="modify-operation">
             <span>edit</span>
@@ -286,18 +274,19 @@
         </div>
       </div>
     </div>
-
     <div class="account-result flt-rgt pdg-rgt-15">
       <span class="ft-sz-20">Total:</span>
       <span class="total-value">188$</span>
     </div>
 
 
+
     <div id="obracun-ostalih-troskova" class="box-center box-border flt-clr-bth columns">
+      <hr/>
       <div class="column">
         <span class="left-corner-text-main">ostali troskovi</span>
         <div id="plus-minus-ostali-holder">
-          <div class="back-button save-button">save</div>
+          <div id="ostali-save" class="back-button save-button">save</div>
         </div>
         <div class="add-ostali">
           <span class="flt-clr-lft flt-lft">Datum</span>
@@ -329,7 +318,7 @@
           </div>
         </div>
       </div>
-      <div class="column">
+      <div id="data-preview-ostali" class="column">
         <div class="data-preview">
           <div class="modify-operation">
             <span>edit</span>

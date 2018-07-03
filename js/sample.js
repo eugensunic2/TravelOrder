@@ -157,13 +157,86 @@
     }
   });
   //SETTINGS END
-})();
 
+  // MAIN FUNCTIONS BEGIN
+
+  // SAVE OBRACUN
+  document.querySelector('#obracun-save').addEventListener('click', function() {
+    createPreviewContainerFirstRow(
+      'edit-obracun',
+      'delete-obracun',
+      'number-obracun',
+      1,
+      '#data-preview-obracun'
+    );
+    createPreviewContainerSecondRow('.flag-obracun', '#data-preview-obracun');
+  });
+
+  // SAVE PRIJEVOZNI
+  document.querySelector('#prijevozni-save').addEventListener('click', function() {
+    createPreviewContainerFirstRow();
+    createPreviewContainerSecondRow();
+  });
+
+  // SAVE OSTALI
+  document.querySelector('#ostali-save').addEventListener('click', function() {
+    createPreviewContainerFirstRow();
+    createPreviewContainerSecondRow();
+  });
+
+  // MAIN FUNCIONS END
+})();
+// MAIN FUNCTIONS BEGIN
 function getAllInputSection(selectors) {
   for (var i = 0; i < document.querySelectorAll(selectors).length; i++) {
     console.log(document.querySelectorAll(selectors)[i].value);
   }
 }
+function createPreviewContainerFirstRow(edit, del, number, order, holder) {
+  var container = document.createElement('div');
+  container.setAttribute('class', 'modify-operation');
+
+  var spanContainerEdit = document.createElement('span');
+  spanContainerEdit.classList.add('preview-edit', edit);
+  spanContainerEdit.innerHTML = 'edit';
+  var spanContainerDelete = document.createElement('span');
+  spanContainerDelete.classList.add('preview-delete', del);
+  spanContainerDelete.innerHTML = 'delete';
+  var spanContainerNumber = document.createElement('span');
+  spanContainerNumber.className = 'flt-rgt flt-clr-rgt input-number numberize-prijevozni ' + number;
+  spanContainerNumber.innerHTML = '#' + 1;
+
+  container.appendChild(spanContainerEdit);
+  container.appendChild(spanContainerDelete);
+  container.appendChild(spanContainerNumber);
+
+  var mainContainer = document.createElement('div');
+  mainContainer.appendChild(container);
+  mainContainer.classList.add('data-preview', 'dp-obracun');
+  document.querySelector(holder).appendChild(mainContainer);
+  //   <div class="modify-operation">
+  //   <span class="preview-edit">edit</span>
+  //   <span class="preview-delete">delete</span>
+  //   <span class="flt-rgt flt-clr-rgt input-number numberize-prijevozni">#1</span>
+  // </div>
+  // <span>value1</span>
+  // <span>value2</span>
+  // <span>value3</span>
+  // <span>value4</span>
+}
+
+function createPreviewContainerSecondRow(selectors, holder) {
+  var elements = document.querySelectorAll(selectors);
+  for (var i = 0; i < elements.length; i++) {
+    var spanContainer = document.createElement('span');
+    spanContainer.textContent = elements[i].value;
+    document
+      .querySelectorAll('.dp-obracun')
+      [document.querySelectorAll('.dp-obracun').length - 1].appendChild(spanContainer);
+  }
+}
+
+// MAIN FUNCTIONS END
 
 function appendScriptTag() {
   script = document.createElement('script');

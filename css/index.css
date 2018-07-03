@@ -335,3 +335,6 @@
   cursor: pointer;
   opacity: 0.8;
 }
+.modify-operation {
+  margin-bottom: 5px;
+}

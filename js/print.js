@@ -1,16 +1,29 @@
 (function() {
-  // ligth blue color: background-color:#209cee30;
   var mainContainer = document.createElement('div');
   mainContainer.setAttribute('id', 'main-print-container');
   document.body.appendChild(mainContainer);
   appendBackButton();
   appendPrintButton();
-  setCompanyLogo('https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg');
-  setCompanyAddress('Comsysto d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; www.comsysto.com &#8226; kontakt@comsysto.com');
+  setCompanyLogo(
+    'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
+  );
+  setCompanyAddress(
+    'Comsysto d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; www.comsysto.com &#8226; kontakt@comsysto.com'
+  );
 
   setIntroHeader('PUTNI RACUN', '12/2017', 'Br.: 47');
   setIntermediateHeader();
-  var obracunDnevniceArray = ['Br.', 'Datum', 'Drzava', 'Polazak', 'Povratak', 'Sati', 'Dnevnice', 'Jedinicne <br/>Dnevnice', 'Iznos u kn'];
+  var obracunDnevniceArray = [
+    'Br.',
+    'Datum',
+    'Drzava',
+    'Polazak',
+    'Povratak',
+    'Sati',
+    'Dnevnice',
+    'Jedinicne <br/>Dnevnice',
+    'Iznos u kn'
+  ];
 
   generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray);
   generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray);
@@ -119,7 +132,8 @@ function setIntroHeader(titleTxt, dateTxt, numberTxt) {
 function setIntermediateHeader() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
-  container.style = 'border: 2px solid #e2e1e1;margin-left:0px; margin-right:0px;margin-bottom:30px;';
+  container.style =
+    'border: 2px solid #e2e1e1;margin-left:0px; margin-right:0px;margin-bottom:30px;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
@@ -217,7 +231,8 @@ function overallPriceDisplay() {
 function setSignatureForm() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
-  container.style = 'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:30px; margin-top:80px;background: #efefef;';
+  container.style =
+    'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:30px; margin-top:80px;background: #efefef;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
