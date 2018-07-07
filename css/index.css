@@ -107,7 +107,6 @@
 }
 .info:hover {
   cursor: pointer;
-  box-shadow: 1px 1px 1px #ad9f9f;
 }
 
 .svg-language {
@@ -329,6 +328,7 @@
   background: #b7ddf7;
   padding: 3px;
   border-radius: 2px;
+  margin-left: 3px;
 }
 .preview-delete:hover,
 .preview-edit:hover {

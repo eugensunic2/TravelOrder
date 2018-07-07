@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // on load
   var nigth_mode_toggle = false;
   var highlight_mode_toggle = false;
@@ -17,12 +17,12 @@
   appendLinkTag();
   appendScriptTag();
   // better solution callback;
-  setTimeout(function() {
+  setTimeout(function () {
     hidePrintPage();
   }, 500);
 
   // open sheet in preview mode
-  document.querySelector('#preview-mode').addEventListener('click', function() {
+  document.querySelector('#preview-mode').addEventListener('click', function () {
     getAllInputSection('.flag-obracun');
     getAllInputSection('.flag-prijevozni');
     getAllInputSection('.flag-ostali');
@@ -44,7 +44,7 @@
   //SETTINGS BEGIN
 
   //default font size
-  document.querySelector('#row-default').addEventListener('click', function() {
+  document.querySelector('#row-default').addEventListener('click', function () {
     fontSize = 0;
     changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
     changeFontSizeSpan(fontSizeObject.array2, fontSizeObject.fontSize2, fontSize);
@@ -53,20 +53,22 @@
   });
 
   // font change
-  document.querySelector('#fonts').addEventListener('click', function() {
+  document.querySelector('#fonts').addEventListener('click', function () {
     fontFlag = !fontFlag;
     for (var i = 0; i < document.querySelectorAll('span').length; i++) {
       fontFlag
-        ? document.querySelectorAll('span')[i].classList.add('new-font')
-        : document.querySelectorAll('span')[i].classList.remove('new-font');
+        ?
+        document.querySelectorAll('span')[i].classList.add('new-font') :
+        document.querySelectorAll('span')[i].classList.remove('new-font');
     }
     fontFlag
-      ? (this.querySelectorAll('span')[0].innerHTML = 'font2')
-      : (this.querySelectorAll('span')[0].innerHTML = 'font1');
+      ?
+      (this.querySelectorAll('span')[0].innerHTML = 'font2') :
+      (this.querySelectorAll('span')[0].innerHTML = 'font1');
   });
 
   //plus icon zoom
-  document.querySelector('#zoom-plus').addEventListener('click', function() {
+  document.querySelector('#zoom-plus').addEventListener('click', function () {
     fontSize = fontSize + 1;
     if (fontSize < 11) {
       changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
@@ -79,7 +81,7 @@
   });
 
   // minus icon zoom
-  document.querySelector('#zoom-minus').addEventListener('click', function() {
+  document.querySelector('#zoom-minus').addEventListener('click', function () {
     fontSize = fontSize - 1;
     if (fontSize > -5) {
       changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
@@ -91,32 +93,31 @@
     }
   });
 
-  document.querySelector('#zoom-minus').addEventListener('click', function() {});
-  document.querySelector('#hide-show-btn').addEventListener('click', function() {
-    hide_show_btn = !hide_show_btn
-      ? (document.querySelector('#settings-section').style.display = 'none')
-      : (document.querySelector('#settings-section').style.display = null);
+  document.querySelector('#zoom-minus').addEventListener('click', function () {});
+  document.querySelector('#hide-show-btn').addEventListener('click', function () {
+    hide_show_btn = !hide_show_btn ?
+      (document.querySelector('#settings-section').style.display = 'none') :
+      (document.querySelector('#settings-section').style.display = null);
 
     hide_show_btn ? (this.innerHTML = 'show') : (this.innerHTML = 'hide');
   });
 
   //highlight
-  document.querySelector('#highlight-heading').addEventListener('click', function() {
+  document.querySelector('#highlight-heading').addEventListener('click', function () {
     highlight_mode_toggle = !highlight_mode_toggle;
     highlight_mode_toggle ? (this.innerHTML = 'unhlt') : (this.innerHTML = 'hlt');
     for (var i = 0; i < document.querySelectorAll('.left-corner-text-main').length; i++) {
       highlight_mode_toggle
-        ? document
-            .querySelectorAll('.left-corner-text-main')
-            [i].classList.add('left-corner-text-main2')
-        : document
-            .querySelectorAll('.left-corner-text-main')
-            [i].classList.remove('left-corner-text-main2');
+        ?
+        document
+        .querySelectorAll('.left-corner-text-main')[i].classList.add('left-corner-text-main2') :
+        document
+        .querySelectorAll('.left-corner-text-main')[i].classList.remove('left-corner-text-main2');
     }
   });
 
   //night-mode
-  document.querySelector('#night-mode').addEventListener('click', function() {
+  document.querySelector('#night-mode').addEventListener('click', function () {
     nigth_mode_toggle = !nigth_mode_toggle;
     if (nigth_mode_toggle) {
       document.querySelector('body').classList.add('body2');
@@ -131,29 +132,34 @@
     }
     for (var i = 0; i < document.querySelectorAll('.font-element').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.font-element')[i].classList.add('font-element2')
-        : document.querySelectorAll('.font-element')[i].classList.remove('font-element2');
+        ?
+        document.querySelectorAll('.font-element')[i].classList.add('font-element2') :
+        document.querySelectorAll('.font-element')[i].classList.remove('font-element2');
     }
     for (var i = 0; i < document.querySelectorAll('.left-corner-text').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.left-corner-text')[i].classList.add('left-corner-text2')
-        : document.querySelectorAll('.left-corner-text')[i].classList.remove('left-corner-text2');
+        ?
+        document.querySelectorAll('.left-corner-text')[i].classList.add('left-corner-text2') :
+        document.querySelectorAll('.left-corner-text')[i].classList.remove('left-corner-text2');
     }
 
     for (var i = 0; i < document.querySelectorAll('.input-number').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.input-number')[i].classList.add('input-number2')
-        : document.querySelectorAll('.input-number')[i].classList.remove('input-number2');
+        ?
+        document.querySelectorAll('.input-number')[i].classList.add('input-number2') :
+        document.querySelectorAll('.input-number')[i].classList.remove('input-number2');
     }
     for (var i = 0; i < document.querySelectorAll('.total-value').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.total-value')[i].classList.add('total-value2')
-        : document.querySelectorAll('.total-value')[i].classList.remove('total-value2');
+        ?
+        document.querySelectorAll('.total-value')[i].classList.add('total-value2') :
+        document.querySelectorAll('.total-value')[i].classList.remove('total-value2');
     }
     for (var i = 0; i < document.querySelectorAll('.left-corner').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.left-corner')[i].classList.add('left-corner2')
-        : document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
+        ?
+        document.querySelectorAll('.left-corner')[i].classList.add('left-corner2') :
+        document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
     }
   });
   //SETTINGS END
@@ -161,50 +167,57 @@
   // MAIN FUNCTIONS BEGIN
 
   // SAVE OBRACUN
-  document.querySelector('#obracun-save').addEventListener('click', function() {
+  document.querySelector('#obracun-save').addEventListener('click', function () {
     createPreviewContainerFirstRow(
       'edit-obracun',
       'delete-obracun',
       'number-obracun',
+      document.querySelectorAll('.dp-obracun') ?
+      document.querySelectorAll('.dp-obracun').length + 1 :
       1,
       '#data-preview-obracun'
     );
-    createPreviewContainerSecondRow('.flag-obracun', '#data-preview-obracun');
+    createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
+    clearSectionInput('.flag-obracun');
   });
 
   // SAVE PRIJEVOZNI
-  document.querySelector('#prijevozni-save').addEventListener('click', function() {
+  document.querySelector('#prijevozni-save').addEventListener('click', function () {
     createPreviewContainerFirstRow();
     createPreviewContainerSecondRow();
+    clearSectionInput('.flag-prijevozni');
   });
 
   // SAVE OSTALI
-  document.querySelector('#ostali-save').addEventListener('click', function() {
+  document.querySelector('#ostali-save').addEventListener('click', function () {
     createPreviewContainerFirstRow();
     createPreviewContainerSecondRow();
+    clearSectionInput('.flag-ostali');
   });
 
   // MAIN FUNCIONS END
 })();
+
 // MAIN FUNCTIONS BEGIN
 function getAllInputSection(selectors) {
   for (var i = 0; i < document.querySelectorAll(selectors).length; i++) {
     console.log(document.querySelectorAll(selectors)[i].value);
   }
 }
+
 function createPreviewContainerFirstRow(edit, del, number, order, holder) {
   var container = document.createElement('div');
   container.setAttribute('class', 'modify-operation');
 
   var spanContainerEdit = document.createElement('span');
-  spanContainerEdit.classList.add('preview-edit', edit);
+  spanContainerEdit.classList.add('preview-edit', edit + order.toString());
   spanContainerEdit.innerHTML = 'edit';
   var spanContainerDelete = document.createElement('span');
-  spanContainerDelete.classList.add('preview-delete', del);
+  spanContainerDelete.classList.add('preview-delete', del + order.toString());
   spanContainerDelete.innerHTML = 'delete';
   var spanContainerNumber = document.createElement('span');
   spanContainerNumber.className = 'flt-rgt flt-clr-rgt input-number numberize-prijevozni ' + number;
-  spanContainerNumber.innerHTML = '#' + 1;
+  spanContainerNumber.innerHTML = '#' + order;
 
   container.appendChild(spanContainerEdit);
   container.appendChild(spanContainerDelete);
@@ -214,15 +227,9 @@ function createPreviewContainerFirstRow(edit, del, number, order, holder) {
   mainContainer.appendChild(container);
   mainContainer.classList.add('data-preview', 'dp-obracun');
   document.querySelector(holder).appendChild(mainContainer);
-  //   <div class="modify-operation">
-  //   <span class="preview-edit">edit</span>
-  //   <span class="preview-delete">delete</span>
-  //   <span class="flt-rgt flt-clr-rgt input-number numberize-prijevozni">#1</span>
-  // </div>
-  // <span>value1</span>
-  // <span>value2</span>
-  // <span>value3</span>
-  // <span>value4</span>
+
+  addPreviewListener('.' + edit + order.toString(), editFunc);
+  addPreviewListener('.' + del + order.toString(), delFunc);
 }
 
 function createPreviewContainerSecondRow(selectors, holder) {
@@ -231,12 +238,103 @@ function createPreviewContainerSecondRow(selectors, holder) {
     var spanContainer = document.createElement('span');
     spanContainer.textContent = elements[i].value;
     document
-      .querySelectorAll('.dp-obracun')
-      [document.querySelectorAll('.dp-obracun').length - 1].appendChild(spanContainer);
+      .querySelectorAll(holder)[document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
+  }
+}
+
+function updatePreviewContainerSecondRow(objHTML, inputField) {
+  var array = [];
+  // have to do this to adjust indexes of both arrays
+  for (var i = 0; i < document.querySelectorAll(inputField).length; i++) {
+    array.push(document.querySelectorAll(inputField)[i].value);
+  }
+  array.splice(0, 0, '');
+  for (var i = 0; i < objHTML.childNodes.length; i++) {
+    if (objHTML.childNodes[i].tagName === 'SPAN' && array[i] !== '') {
+      objHTML.childNodes[i].innerHTML = array[i];
+    }
+  }
+}
+
+function addPreviewListener(className, fn) {
+  document.querySelector(className).addEventListener('click', function (e) {
+    fn(e);
+  });
+}
+
+function editFunc(e, callback) {
+  for (var i = 0; i < document.querySelectorAll('.preview-edit').length; i++) {
+    document.querySelectorAll('.preview-edit')[i].style.pointerEvents = 'auto';
+  }
+  // clear all edit disablings here in a loop
+  var getSpanContent = [];
+  var objHTML = e.path[2];
+  // disable edit button
+  e.target.style.pointerEvents = 'none';
+  editModeActivate(objHTML, '.dp-obracun');
+  for (var i = 0; i < objHTML.childNodes.length; i++) {
+    if (objHTML.childNodes[i].tagName === 'SPAN' && objHTML.childNodes[i].value != '') {
+      getSpanContent.push(objHTML.childNodes[i].innerHTML);
+    }
+  }
+  populateSpanSection('.flag-obracun', getSpanContent);
+}
+
+function delFunc() {
+  console.log('delete');
+}
+
+function editModeActivate(objHTML, spanClass) {
+  // clear all colors
+  for (var i = 0; i < document.querySelectorAll(spanClass).length; i++) {
+    document.querySelectorAll(spanClass)[i].style.backgroundColor = '#f3f3f3';
+  }
+  objHTML.style.backgroundColor = '#ff3860d4';
+  // <div id="obracun-save" class="back-button save-button">save</div>
+  document.querySelector('#obracun-save').style.display = 'none';
+
+  // append edit button
+  var divObracunEdit = document.createElement('div');
+  divObracunEdit.setAttribute('id', 'obracun-edit');
+  divObracunEdit.className = 'back-button save-button';
+  divObracunEdit.style.backgroundColor = '#ffdd57';
+  divObracunEdit.style.color = '#4a4a4a';
+  divObracunEdit.innerHTML = 'edit';
+
+  document.querySelector('#plus-minus-dnevnica-holder').appendChild(divObracunEdit);
+
+  document.querySelector('#obracun-edit').addEventListener('click', function () {
+    updatePreviewContainerSecondRow(objHTML, '.flag-obracun');
+  });
+
+  // add event on editing already existing span
+
+}
+
+function populateSpanSection(selector, array) {
+  for (var i = 0; i < document.querySelectorAll(selector).length; i++) {
+    document.querySelectorAll(selector)[i].value = array[i];
+  }
+}
+
+function clearSectionInput(selector) {
+  for (var i = 0; i < document.querySelectorAll(selector).length; i++) {
+    document.querySelectorAll(selector)[i].value = '';
   }
 }
 
 // MAIN FUNCTIONS END
+
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
 
 function appendScriptTag() {
   script = document.createElement('script');
@@ -252,6 +350,7 @@ function appendLinkTag() {
   link.href = './css/print.css';
   head.appendChild(link);
 }
+
 function hidePrintPage() {
   document.querySelector('#main-print-container').style.display = 'none';
 }
@@ -277,6 +376,7 @@ function getSeparateSpan() {
     fontSize3: 20
   };
 }
+
 function filtrateAllApart() {
   var array = document.querySelectorAll('span');
   var array_0 = [];
@@ -289,8 +389,12 @@ function filtrateAllApart() {
       array_0.push(array[i]);
   }
 
-  return { array: array_0, fontSize: 16 };
+  return {
+    array: array_0,
+    fontSize: 16
+  };
 }
+
 function changeFontSizeSpan(array, font, fontChange) {
   for (var i = 0; i < array.length; i++) {
     array[i].style.fontSize = (font + fontChange).toString() + 'px';
