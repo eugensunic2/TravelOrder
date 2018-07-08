@@ -10,7 +10,6 @@
 
   document.querySelector('#obracun-edit-close').addEventListener('click', function() {
     clearSectionInput('.flag-obracun');
-
     // reset backgroundColor
     for (var i = 0; i < document.querySelectorAll('.data-preview').length; i++) {
       document.querySelectorAll('.data-preview')[i].style.backgroundColor = 'rgb(243, 243, 243)';
