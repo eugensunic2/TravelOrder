@@ -151,6 +151,9 @@ function delFunc(e) {
   e.path[2].remove();
   resetNumberOrder('.number-obracun');
   clearSectionInput('.flag-obracun');
+  document.querySelector('#obracun-save').style.display = '';
+  document.querySelector('#obracun-edit').style.display = 'none';
+  document.querySelector('#obracun-edit-close').style.display = 'none';
 }
 
 function editModeActivate(objHTML, spanClass) {
