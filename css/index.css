@@ -310,31 +310,62 @@
 .add-ostali {
   margin-bottom: 10px;
 }
-.data-preview {
+/* obracun */
+.data-preview-obracun {
   border: 1px solid gainsboro;
   border-radius: 3px;
   padding: 5px;
   background: #f3f3f3;
   margin-bottom: 5px;
 }
-.preview-edit {
+.preview-edit-obracun {
   border: 1px solid #b0a8a8;
   background: #ffdd57;
   padding: 3px;
   border-radius: 2px;
 }
-.preview-delete {
+.preview-delete-obracun {
   border: 1px solid #b0a8a8;
   background: #b7ddf7;
   padding: 3px;
   border-radius: 2px;
   margin-left: 3px;
 }
-.preview-delete:hover,
-.preview-edit:hover {
+.preview-delete-obracun:hover,
+.preview-edit-obracun:hover {
   cursor: pointer;
   opacity: 0.8;
 }
-.modify-operation {
+.modify-operation-obracun {
+  margin-bottom: 5px;
+}
+
+/* prijevozni */
+.data-preview-prijevozni {
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  padding: 5px;
+  background: #f3f3f3;
+  margin-bottom: 5px;
+}
+.preview-edit-prijevozni {
+  border: 1px solid #b0a8a8;
+  background: #ffdd57;
+  padding: 3px;
+  border-radius: 2px;
+}
+.preview-delete-prijevozni {
+  border: 1px solid #b0a8a8;
+  background: #b7ddf7;
+  padding: 3px;
+  border-radius: 2px;
+  margin-left: 3px;
+}
+.preview-delete-prijevozni:hover,
+.preview-edit-prijevozni:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.modify-operation-prijevozni {
   margin-bottom: 5px;
 }

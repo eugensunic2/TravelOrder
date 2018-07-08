@@ -8,6 +8,7 @@
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
 
+  // OBRACUN CLOSE
   document.querySelector('#obracun-edit-close').addEventListener('click', function() {
     clearSectionInput('.flag-obracun');
     // reset backgroundColor
@@ -23,6 +24,23 @@
     document.querySelector('#obracun-edit-close').style.display = 'none';
   });
 
+  // PRIJEVOZNI CLOSE
+  document.querySelector('#prijevozni-edit-close').addEventListener('click', function() {
+    clearSectionInput('.flag-prijevozni');
+    // reset backgroundColor
+    for (var i = 0; i < document.querySelectorAll('.data-preview-prijevozni').length; i++) {
+      document.querySelectorAll('.data-preview-prijevozni')[i].style.backgroundColor =
+        'rgb(243, 243, 243)';
+    }
+    // reset disable button
+    for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
+      document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
+    }
+    document.querySelector('#prijevozni-save').style.display = '';
+    document.querySelector('#prijevozni-edit').style.display = 'none';
+    document.querySelector('#prijevozni-edit-close').style.display = 'none';
+  });
+
   // SAVE OBRACUN
   document.querySelector('#obracun-save').addEventListener('click', function() {
     createPreviewContainerFirstRow(
@@ -33,11 +51,12 @@
         ? document.querySelectorAll('.dp-obracun').length + 1
         : 1,
       '#data-preview-obracun',
-      'modify-operation',
-      'preview-edit',
-      'preview-delete',
-      'data-preview',
-      'dp-obracun'
+      'modify-operation-obracun',
+      'preview-edit-obracun',
+      'preview-delete-obracun',
+      'data-preview-obracun',
+      'dp-obracun',
+      addPreviewListenerObracun
     );
     createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
     clearSectionInput('.flag-obracun');
@@ -52,7 +71,13 @@
       document.querySelectorAll('.dp-prijevozni')
         ? document.querySelectorAll('.dp-prijevozni').length + 1
         : 1,
-      '#data-preview-prijevozni'
+      '#data-preview-prijevozni',
+      'modify-operation-prijevozni',
+      'preview-edit-prijevozni',
+      'preview-delete-prijevozni',
+      'data-preview-prijevozni',
+      'dp-prijevozni',
+      addPreviewListenerPrijevozni
     );
     createPreviewContainerSecondRow('.flag-prijevozni', '.dp-prijevozni');
     clearSectionInput('.flag-prijevozni');
@@ -85,7 +110,8 @@ function createPreviewContainerFirstRow(
   preview_edit,
   preview_delete,
   data_preview,
-  dp_obracun
+  dp_obracun,
+  callbackPreviewListener
 ) {
   var container = document.createElement('div');
   container.setAttribute('class', modify_operation);
@@ -108,8 +134,8 @@ function createPreviewContainerFirstRow(
   mainContainer.classList.add(data_preview, dp_obracun);
   document.querySelector(holder).appendChild(mainContainer);
 
-  addPreviewListener('.' + edit + order.toString(), editFunc, 'edit');
-  addPreviewListener('.' + del + order.toString(), delFunc, 'delete');
+  callbackPreviewListener('.' + edit + order.toString(), editFunc, 'edit');
+  callbackPreviewListener('.' + del + order.toString(), delFunc, 'delete');
 }
 
 function createPreviewContainerSecondRow(selectors, holder) {
@@ -135,22 +161,24 @@ function updatePreviewContainerSecondRow() {
       globalObjHTML.childNodes[i].innerHTML = array[i] + ' ';
     }
   }
+  // parametrizirati
   clearSectionInput('.flag-obracun');
+  clearSectionInput('.flag-prijevozni');
 }
 
-function addPreviewListener(className, fn, tag) {
+function addPreviewListenerObracun(className, fn, tag) {
   document.querySelector(className).addEventListener('click', function(e) {
     if (tag === 'edit') {
       fn(
         e,
-        '.preview-edit',
+        '.preview-edit-obracun',
         '.dp-obracun',
         '.flag-obracun',
         '#obracun-edit-close',
         '#obracun-save',
         '#obracun-edit',
         'obracun-edit',
-        '#plus-minus-dnevnica-holder'
+        '#plus-minus-dnevnica-holder-obracun'
       );
     }
     if (tag === 'delete') {
@@ -165,6 +193,34 @@ function addPreviewListener(className, fn, tag) {
     }
   });
 }
+function addPreviewListenerPrijevozni(className, fn, tag) {
+  document.querySelector(className).addEventListener('click', function(e) {
+    if (tag === 'edit') {
+      fn(
+        e,
+        '.preview-edit-prijevozni',
+        '.dp-prijevozni',
+        '.flag-prijevozni',
+        '#prijevozni-edit-close',
+        '#prijevozni-save',
+        '#prijevozni-edit',
+        'prijevozni-edit',
+        '#plus-minus-prijevozni-holder'
+      );
+    }
+    if (tag === 'delete') {
+      fn(
+        e,
+        '.number-prijevozni',
+        '.flag-prijevozni',
+        '#prijevozni-save',
+        '#prijevozni-edit',
+        '#prijevozni-edit-close'
+      );
+    }
+  });
+}
+function addPreviewListenerOstali() {}
 
 function editFunc(
   e,
@@ -188,6 +244,7 @@ function editFunc(
   editModeActivate(
     objHTML,
     dp_obracun_dot,
+    flag_obracun_dot,
     obracun_edit_closeID,
     obracun_saveID,
     obracun_editID,
@@ -222,6 +279,7 @@ function delFunc(
 function editModeActivate(
   objHTML,
   spanClass,
+  flag_obracun_dot,
   obracun_edit_closeID,
   obracun_saveID,
   obracun_editID,
@@ -254,7 +312,8 @@ function editModeActivate(
     document.querySelector(obracun_editID).style.display = '';
   }
   globalObjHTML = objHTML;
-  globalSpanClass = '.flag-obracun';
+  // flag-obracun
+  globalSpanClass = flag_obracun_dot;
   // handling events
   document
     .querySelector(obracun_editID)
