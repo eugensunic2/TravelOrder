@@ -32,7 +32,12 @@
       document.querySelectorAll('.dp-obracun')
         ? document.querySelectorAll('.dp-obracun').length + 1
         : 1,
-      '#data-preview-obracun'
+      '#data-preview-obracun',
+      'modify-operation',
+      'preview-edit',
+      'preview-delete',
+      'data-preview',
+      'dp-obracun'
     );
     createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
     clearSectionInput('.flag-obracun');
@@ -70,14 +75,25 @@ function getAllInputSection(selectors) {
   }
 }
 
-function createPreviewContainerFirstRow(edit, del, number, order, holder) {
+function createPreviewContainerFirstRow(
+  edit,
+  del,
+  number,
+  order,
+  holder,
+  modify_operation,
+  preview_edit,
+  preview_delete,
+  data_preview,
+  dp_obracun
+) {
   var container = document.createElement('div');
-  container.setAttribute('class', 'modify-operation');
+  container.setAttribute('class', modify_operation);
   var spanContainerEdit = document.createElement('span');
-  spanContainerEdit.classList.add('preview-edit', edit + order.toString());
+  spanContainerEdit.classList.add(preview_edit, edit + order.toString());
   spanContainerEdit.innerHTML = 'edit';
   var spanContainerDelete = document.createElement('span');
-  spanContainerDelete.classList.add('preview-delete', del + order.toString());
+  spanContainerDelete.classList.add(preview_delete, del + order.toString());
   spanContainerDelete.innerHTML = 'delete';
   var spanContainerNumber = document.createElement('span');
   spanContainerNumber.className = 'flt-rgt flt-clr-rgt input-number numberize-prijevozni ' + number;
@@ -89,11 +105,11 @@ function createPreviewContainerFirstRow(edit, del, number, order, holder) {
 
   var mainContainer = document.createElement('div');
   mainContainer.appendChild(container);
-  mainContainer.classList.add('data-preview', 'dp-obracun');
+  mainContainer.classList.add(data_preview, dp_obracun);
   document.querySelector(holder).appendChild(mainContainer);
 
-  addPreviewListener('.' + edit + order.toString(), editFunc);
-  addPreviewListener('.' + del + order.toString(), delFunc);
+  addPreviewListener('.' + edit + order.toString(), editFunc, 'edit');
+  addPreviewListener('.' + del + order.toString(), delFunc, 'delete');
 }
 
 function createPreviewContainerSecondRow(selectors, holder) {
@@ -122,74 +138,129 @@ function updatePreviewContainerSecondRow() {
   clearSectionInput('.flag-obracun');
 }
 
-function addPreviewListener(className, fn) {
+function addPreviewListener(className, fn, tag) {
   document.querySelector(className).addEventListener('click', function(e) {
-    fn(e);
+    if (tag === 'edit') {
+      fn(
+        e,
+        '.preview-edit',
+        '.dp-obracun',
+        '.flag-obracun',
+        '#obracun-edit-close',
+        '#obracun-save',
+        '#obracun-edit',
+        'obracun-edit',
+        '#plus-minus-dnevnica-holder'
+      );
+    }
+    if (tag === 'delete') {
+      fn(
+        e,
+        '.number-obracun',
+        '.flag-obracun',
+        '#obracun-save',
+        '#obracun-edit',
+        '#obracun-edit-close'
+      );
+    }
   });
 }
 
-function editFunc(e) {
+function editFunc(
+  e,
+  preview_edit_dot,
+  dp_obracun_dot,
+  flag_obracun_dot,
+  obracun_edit_closeID,
+  obracun_saveID,
+  obracun_editID,
+  obracun_edit,
+  plus_minus_holderID
+) {
   // reset css disable button
-  for (var i = 0; i < document.querySelectorAll('.preview-edit').length; i++) {
-    document.querySelectorAll('.preview-edit')[i].style.pointerEvents = 'auto';
+  for (var i = 0; i < document.querySelectorAll(preview_edit_dot).length; i++) {
+    document.querySelectorAll(preview_edit_dot)[i].style.pointerEvents = 'auto';
   }
   var getSpanContent = [];
   var objHTML = e.path[2];
   // disable edit button
   e.target.style.pointerEvents = 'none';
-  editModeActivate(objHTML, '.dp-obracun');
+  editModeActivate(
+    objHTML,
+    dp_obracun_dot,
+    obracun_edit_closeID,
+    obracun_saveID,
+    obracun_editID,
+    obracun_edit,
+    plus_minus_holderID
+  );
   for (var i = 0; i < objHTML.childNodes.length; i++) {
     if (objHTML.childNodes[i].tagName === 'SPAN' && objHTML.childNodes[i].value !== '') {
       getSpanContent.push(objHTML.childNodes[i].innerHTML);
     }
   }
-  populateSpanSection('.flag-obracun', getSpanContent);
+  populateSpanSection(flag_obracun_dot, getSpanContent);
 }
 
-function delFunc(e) {
+function delFunc(
+  e,
+  number_obracun_dot,
+  flag_obracun_dot,
+  obracun_saveID,
+  obracun_editID,
+  obracun_edit_closeID
+) {
   // replace with IE and Safari working version
   e.path[2].remove();
-  resetNumberOrder('.number-obracun');
-  clearSectionInput('.flag-obracun');
-  document.querySelector('#obracun-save').style.display = '';
-  document.querySelector('#obracun-edit').style.display = 'none';
-  document.querySelector('#obracun-edit-close').style.display = 'none';
+  resetNumberOrder(number_obracun_dot);
+  clearSectionInput(flag_obracun_dot);
+  document.querySelector(obracun_saveID).style.display = '';
+  document.querySelector(obracun_editID).style.display = 'none';
+  document.querySelector(obracun_edit_closeID).style.display = 'none';
 }
 
-function editModeActivate(objHTML, spanClass) {
+function editModeActivate(
+  objHTML,
+  spanClass,
+  obracun_edit_closeID,
+  obracun_saveID,
+  obracun_editID,
+  obracun_edit,
+  plus_minus_holderID
+) {
   // clear all colors and show close button
-  document.querySelector('#obracun-edit-close').style.display = '';
+  document.querySelector(obracun_edit_closeID).style.display = '';
   for (var i = 0; i < document.querySelectorAll(spanClass).length; i++) {
     document.querySelectorAll(spanClass)[i].style.backgroundColor = '#f3f3f3';
   }
   objHTML.style.backgroundColor = '#ff3860d4';
   // <div id="obracun-save" class="back-button save-button">save</div>
   // remove save
-  document.querySelector('#obracun-save').style.display = 'none';
+  document.querySelector(obracun_saveID).style.display = 'none';
 
   // append edit button
-  if (document.querySelector('#obracun-edit') === null) {
+  if (document.querySelector(obracun_editID) === null) {
     var divObracunEdit = document.createElement('div');
-    divObracunEdit.setAttribute('id', 'obracun-edit');
+    divObracunEdit.setAttribute('id', obracun_edit);
     divObracunEdit.className = 'back-button save-button';
     divObracunEdit.style.backgroundColor = '#ffdd57';
     divObracunEdit.style.color = '#4a4a4a';
     divObracunEdit.innerHTML = 'edit';
     // append edit close button for edit
-    document.querySelector('#plus-minus-dnevnica-holder').appendChild(divObracunEdit);
+    document.querySelector(plus_minus_holderID).appendChild(divObracunEdit);
   }
   // show edit button again
-  if (document.querySelector('#obracun-edit').style.display === 'none') {
-    document.querySelector('#obracun-edit').style.display = '';
+  if (document.querySelector(obracun_editID).style.display === 'none') {
+    document.querySelector(obracun_editID).style.display = '';
   }
   globalObjHTML = objHTML;
   globalSpanClass = '.flag-obracun';
   // handling events
   document
-    .querySelector('#obracun-edit')
+    .querySelector(obracun_editID)
     .removeEventListener('click', updatePreviewContainerSecondRow, true);
   document
-    .querySelector('#obracun-edit')
+    .querySelector(obracun_editID)
     .addEventListener('click', updatePreviewContainerSecondRow, true);
 }
 
