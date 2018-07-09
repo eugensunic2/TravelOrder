@@ -1,0 +1,4 @@
+- css classes, comonize, because they are equal
+- on load method for initializing display none
+- close button methodize
+- fix delete malworking

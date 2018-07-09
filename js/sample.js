@@ -40,6 +40,22 @@
     document.querySelector('#prijevozni-edit').style.display = 'none';
     document.querySelector('#prijevozni-edit-close').style.display = 'none';
   });
+  // PRIJEVOZNI CLOSE
+  document.querySelector('#ostali-edit-close').addEventListener('click', function() {
+    clearSectionInput('.flag-ostali');
+    // reset backgroundColor
+    for (var i = 0; i < document.querySelectorAll('.data-preview-ostali').length; i++) {
+      document.querySelectorAll('.data-preview-ostali')[i].style.backgroundColor =
+        'rgb(243, 243, 243)';
+    }
+    // reset disable button
+    for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
+      document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
+    }
+    document.querySelector('#ostali-save').style.display = '';
+    document.querySelector('#ostali-edit').style.display = 'none';
+    document.querySelector('#ostali-edit-close').style.display = 'none';
+  });
 
   // SAVE OBRACUN
   document.querySelector('#obracun-save').addEventListener('click', function() {
@@ -85,8 +101,22 @@
 
   // SAVE OSTALI
   document.querySelector('#ostali-save').addEventListener('click', function() {
-    createPreviewContainerFirstRow();
-    createPreviewContainerSecondRow();
+    createPreviewContainerFirstRow(
+      'edit-ostali',
+      'delete-ostali',
+      'number-ostali',
+      document.querySelectorAll('.dp-ostali')
+        ? document.querySelectorAll('.dp-ostali').length + 1
+        : 1,
+      '#data-preview-ostali',
+      'modify-operation-ostali',
+      'preview-edit-ostali',
+      'preview-delete-ostali',
+      'data-preview-ostali',
+      'dp-ostali',
+      addPreviewListenerOstali
+    );
+    createPreviewContainerSecondRow('.flag-ostali', '.dp-ostali');
     clearSectionInput('.flag-ostali');
   });
 
@@ -220,7 +250,26 @@ function addPreviewListenerPrijevozni(className, fn, tag) {
     }
   });
 }
-function addPreviewListenerOstali() {}
+function addPreviewListenerOstali(className, fn, tag) {
+  document.querySelector(className).addEventListener('click', function(e) {
+    if (tag === 'edit') {
+      fn(
+        e,
+        '.preview-edit-ostali',
+        '.dp-ostali',
+        '.flag-ostali',
+        '#ostali-edit-close',
+        '#ostali-save',
+        '#ostali-edit',
+        'ostali-edit',
+        '#plus-minus-ostali-holder'
+      );
+    }
+    if (tag === 'delete') {
+      fn(e, '.number-ostali', '.flag-ostali', '#ostali-save', '#ostali-edit', '#ostali-edit-close');
+    }
+  });
+}
 
 function editFunc(
   e,

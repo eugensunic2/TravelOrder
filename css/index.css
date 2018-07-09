@@ -369,3 +369,33 @@
 .modify-operation-prijevozni {
   margin-bottom: 5px;
 }
+
+/* ostali */
+.data-preview-ostali {
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  padding: 5px;
+  background: #f3f3f3;
+  margin-bottom: 5px;
+}
+.preview-edit-ostali {
+  border: 1px solid #b0a8a8;
+  background: #ffdd57;
+  padding: 3px;
+  border-radius: 2px;
+}
+.preview-delete-ostali {
+  border: 1px solid #b0a8a8;
+  background: #b7ddf7;
+  padding: 3px;
+  border-radius: 2px;
+  margin-left: 3px;
+}
+.preview-delete-ostali:hover,
+.preview-edit-ostali:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.modify-operation-ostali {
+  margin-bottom: 5px;
+}
