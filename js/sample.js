@@ -40,6 +40,7 @@
     document.querySelector('#prijevozni-edit').style.display = 'none';
     document.querySelector('#prijevozni-edit-close').style.display = 'none';
   });
+
   // PRIJEVOZNI CLOSE
   document.querySelector('#ostali-edit-close').addEventListener('click', function() {
     clearSectionInput('.flag-ostali');
