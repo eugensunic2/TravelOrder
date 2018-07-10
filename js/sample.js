@@ -385,10 +385,12 @@ function delFunc(
   obracun_editID,
   obracun_edit_closeID
 ) {
+  // replace with IE and Safari working version
   e.path[2].parentNode.removeChild(e.path[2]);
   resetNumberOrder(number_obracun_dot);
   clearSectionInput(flag_obracun_dot);
   document.querySelector(obracun_saveID).style.display = '';
+  document.querySelector(obracun_editID).style.display = 'none';
   document.querySelector(obracun_edit_closeID).style.display = 'none';
 }
 
