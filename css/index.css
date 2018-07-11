@@ -19,8 +19,14 @@
 .ft-sz-20 {
   font-size: 20px;
 }
+.ft-sz-18 {
+  font-size: 20px;
+}
 .width-70 {
   width: 70px;
+}
+.width-100 {
+  width: 100%;
 }
 .pdg-rgt-15 {
   padding-right: 15px;

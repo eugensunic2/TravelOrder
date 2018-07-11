@@ -208,6 +208,7 @@ function createPreviewContainerSecondRow(selectors, holder) {
   var elements = document.querySelectorAll(selectors);
   for (var i = 0; i < elements.length; i++) {
     var spanContainer = document.createElement('span');
+    spanContainer.classList.add('loopme');
     spanContainer.textContent = elements[i].value + ' ';
     document
       .querySelectorAll(holder)
