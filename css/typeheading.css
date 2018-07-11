@@ -5,7 +5,6 @@
 .typeahead,
 .tt-query,
 .tt-hint {
-
   font-size: 16px;
   height: 30px;
   line-height: 30px;
@@ -14,10 +13,8 @@
 }
 .typeahead {
   width: 100%;
- 
 }
 .typeahead:focus {
- 
 }
 .tt-query {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
@@ -59,4 +56,9 @@
   top: -40px;
   padding-left: 15px;
   padding-right: 15px;
+}
+.typehead-specialize {
+  border: 1px solid #d9d9d9;
+  box-shadow: inset 0px 0px 1px #cfbfbf;
+  border-radius: 2px;
 }
