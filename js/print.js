@@ -24,9 +24,15 @@
     'Iznos u kn'
   ];
 
-  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray);
-  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray);
-  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray);
+  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray, 'OBRACUN DNEVNICE');
+  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray, 'OBRACUN PRIJEVOZA');
+  generateTable(
+    10,
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    300,
+    obracunDnevniceArray,
+    'OBRACUN OSTALIH TROSKOVA'
+  );
 
   overallPriceDisplay();
 
@@ -52,10 +58,10 @@ function appendPrintButton() {
 
   document.querySelector('#main-print-container').appendChild(newdiv);
 }
-function generateTable(rowNum, data, totalValue, headerNamesArray) {
+function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle) {
   // id= .add-obracun
   var cnt = 0;
-  setTableTitle('OBRACUN DEVNICE');
+  setTableTitle(tableTitle);
   var cellNumber = 9;
   // dataObj= {datum:'', drzava:'', polazak:'', povratak:''};
   var table = document.createElement('table');
@@ -169,7 +175,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
 
   document.querySelector('#main-print-container').appendChild(divElement);
 }
-function overallPriceDisplay() {
+function overallPriceDisplay(totalSum) {
   container = document.createElement('div');
   container.style = 'background-color:#209cee30;width:100%%;margin-left:30%;margin-top:30px;';
   container.setAttribute('class', 'columns');
@@ -206,10 +212,10 @@ function overallPriceDisplay() {
   third.innerHTML = 'Ukupno nepriznatih troškova:';
   fourth.innerHTML = 'Ostaje za isplatu / vracanje u kn:';
 
-  first_p.innerHTML = '2103,00kn';
-  second_p.innerHTML = '2103,00kn';
-  third_p.innerHTML = '2103,00kn';
-  fourth_p.innerHTML = '2103,00kn';
+  first_p.innerHTML = totalSum;
+  second_p.innerHTML = 'kn';
+  third_p.innerHTML = 'kn';
+  fourth_p.innerHTML = 'kn';
 
   // appending
   leftElement.appendChild(first);
