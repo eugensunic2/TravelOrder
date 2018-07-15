@@ -10,6 +10,11 @@ var obracunOstali = 0;
   var globalObjHTML;
   var globalSpanClass;
 
+  document.querySelector('#preview-mode').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = './print.html';
+  });
+
   document.querySelector('#obracun-edit-close').style.display = 'none';
   document.querySelector('#prijevozni-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
@@ -605,12 +610,17 @@ function isEndDateSmaller(selector1, selector2, index) {
     .trimEnd();
   return dateTimeToDays(begin, end) < 0;
 }
+
 function isNumberOnly(selector) {
   var value = document
     .querySelector(selector)
     .value.trimStart()
     .trimEnd();
   return value.length > 0 && value % 1 >= 0;
+}
+
+function isBasicValidation(selector) {
+  return document.querySelectorAll(selector).value.length > 0;
 }
 
 function dateTimeToDays(begin, end) {

@@ -2,8 +2,7 @@
   var mainContainer = document.createElement('div');
   mainContainer.setAttribute('id', 'main-print-container');
   document.body.appendChild(mainContainer);
-  appendBackButton();
-  appendPrintButton();
+
   setCompanyLogo(
     'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
   );

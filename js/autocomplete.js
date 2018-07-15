@@ -19,7 +19,7 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
-
+var currency = ['$', 'EUR', 'HRK'];
 var countries = [
   'Afghanistan',
   'Albania',
@@ -233,6 +233,17 @@ var countries = [
 var spending = ['some', 'And'];
 var transportation = ['bus', 'tram'];
 
+$('.the-currency .typeahead').typeahead(
+  {
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'currency',
+    source: substringMatcher(currency)
+  }
+);
 $('.the-country .typeahead').typeahead(
   {
     hint: true,
