@@ -1,4 +1,10 @@
 var opacityValue = 0.7;
+
+// sub total value
+var obracunTotal = 0;
+var obracunPrijevozni = 0;
+var obracunOstali = 0;
+
 (function() {
   // on load
   var globalObjHTML;
@@ -8,6 +14,25 @@ var opacityValue = 0.7;
   document.querySelector('#prijevozni-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
+
+  // friend-change
+  document.querySelector('#friend-stay').addEventListener('change', function(e) {
+    document.querySelector('#friend-span').value = this.checked ? 'friend stay' : '';
+  });
+
+  // date1 change
+  document.querySelectorAll('.date1')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // date2 change
+  document.querySelectorAll('.date2')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+
+  // date-only change
+  document.querySelectorAll('.date-only')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
 
   // OBRACUN CLOSE
   document.querySelector('#obracun-edit-close').addEventListener('click', function() {
@@ -86,25 +111,49 @@ var opacityValue = 0.7;
 
   // SAVE OBRACUN
   document.querySelector('#obracun-save').addEventListener('click', function() {
-    createPreviewContainerFirstRow(
-      'edit-obracun',
-      'delete-obracun',
-      'number-obracun',
-      document.querySelectorAll('.dp-obracun')
-        ? document.querySelectorAll('.dp-obracun').length + 1
-        : 1,
-      '#data-preview-obracun',
-      'modify-operation-obracun',
-      'preview-edit-obracun',
-      'preview-delete-obracun',
-      'data-preview-obracun',
-      'dp-obracun',
-      addPreviewListenerObracun
-    );
-    createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
-    clearSectionInput('.flag-obracun');
-    for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
-      document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
+    if (
+      validateDate('.date1', '.date2') &&
+      !validateDateOnly('.date-only', 0) &&
+      !isEndDateSmaller('.date1', '.date2', 0)
+    ) {
+      createPreviewContainerFirstRow(
+        'edit-obracun',
+        'delete-obracun',
+        'number-obracun',
+        document.querySelectorAll('.dp-obracun')
+          ? document.querySelectorAll('.dp-obracun').length + 1
+          : 1,
+        '#data-preview-obracun',
+        'modify-operation-obracun',
+        'preview-edit-obracun',
+        'preview-delete-obracun',
+        'data-preview-obracun',
+        'dp-obracun',
+        addPreviewListenerObracun
+      );
+      createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
+      clearSectionInput('.flag-obracun');
+      for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
+        document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
+      }
+      modifyTotalValueSub('.loopme', '#total-obracun');
+      // reset html here
+      document.querySelector('#friend-stay').checked = false;
+      resetRedInputBorder('.date-only', '.date1', '.date2', 0);
+    } else {
+      // put red borders
+      if (validateDateOnly('.date-only', 0)) {
+        document.querySelectorAll('.date-only')[0].style.border = '2px solid #ff88a0';
+      }
+      if (validateBeginDate('.date1', 0)) {
+        document.querySelectorAll('.date1')[0].style.border = '2px solid #ff88a0';
+      }
+      if (validateEndDate('.date2', 0)) {
+        document.querySelectorAll('.date2')[0].style.border = '2px solid #ff88a0';
+      } else {
+        document.querySelectorAll('.date1')[0].style.border = '2px solid #ff88a0';
+        document.querySelectorAll('.date2')[0].style.border = '2px solid #ff88a0';
+      }
     }
   });
 
@@ -457,6 +506,114 @@ function resetNumberOrder(selector) {
   for (var i = 0; i < document.querySelectorAll(selector).length; i++) {
     document.querySelectorAll(selector)[i].innerHTML = '#' + (i + 1);
   }
+}
+
+function modifyTotalValueSub(selector, outputSelector) {
+  elmLength = document.querySelectorAll(selector).length;
+  var begin = document
+    .querySelectorAll(selector)
+    [elmLength - 3].innerHTML.trimStart()
+    .trimEnd();
+  var end = document
+    .querySelectorAll(selector)
+    [elmLength - 2].innerHTML.trimStart()
+    .trimEnd();
+
+  var day = dateTimeToDays(begin, end);
+  var friendStay = document.querySelector('#friend-stay').checked ? 70 : 50;
+
+  this.obracunTotal = this.obracunTotal + parseInt((friendStay * day).toFixed(2));
+  console.log(obracunTotal);
+  document.querySelector(outputSelector).innerHTML = this.obracunTotal + '€';
+}
+// date validation
+function validateDate(selector1, selector2) {
+  var begin = document
+    .querySelector(selector1)
+    .value.trimStart()
+    .trimEnd();
+  var end = document
+    .querySelector(selector2)
+    .value.trimStart()
+    .trimEnd();
+
+  if (
+    begin.match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null &&
+    end.match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function validateBeginDate(selector, index) {
+  return document
+    .querySelectorAll(selector)
+    [index].value.trimStart()
+    .trimEnd()
+    .match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null
+    ? false
+    : true;
+}
+
+function validateEndDate(selector, index) {
+  return document
+    .querySelectorAll(selector)
+    [index].value.trimStart()
+    .trimEnd()
+    .match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null
+    ? false
+    : true;
+}
+
+function validateDateOnly(selector, index) {
+  return document
+    .querySelectorAll(selector)
+    [index].value.trimStart()
+    .trimEnd()
+    .match(/^(\d{2})\.(\d{2})\.(\d{4})$/) !== null
+    ? false
+    : true;
+}
+
+function isEndDateSmaller(selector1, selector2, index) {
+  var begin = document
+    .querySelectorAll(selector1)
+    [index].value.trimStart()
+    .trimEnd();
+  var end = document
+    .querySelectorAll(selector2)
+    [index].value.trimStart()
+    .trimEnd();
+  console.log(dateTimeToDays(begin, end) < 0);
+  return dateTimeToDays(begin, end) < 0;
+}
+
+function dateTimeToDays(begin, end) {
+  var dateSubstractionMiliSeconds =
+    new Date(
+      end.substring(6, 10),
+      parseInt(end.substring(3, 5)) - 1,
+      end.substring(0, 2),
+      end.substring(11, 13),
+      end.substring(14, end.length)
+    ).getTime() -
+    new Date(
+      begin.substring(6, 10),
+      parseInt(begin.substring(3, 5)) - 1,
+      begin.substring(0, 2),
+      begin.substring(11, 13),
+      begin.substring(14, end.length)
+    ).getTime();
+
+  var hours = dateSubstractionMiliSeconds / (1000 * 60 * 60);
+  return hours / 24;
+}
+
+function resetRedInputBorder(date0, date1, date2, index) {
+  document.querySelectorAll(date0)[index].style.border = '';
+  document.querySelectorAll(date1)[index].style.border = '';
+  document.querySelectorAll(date2)[index].style.border = '';
 }
 
 // MAIN FUNCTION DECLARATION END

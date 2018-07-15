@@ -4,6 +4,9 @@ input {
 .zindex-positive {
   z-index: 100;
 }
+.not-visible {
+  visibility: hidden;
+}
 .flt-lft {
   float: left;
 }

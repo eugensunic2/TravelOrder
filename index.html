@@ -159,7 +159,7 @@
         <div class="inline-block">
           <div class="field">
             <div class="control">
-              <input class="input is-medium" type="text" placeholder=" dd.mm.yyyy hh:mm">
+              <input class="input is-medium" type="text" placeholder="dd.mm.yyyy">
             </div>
           </div>
         </div>
@@ -176,13 +176,13 @@
         </div>
         <div class="add-obracun">
           <label class="checkbox zindex-positive flt-clr-lft flt-lft">
-            <input type="checkbox"> Friend stay
+            <input id="friend-stay" type="checkbox"> Friend stay
           </label>
           <span class="flt-clr-lft flt-lft">Datum</span>
           <div class="date-width">
             <div class="field">
               <div class="control">
-                <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy hh:mm">
+                <input class="input is-small flag-obracun date-only" type="text" placeholder="dd.mm.yyyy hh:mm">
               </div>
             </div>
           </div>
@@ -194,7 +194,7 @@
           <div class="inline-block">
             <div class="field">
               <div class="control">
-                <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy hh:mm">
+                <input class="input is-small flag-obracun date1" type="text" placeholder="dd.mm.yyyy hh:mm">
               </div>
             </div>
           </div>
@@ -202,19 +202,21 @@
           <div class="inline-block">
             <div class="field">
               <div class="control">
-                <input class="input is-small flag-obracun" type="text" placeholder="dd.mm.yyyy hh:mm">
+                <input class="input is-small flag-obracun date2" type="text" placeholder="dd.mm.yyyy hh:mm">
               </div>
             </div>
           </div>
         </div>
       </div>
+      <input id="friend-span" class="not-visible flag-obracun">
       <div id="data-preview-obracun" class="column">
       </div>
     </div>
     <div class="account-result flt-rgt pdg-rgt-15">
       <span class="ft-sz-20">Total:</span>
-      <span class="total-value">188$</span>
+      <span id="total-obracun" class="total-value">0 €</span>
     </div>
+
 
 
 
@@ -269,7 +271,7 @@
     </div>
     <div class="account-result flt-rgt pdg-rgt-15">
       <span class="ft-sz-20">Total:</span>
-      <span class="total-value">188$</span>
+      <span id="total-prijevozni" class="total-value">0 €</span>
     </div>
 
 
@@ -317,7 +319,7 @@
     </div>
     <div class="account-result flt-rgt pdg-rgt-15">
       <span class="ft-sz-20">Total:</span>
-      <span class="total-value">188$</span>
+      <span class="total-value">0 €</span>
     </div>
 
     <div id="izvjesce" class="content-center mg-btm-30 mg-tp-100 container">
@@ -327,7 +329,7 @@
     <hr>
     <div class="account-result overall">
       <span class="ft-sz-20">Overall:</span>
-      <span class="total-value">300$</span>
+      <span id="total-ostali" class="total-value">0 €</span>
     </div>
 
     <a id="preview-mode" class="button is-primary preview-mode">Preview mode</a>
