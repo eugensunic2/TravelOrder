@@ -2,3 +2,4 @@
 - on load method for initializing display none
 - close button methodize
 - fix delete malworking
+- add utf8 to both index.html and print.html
