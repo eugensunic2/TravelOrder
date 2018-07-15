@@ -29,8 +29,15 @@ var obracunOstali = 0;
     this.style.border = '';
   });
 
-  // date-only change
+  // date-only change obracun
   document.querySelectorAll('.date-only')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // date-only change ostali
+  document.querySelectorAll('.date-only')[1].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelectorAll('.digit-only')[0].addEventListener('input', function(e) {
     this.style.border = '';
   });
 
@@ -182,25 +189,35 @@ var obracunOstali = 0;
 
   // SAVE OSTALI
   document.querySelector('#ostali-save').addEventListener('click', function() {
-    createPreviewContainerFirstRow(
-      'edit-ostali',
-      'delete-ostali',
-      'number-ostali',
-      document.querySelectorAll('.dp-ostali')
-        ? document.querySelectorAll('.dp-ostali').length + 1
-        : 1,
-      '#data-preview-ostali',
-      'modify-operation-ostali',
-      'preview-edit-ostali',
-      'preview-delete-ostali',
-      'data-preview-ostali',
-      'dp-ostali',
-      addPreviewListenerOstali
-    );
-    createPreviewContainerSecondRow('.flag-ostali', '.dp-ostali');
-    clearSectionInput('.flag-ostali');
-    for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
-      document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
+    if (!validateDateOnly('.date-only', 1) && isNumberOnly('.digit-only')) {
+      createPreviewContainerFirstRow(
+        'edit-ostali',
+        'delete-ostali',
+        'number-ostali',
+        document.querySelectorAll('.dp-ostali')
+          ? document.querySelectorAll('.dp-ostali').length + 1
+          : 1,
+        '#data-preview-ostali',
+        'modify-operation-ostali',
+        'preview-edit-ostali',
+        'preview-delete-ostali',
+        'data-preview-ostali',
+        'dp-ostali',
+        addPreviewListenerOstali
+      );
+      createPreviewContainerSecondRow('.flag-ostali', '.dp-ostali');
+      clearSectionInput('.flag-ostali');
+      for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
+        document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
+      }
+      resetRedInputBorderOstali('digit-only', '.date-only');
+    } else {
+      if (validateDateOnly('.date-only', 1)) {
+        document.querySelectorAll('.date-only')[1].style.border = '2px solid #ff88a0';
+      }
+      if (!isNumberOnly('.digit-only')) {
+        document.querySelectorAll('.digit-only')[0].style.border = '2px solid #ff88a0';
+      }
     }
   });
 
@@ -586,8 +603,14 @@ function isEndDateSmaller(selector1, selector2, index) {
     .querySelectorAll(selector2)
     [index].value.trimStart()
     .trimEnd();
-  console.log(dateTimeToDays(begin, end) < 0);
   return dateTimeToDays(begin, end) < 0;
+}
+function isNumberOnly(selector) {
+  var value = document
+    .querySelector(selector)
+    .value.trimStart()
+    .trimEnd();
+  return value.length > 0 && value % 1 >= 0;
 }
 
 function dateTimeToDays(begin, end) {
@@ -615,6 +638,11 @@ function resetRedInputBorder(date0, date1, date2, index) {
   document.querySelectorAll(date0)[index].style.border = '';
   document.querySelectorAll(date1)[index].style.border = '';
   document.querySelectorAll(date2)[index].style.border = '';
+}
+
+function resetRedInputBorderOstali(digitOnly, dateOnly) {
+  document.querySelectorAll(digitOnly)[0].style.border = '';
+  document.querySelectorAll(dateOnly)[1].style.border = '';
 }
 
 function alternatePointerEventsOpacity(dnevnicaID, prijevozniID, pointerValue, opacityValue) {
