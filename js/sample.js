@@ -50,10 +50,13 @@ var obracunOstali = 0;
     document.querySelector('#obracun-edit').style.display = 'none';
     document.querySelector('#obracun-edit-close').style.display = 'none';
     // disable other two
-    document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = '';
-    document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = '';
-    document.querySelector('#obracun-ostalih-troskova').style.opacity = 1;
-    document.querySelector('#obracun-prijevoznih-troskova').style.opacity = 1;
+    alternatePointerEventsOpacity(
+      '#obracun-prijevoznih-troskova',
+      '#obracun-ostalih-troskova',
+      '',
+      1
+    );
+
     for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
       document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
     }
@@ -75,10 +78,8 @@ var obracunOstali = 0;
     document.querySelector('#prijevozni-edit').style.display = 'none';
     document.querySelector('#prijevozni-edit-close').style.display = 'none';
     // disable other two
-    document.querySelector('#obracun-dnevnica').style.pointerEvents = '';
-    document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = '';
-    document.querySelector('#obracun-dnevnica').style.opacity = 1;
-    document.querySelector('#obracun-ostalih-troskova').style.opacity = 1;
+    alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-ostalih-troskova', '', 1);
+
     for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
       document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
     }
@@ -100,10 +101,8 @@ var obracunOstali = 0;
     document.querySelector('#ostali-edit').style.display = 'none';
     document.querySelector('#ostali-edit-close').style.display = 'none';
     // disable other two
-    document.querySelector('#obracun-dnevnica').style.pointerEvents = '';
-    document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = '';
-    document.querySelector('#obracun-dnevnica').style.opacity = 1;
-    document.querySelector('#obracun-prijevoznih-troskova').style.opacity = 1;
+    alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-prijevoznih-troskova', '', 1);
+
     for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
       document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
     }
@@ -296,10 +295,12 @@ function addPreviewListenerObracun(className, fn, tag) {
         'obracun-edit',
         '#plus-minus-dnevnica-holder-obracun'
       );
-      document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = 'none';
-      document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = 'none';
-      document.querySelector('#obracun-ostalih-troskova').style.opacity = opacityValue;
-      document.querySelector('#obracun-prijevoznih-troskova').style.opacity = opacityValue;
+      alternatePointerEventsOpacity(
+        '#obracun-prijevoznih-troskova',
+        '#obracun-ostalih-troskova',
+        'none',
+        opacityValue
+      );
     }
     if (tag === 'delete') {
       fn(
@@ -310,10 +311,13 @@ function addPreviewListenerObracun(className, fn, tag) {
         '#obracun-edit',
         '#obracun-edit-close'
       );
-      document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = '';
-      document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = '';
-      document.querySelector('#obracun-ostalih-troskova').style.opacity = 1;
-      document.querySelector('#obracun-prijevoznih-troskova').style.opacity = 1;
+      alternatePointerEventsOpacity(
+        '#obracun-prijevoznih-troskova',
+        '#obracun-ostalih-troskova',
+        '',
+        1
+      );
+
       for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
         document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
       }
@@ -334,10 +338,12 @@ function addPreviewListenerPrijevozni(className, fn, tag) {
         'prijevozni-edit',
         '#plus-minus-prijevozni-holder'
       );
-      document.querySelector('#obracun-dnevnica').style.pointerEvents = 'none';
-      document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = 'none';
-      document.querySelector('#obracun-dnevnica').style.opacity = opacityValue;
-      document.querySelector('#obracun-ostalih-troskova').style.opacity = opacityValue;
+      alternatePointerEventsOpacity(
+        '#obracun-dnevnica',
+        '#obracun-ostalih-troskova',
+        'none',
+        opacityValue
+      );
     }
     if (tag === 'delete') {
       fn(
@@ -348,10 +354,7 @@ function addPreviewListenerPrijevozni(className, fn, tag) {
         '#prijevozni-edit',
         '#prijevozni-edit-close'
       );
-      document.querySelector('#obracun-dnevnica').style.pointerEvents = '';
-      document.querySelector('#obracun-ostalih-troskova').style.pointerEvents = '';
-      document.querySelector('#obracun-dnevnica').style.opacity = 1;
-      document.querySelector('#obracun-ostalih-troskova').style.opacity = 1;
+      alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-ostalih-troskova', '', 1);
       for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
         document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
       }
@@ -372,17 +375,16 @@ function addPreviewListenerOstali(className, fn, tag) {
         'ostali-edit',
         '#plus-minus-ostali-holder'
       );
-      document.querySelector('#obracun-dnevnica').style.pointerEvents = 'none';
-      document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = 'none';
-      document.querySelector('#obracun-dnevnica').style.opacity = opacityValue;
-      document.querySelector('#obracun-prijevoznih-troskova').style.opacity = opacityValue;
+      alternatePointerEventsOpacity(
+        '#obracun-dnevnica',
+        '#obracun-prijevoznih-troskova',
+        'none',
+        opacityValue
+      );
     }
     if (tag === 'delete') {
       fn(e, '.number-ostali', '.flag-ostali', '#ostali-save', '#ostali-edit', '#ostali-edit-close');
-      document.querySelector('#obracun-dnevnica').style.pointerEvents = '';
-      document.querySelector('#obracun-prijevoznih-troskova').style.pointerEvents = '';
-      document.querySelector('#obracun-dnevnica').style.opacity = 1;
-      document.querySelector('#obracun-prijevoznih-troskova').style.opacity = 1;
+      alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-prijevoznih-troskova', '', 1);
       for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
         document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
       }
@@ -522,9 +524,8 @@ function modifyTotalValueSub(selector, outputSelector) {
   var day = dateTimeToDays(begin, end);
   var friendStay = document.querySelector('#friend-stay').checked ? 70 : 50;
 
-  this.obracunTotal = this.obracunTotal + parseInt((friendStay * day).toFixed(2));
-  console.log(obracunTotal);
-  document.querySelector(outputSelector).innerHTML = this.obracunTotal + '€';
+  obracunTotal = obracunTotal + parseInt((friendStay * day).toFixed(2));
+  document.querySelector(outputSelector).innerHTML = obracunTotal + '€';
 }
 // date validation
 function validateDate(selector1, selector2) {
@@ -614,6 +615,13 @@ function resetRedInputBorder(date0, date1, date2, index) {
   document.querySelectorAll(date0)[index].style.border = '';
   document.querySelectorAll(date1)[index].style.border = '';
   document.querySelectorAll(date2)[index].style.border = '';
+}
+
+function alternatePointerEventsOpacity(dnevnicaID, prijevozniID, pointerValue, opacityValue) {
+  document.querySelector(dnevnicaID).style.pointerEvents = pointerValue;
+  document.querySelector(prijevozniID).style.pointerEvents = pointerValue;
+  document.querySelector(dnevnicaID).style.opacity = opacityValue;
+  document.querySelector(prijevozniID).style.opacity = opacityValue;
 }
 
 // MAIN FUNCTION DECLARATION END
