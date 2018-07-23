@@ -23,16 +23,31 @@
     'Jedinicne <br/>Dnevnice',
     'Iznos u kn'
   ];
-
-  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray, 'OBRACUN DNEVNICE');
-  generateTable(10, [0, 1, 2, 3, 4, 5, 6, 7, 8], 300, obracunDnevniceArray, 'OBRACUN PRIJEVOZA');
-  generateTable(
-    10,
-    [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    300,
-    obracunDnevniceArray,
-    'OBRACUN OSTALIH TROSKOVA'
-  );
+  if (localStorage.getItem('obracun-table')) {
+    generateTable(
+      JSON.parse(localStorage.getItem('obracun-table')).length,
+      JSON.parse(localStorage.getItem('obracun-table')),
+      300,
+      obracunDnevniceArray,
+      'OBRACUN DNEVNICE'
+    );
+  }
+  // generateTable(
+  //   2,
+  //   JSON.parse(localStorage.getItem('ostali-table')),
+  //   300,
+  //   obracunDnevniceArray,
+  //   'OBRACUN PRIJEVOZA'
+  // );
+  if (localStorage.getItem('ostali-table')) {
+    generateTable(
+      JSON.parse(localStorage.getItem('ostali-table')).length,
+      JSON.parse(localStorage.getItem('ostali-table')),
+      300,
+      obracunDnevniceArray,
+      'OBRACUN OSTALIH TROSKOVA'
+    );
+  }
 
   overallPriceDisplay();
 
@@ -69,6 +84,8 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle) {
   for (var i = 0; i < rowNum; i++) {
     var tr = document.createElement('tr');
     table.appendChild(tr);
+    var newData = data[i];
+    console.log(newData);
     for (var j = 0; j < cellNumber; j++) {
       var td = document.createElement('td');
       td.style = 'text-align:center;';
@@ -78,9 +95,9 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle) {
       } else {
         if (!j) {
           td.innerHTML = ++cnt;
-        } else {
-          td.innerHTML = data[j];
+          tr.appendChild(td);
         }
+        td.innerHTML = newData[j];
       }
       tr.appendChild(td);
     }

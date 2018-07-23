@@ -5,13 +5,25 @@ var obracunTotal = 0;
 var obracunPrijevozni = 0;
 var obracunOstali = 0;
 
+var storageObjObracun = [];
+var storageObjOstali = [];
+
 (function() {
   // on load
   var globalObjHTML;
   var globalSpanClass;
 
+  // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
+    retrievePreviewSection('data-preview-obracun', storageObjObracun);
+    extraFillObracun(storageObjObracun);
+
+    retrievePreviewSection('data-preview-ostali', storageObjOstali);
+    extraFillOstali(storageObjOstali);
+
+    localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
+    localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
     window.location.href = './print.html';
   });
 
@@ -147,7 +159,8 @@ var obracunOstali = 0;
       for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
         document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
       }
-      modifyTotalValueSub('.loopme', '#total-obracun');
+      // here you have to place total accumulation VALUE DONT FORGET THAT !!!!
+      // modifyTotalValueSub('.loopme', '#total-obracun');
       // reset html here
       document.querySelector('#friend-stay').checked = false;
       resetRedInputBorder('.date-only', '.date1', '.date2', 0);
@@ -230,11 +243,6 @@ var obracunOstali = 0;
 })();
 
 // MAIN FUNCTION DECLARATION BEGIN
-function getAllInputSection(selectors) {
-  for (var i = 0; i < document.querySelectorAll(selectors).length; i++) {
-    console.log(document.querySelectorAll(selectors)[i].value);
-  }
-}
 
 function createPreviewContainerFirstRow(
   edit,
@@ -284,6 +292,13 @@ function createPreviewContainerSecondRow(selectors, holder) {
       .querySelectorAll(holder)
       [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
   }
+  // total sub value
+
+  spanContainer.classList.add('loopme');
+  spanContainer.textContent = modifyTotalValueSub('.loopme', '#friend-stay') + '€';
+  document
+    .querySelectorAll(holder)
+    [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
 }
 
 function updatePreviewContainerSecondRow() {
@@ -532,22 +547,19 @@ function resetNumberOrder(selector) {
   }
 }
 
-function modifyTotalValueSub(selector, outputSelector) {
-  elmLength = document.querySelectorAll(selector).length;
-  var begin = document
-    .querySelectorAll(selector)
-    [elmLength - 3].innerHTML.trimStart()
-    .trimEnd();
-  var end = document
-    .querySelectorAll(selector)
-    [elmLength - 2].innerHTML.trimStart()
-    .trimEnd();
+function modifyTotalValueSub(selector, friendStay) {
+  var parent = document.getElementsByClassName('data-preview-obracun')[0];
+  elmLength = parent.childNodes.length;
+
+  var begin = parent.childNodes[elmLength - 3].innerHTML.trimStart().trimEnd();
+  var end = parent.childNodes[elmLength - 2].innerHTML.trimStart().trimEnd();
 
   var day = dateTimeToDays(begin, end);
-  var friendStay = document.querySelector('#friend-stay').checked ? 70 : 50;
+  if (document.querySelector(friendStay)) {
+    var friendStay = document.querySelector(friendStay).checked ? 70 : 50;
+  }
 
-  obracunTotal = obracunTotal + parseInt((friendStay * day).toFixed(2));
-  document.querySelector(outputSelector).innerHTML = obracunTotal + '€';
+  return parseInt((friendStay * day).toFixed(2));
 }
 // date validation
 function validateDate(selector1, selector2) {
@@ -661,5 +673,39 @@ function alternatePointerEventsOpacity(dnevnicaID, prijevozniID, pointerValue, o
   document.querySelector(dnevnicaID).style.opacity = opacityValue;
   document.querySelector(prijevozniID).style.opacity = opacityValue;
 }
-
 // MAIN FUNCTION DECLARATION END
+// data-preview-ostali
+// 'data-preview-obracun'
+function retrievePreviewSection(dataPreviewSeletor, arr) {
+  arr.push([]);
+  for (var i = 0; i < document.getElementsByClassName(dataPreviewSeletor).length; i++) {
+    var parent = document.getElementsByClassName(dataPreviewSeletor)[i];
+    var tempArray = [];
+    for (var j = 0; j < parent.childNodes.length; j++) {
+      if (parent.childNodes[j].tagName === 'SPAN' && parent.childNodes[j].innerHTML.trim() !== '') {
+        tempArray.push(parent.childNodes[j].innerHTML.trim());
+      }
+    }
+    arr.push(tempArray);
+    console.log(arr);
+  }
+}
+
+function extraFillObracun(array) {
+  var tempArr = array[array.length - 1];
+  var getLast = tempArr[tempArr.length - 1];
+  array[array.length - 1].splice(
+    4,
+    4,
+    dateTimeToDays(tempArr[2], tempArr[3]) * 24,
+    dateTimeToDays(tempArr[2], tempArr[3]),
+    tempArr[tempArr.length - 1] % 7 == 0 ? 350 : 500,
+    getLast
+  );
+}
+
+function extraFillOstali(array) {
+  var tempArr = array[array.length - 1];
+  var getLast = tempArr[tempArr.length - 1];
+  array[array.length - 1].splice(3, 4, getLast, 7.67, 'nepriznato', parseFloat(tempArr[2]) * 7.67);
+}

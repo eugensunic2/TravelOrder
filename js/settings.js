@@ -22,24 +22,6 @@
   }, 500);
 
   // open sheet in preview mode
-  document.querySelector('#preview-mode').addEventListener('click', function() {
-    getAllInputSection('.flag-obracun');
-    getAllInputSection('.flag-prijevozni');
-    getAllInputSection('.flag-ostali');
-
-    // document.querySelector('#parent-heading').style.display = 'none';
-    // document.querySelector('#parent-container').style.display = 'none';
-    // document.body.classList.remove('body2');
-    // document.querySelector('#main-print-container').style.display = '';
-
-    // window.print();
-
-    // document.querySelector('.back-button').addEventListener('click', function() {
-    //   document.querySelector('#parent-heading').style.display = '';
-    //   document.querySelector('#parent-container').style.display = '';
-    //   document.querySelector('#main-print-container').style.display = 'none';
-    // });
-  });
 
   //SETTINGS BEGIN
 
