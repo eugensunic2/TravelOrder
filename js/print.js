@@ -1,4 +1,25 @@
 (function() {
+  var obracunDnevniceArray = [
+    'Br.',
+    'Datum',
+    'Drzava',
+    'Polazak',
+    'Povratak',
+    'Sati',
+    'Dnevnice',
+    'Jedinicne <br/>Dnevnice',
+    'Iznos u kn'
+  ];
+  var obracunOstaliArray = [
+    'Br.',
+    'Datum',
+    'Vrsta troska',
+    'Iznos',
+    'Valuta',
+    'Tecaj',
+    'Nepriznato',
+    'Iznos u kn'
+  ];
   var mainContainer = document.createElement('div');
   mainContainer.setAttribute('id', 'main-print-container');
   document.body.appendChild(mainContainer);
@@ -12,40 +33,24 @@
 
   setIntroHeader('PUTNI RACUN', '12/2017', 'Br.: 47');
   setIntermediateHeader();
-  var obracunDnevniceArray = [
-    'Br.',
-    'Datum',
-    'Drzava',
-    'Polazak',
-    'Povratak',
-    'Sati',
-    'Dnevnice',
-    'Jedinicne <br/>Dnevnice',
-    'Iznos u kn'
-  ];
   if (localStorage.getItem('obracun-table')) {
     generateTable(
       JSON.parse(localStorage.getItem('obracun-table')).length,
       JSON.parse(localStorage.getItem('obracun-table')),
       300,
       obracunDnevniceArray,
-      'OBRACUN DNEVNICE'
+      'OBRACUN DNEVNICE',
+      9
     );
   }
-  // generateTable(
-  //   2,
-  //   JSON.parse(localStorage.getItem('ostali-table')),
-  //   300,
-  //   obracunDnevniceArray,
-  //   'OBRACUN PRIJEVOZA'
-  // );
   if (localStorage.getItem('ostali-table')) {
     generateTable(
       JSON.parse(localStorage.getItem('ostali-table')).length,
       JSON.parse(localStorage.getItem('ostali-table')),
       300,
-      obracunDnevniceArray,
-      'OBRACUN OSTALIH TROSKOVA'
+      obracunOstaliArray,
+      'OBRACUN OSTALIH TROSKOVA',
+      8
     );
   }
 
@@ -73,19 +78,19 @@ function appendPrintButton() {
 
   document.querySelector('#main-print-container').appendChild(newdiv);
 }
-function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle) {
+function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, cellnum) {
   // id= .add-obracun
   var cnt = 0;
   setTableTitle(tableTitle);
-  var cellNumber = 9;
-  // dataObj= {datum:'', drzava:'', polazak:'', povratak:''};
+  var cellNumber = cellnum;
+
   var table = document.createElement('table');
   table.style = 'width:100%;margin-left:0px;margin-right:0px';
+
   for (var i = 0; i < rowNum; i++) {
     var tr = document.createElement('tr');
     table.appendChild(tr);
     var newData = data[i];
-    console.log(newData);
     for (var j = 0; j < cellNumber; j++) {
       var td = document.createElement('td');
       td.style = 'text-align:center;';
@@ -93,13 +98,20 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle) {
         td.style = 'font-weight:600;text-align:center';
         td.innerHTML = headerNamesArray[j];
       } else {
-        if (!j) {
+        if (j === 0) {
           td.innerHTML = ++cnt;
           tr.appendChild(td);
         }
-        td.innerHTML = newData[j];
+        // improve this it's bad
+        if (newData[j]) {
+          var td = document.createElement('td');
+          td.style = 'text-align:center';
+          td.innerHTML = newData[j];
+        }
       }
-      tr.appendChild(td);
+      if (td.innerHTML.trim()) {
+        tr.appendChild(td);
+      }
     }
   }
   document.querySelector('#main-print-container').appendChild(table);
