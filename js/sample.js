@@ -16,9 +16,14 @@ var storageObjOstali = [];
   // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
+    // first section
+    localStorage.setItem('first-section', JSON.stringify(retrieveFirstSection()));
+
+    // second section
     retrievePreviewSection('data-preview-obracun', storageObjObracun);
     extraFillObracun(storageObjObracun);
 
+    // third section
     retrievePreviewSection('data-preview-ostali', storageObjOstali);
     extraFillOstali(storageObjOstali);
 
@@ -676,6 +681,13 @@ function alternatePointerEventsOpacity(dnevnicaID, prijevozniID, pointerValue, o
 // MAIN FUNCTION DECLARATION END
 // data-preview-ostali
 // 'data-preview-obracun'
+function retrieveFirstSection() {
+  var array = [];
+  for (var i = 0; i < document.getElementsByClassName('is-medium').length; i++) {
+    array.push(document.getElementsByClassName('is-medium')[i].value.trim());
+  }
+  return array;
+}
 function retrievePreviewSection(dataPreviewSeletor, arr) {
   arr.push([]);
   for (var i = 0; i < document.getElementsByClassName(dataPreviewSeletor).length; i++) {

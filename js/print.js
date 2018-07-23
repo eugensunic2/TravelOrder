@@ -2,23 +2,23 @@
   var obracunDnevniceArray = [
     'Br.',
     'Datum',
-    'Drzava',
+    'Država',
     'Polazak',
     'Povratak',
     'Sati',
     'Dnevnice',
-    'Jedinicne <br/>Dnevnice',
-    'Iznos u kn'
+    'Jedinične <br/>Dnevnice',
+    'Iznos u Kn'
   ];
   var obracunOstaliArray = [
     'Br.',
     'Datum',
-    'Vrsta troska',
+    'Vrsta troška',
     'Iznos',
     'Valuta',
-    'Tecaj',
+    'Tečaj',
     'Nepriznato',
-    'Iznos u kn'
+    'Iznos u Kn'
   ];
   var mainContainer = document.createElement('div');
   mainContainer.setAttribute('id', 'main-print-container');
@@ -31,7 +31,7 @@
     'Comsysto d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; www.comsysto.com &#8226; kontakt@comsysto.com'
   );
 
-  setIntroHeader('PUTNI RACUN', '12/2017', 'Br.: 47');
+  setIntroHeader('PUTNI RAČUN', '12/2017', 'Br.: 47');
   setIntermediateHeader();
   if (localStorage.getItem('obracun-table')) {
     generateTable(
@@ -39,8 +39,9 @@
       JSON.parse(localStorage.getItem('obracun-table')),
       300,
       obracunDnevniceArray,
-      'OBRACUN DNEVNICE',
-      9
+      'OBRAČUN DNEVNICE',
+      9,
+      'obracun-table'
     );
   }
   if (localStorage.getItem('ostali-table')) {
@@ -49,12 +50,13 @@
       JSON.parse(localStorage.getItem('ostali-table')),
       300,
       obracunOstaliArray,
-      'OBRACUN OSTALIH TROSKOVA',
-      8
+      'OBRAČUN OSTALIH TROŠKOVA',
+      8,
+      'ostali-table'
     );
   }
 
-  overallPriceDisplay();
+  overallPriceDisplay(getTotalSumValue());
 
   setSignatureForm();
 })();
@@ -67,6 +69,7 @@ function appendBackButton() {
 
   document.querySelector('#main-print-container').appendChild(newdiv);
 }
+
 function appendPrintButton() {
   var newdiv = document.createElement('div');
   newdiv.innerHTML = 'print';
@@ -78,7 +81,8 @@ function appendPrintButton() {
 
   document.querySelector('#main-print-container').appendChild(newdiv);
 }
-function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, cellnum) {
+
+function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, cellnum, storeID) {
   // id= .add-obracun
   var cnt = 0;
   setTableTitle(tableTitle);
@@ -95,17 +99,17 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
       var td = document.createElement('td');
       td.style = 'text-align:center;';
       if (i === 0) {
-        td.style = 'font-weight:600;text-align:center';
+        td.style = 'font-weight:600;text-align:center;padding:2px';
         td.innerHTML = headerNamesArray[j];
       } else {
         if (j === 0) {
-          td.innerHTML = ++cnt;
+          td.innerHTML = ++cnt + '.';
           tr.appendChild(td);
         }
         // improve this it's bad
         if (newData[j]) {
           var td = document.createElement('td');
-          td.style = 'text-align:center';
+          td.style = 'text-align:center;padding:2px';
           td.innerHTML = newData[j];
         }
       }
@@ -115,7 +119,7 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
     }
   }
   document.querySelector('#main-print-container').appendChild(table);
-  setResultFooter('Ukupno', '183 HRK');
+  setResultFooter('Ukupno:', getSubAmountValue(storeID) + ' HRK');
 }
 
 function setTableTitle(titleTxt) {
@@ -132,6 +136,7 @@ function setCompanyLogo(imgPath) {
 
   document.querySelector('#main-print-container').appendChild(image);
 }
+
 function setCompanyAddress(address) {
   var adr = document.createElement('p');
   adr.setAttribute('class', 'center');
@@ -140,6 +145,7 @@ function setCompanyAddress(address) {
 
   document.querySelector('#main-print-container').appendChild(adr);
 }
+
 function setIntroHeader(titleTxt, dateTxt, numberTxt) {
   // parent
   var container = document.createElement('div');
@@ -163,6 +169,7 @@ function setIntroHeader(titleTxt, dateTxt, numberTxt) {
 
   document.querySelector('#main-print-container').appendChild(container);
 }
+
 function setIntermediateHeader() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
@@ -197,6 +204,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
   // create right element
   var rightElement = document.createElement('span');
   rightElement.style = 'clear:left;float:right; font-weight:600;';
+  rightElement.classList.add('take-me');
   rightElement.innerHTML = rightElementContent;
 
   divElement.appendChild(leftElement);
@@ -204,6 +212,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
 
   document.querySelector('#main-print-container').appendChild(divElement);
 }
+
 function overallPriceDisplay(totalSum) {
   container = document.createElement('div');
   container.style = 'background-color:#209cee30;width:100%%;margin-left:30%;margin-top:30px;';
@@ -239,7 +248,7 @@ function overallPriceDisplay(totalSum) {
   first.innerHTML = 'Ukupni troškovi:';
   second.innerHTML = 'Ukupno primljeni predujam:';
   third.innerHTML = 'Ukupno nepriznatih troškova:';
-  fourth.innerHTML = 'Ostaje za isplatu / vracanje u kn:';
+  fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
 
   first_p.innerHTML = totalSum;
   second_p.innerHTML = 'kn';
@@ -262,11 +271,12 @@ function overallPriceDisplay(totalSum) {
 
   document.querySelector('#main-print-container').appendChild(container);
 }
+
 function setSignatureForm() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
   container.style =
-    'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:30px; margin-top:80px;background: #efefef;';
+    'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:30px; margin-top:30px;background: #efefef;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
@@ -284,7 +294,7 @@ function setSignatureForm() {
   div2_one.setAttribute('class', 'column center');
 
   var span1 = document.createElement('span');
-  span1.innerHTML = 'Podnositelj racuna';
+  span1.innerHTML = 'Podnositelj računa';
   span1.style = 'position:relative;border-top:1px solid grey;top:10px;padding-top:2px;';
 
   div2_one.appendChild(span1);
@@ -314,8 +324,35 @@ function setSignatureForm() {
   document.querySelector('#main-print-container').appendChild(container);
 }
 
-function displayOverallCalculation() {
-  var divElement = document.createElement('table');
+function getSubAmountValue(localStorageId) {
+  var outputSum = 0;
+  var multiArray = JSON.parse(localStorage.getItem(localStorageId));
+  for (var i = 0; i < multiArray.length; i++) {
+    var singleArr = multiArray[i];
+    if (singleArr.length !== 0) {
+      outputSum += parseFloat(singleArr[singleArr.length - 1].toString().trim());
+    }
+  }
+  return outputSum;
 }
 
-function generateFooterSignature() {}
+function getTotalSumValue() {
+  console.log(document.querySelectorAll('.take-me')[0].innerHTML.trim());
+
+  return (
+    (
+      parseFloat(
+        document
+          .querySelectorAll('.take-me')[0]
+          .innerHTML.trim()
+          .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
+      ) +
+      parseFloat(
+        document
+          .querySelectorAll('.take-me')[1]
+          .innerHTML.trim()
+          .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.length - 1)
+      )
+    ).toFixed(2) + ' HRK'
+  );
+}

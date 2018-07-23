@@ -1,6 +1,9 @@
 input {
   margin-bottom: 4px !important;
 }
+.btm-1 {
+  bottom: 1px;
+}
 .zindex-positive {
   z-index: 100;
 }
@@ -10,7 +13,6 @@ input {
 .flt-lft {
   float: left;
 }
-
 .flt-rgt {
   float: right;
 }
@@ -34,6 +36,9 @@ input {
 }
 .width-70 {
   width: 70px;
+}
+.width-90 {
+  width: 90px;
 }
 .width-100 {
   width: 100%;

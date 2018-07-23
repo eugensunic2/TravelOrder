@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulmaswatch/0.6.2/default/bulmaswatch.min.css" rel="stylesheet">
 
@@ -305,10 +307,14 @@
               </div>
             </div>
           </div>
-          <div class="inline-block width-70">
+          <span>Currency rate: </span>
+          <div class="inline-block">
+            <input class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">
+          </div>
+          <div class="inline-block width-90">
             <div class="field">
               <div class="control">
-                <input class="typeahead input is-small flag-ostali the-currency" type="text" placeholder="$,£,€,HRK">
+                <input class="typeahead input is-small flag-ostali the-currency btm-1" type="text" placeholder="$,£,€,HRK">
               </div>
             </div>
           </div>
@@ -338,7 +344,6 @@
 
   <script src="./js/autocomplete.js"></script>
   <script src="./js/sample.js"></script>
-  <!-- <script src="./js/print.js"></script> -->
   <script src="./js/settings.js"></script>
 
 </body>
