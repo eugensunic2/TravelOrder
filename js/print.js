@@ -28,10 +28,14 @@
     'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
   );
   setCompanyAddress(
-    'Comsysto d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; www.comsysto.com &#8226; kontakt@comsysto.com'
+    'Comsysto Reply d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; comsystoreply.de &#8226; kontakt.comsysto@reply.de'
   );
 
-  setIntroHeader('PUTNI RAČUN', '12/2017', 'Br.: 47');
+  setIntroHeader(
+    'PUTNI RAČUN',
+    JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
+    'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0]
+  );
   setIntermediateHeader();
   if (localStorage.getItem('obracun-table')) {
     generateTable(
@@ -83,7 +87,6 @@ function appendPrintButton() {
 }
 
 function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, cellnum, storeID) {
-  // id= .add-obracun
   var cnt = 0;
   setTableTitle(tableTitle);
   var cellNumber = cellnum;
@@ -184,7 +187,10 @@ function setIntermediateHeader() {
   div_2.style = 'border-left: 2px solid #d8d4d4;';
 
   div_1.innerHTML = 'Prema putnom nalogu:';
-  div_2.innerHTML = '12/2017, Br.:47';
+  div_2.innerHTML =
+    JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/') +
+    ', Br.:' +
+    JSON.parse(localStorage.getItem('first-section'))[0];
 
   container.appendChild(div_1);
   container.appendChild(div_2);
@@ -251,9 +257,9 @@ function overallPriceDisplay(totalSum) {
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
 
   first_p.innerHTML = totalSum;
-  second_p.innerHTML = 'kn';
-  third_p.innerHTML = 'kn';
-  fourth_p.innerHTML = 'kn';
+  second_p.innerHTML = '0 HRK';
+  third_p.innerHTML = '0 HRK';
+  fourth_p.innerHTML = 'HRK';
 
   // appending
   leftElement.appendChild(first);
@@ -283,7 +289,7 @@ function setSignatureForm() {
 
   div_1.setAttribute('class', 'column');
   div_2.setAttribute('class', 'column');
-  div_1.innerHTML = 'Zagreb, 08.12.2017.';
+  div_1.innerHTML = 'Zagreb, ' + getDateFormatDDMMYYYY();
   div_2.style = 'border-left: 2px solid #d8d4d4;';
 
   var div2_container = document.createElement('div');
@@ -355,4 +361,19 @@ function getTotalSumValue() {
       )
     ).toFixed(2) + ' HRK'
   );
+}
+
+function getDateFormatDDMMYYYY() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+  return dd + '.' + mm + '.' + yyyy;
 }

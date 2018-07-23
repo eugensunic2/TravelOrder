@@ -2,7 +2,6 @@ var opacityValue = 0.7;
 
 // sub total value
 var obracunTotal = 0;
-var obracunPrijevozni = 0;
 var obracunOstali = 0;
 
 var storageObjObracun = [];
@@ -33,7 +32,6 @@ var storageObjOstali = [];
   });
 
   document.querySelector('#obracun-edit-close').style.display = 'none';
-  document.querySelector('#prijevozni-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
 
@@ -80,7 +78,6 @@ var storageObjOstali = [];
     document.querySelector('#obracun-edit-close').style.display = 'none';
     // disable other two
     alternatePointerEventsOpacity(
-      '#obracun-prijevoznih-troskova',
       '#obracun-ostalih-troskova',
       '',
       1
@@ -91,28 +88,6 @@ var storageObjOstali = [];
     }
   });
 
-  // PRIJEVOZNI CLOSE
-  document.querySelector('#prijevozni-edit-close').addEventListener('click', function() {
-    clearSectionInput('.flag-prijevozni');
-    // reset backgroundColor
-    for (var i = 0; i < document.querySelectorAll('.data-preview-prijevozni').length; i++) {
-      document.querySelectorAll('.data-preview-prijevozni')[i].style.backgroundColor =
-        'rgb(243, 243, 243)';
-    }
-    // reset disable button
-    for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
-      document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
-    }
-    document.querySelector('#prijevozni-save').style.display = '';
-    document.querySelector('#prijevozni-edit').style.display = 'none';
-    document.querySelector('#prijevozni-edit-close').style.display = 'none';
-    // disable other two
-    alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-ostalih-troskova', '', 1);
-
-    for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
-      document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
-    }
-  });
 
   // OSTALI CLOSE
   document.querySelector('#ostali-edit-close').addEventListener('click', function() {
@@ -130,7 +105,6 @@ var storageObjOstali = [];
     document.querySelector('#ostali-edit').style.display = 'none';
     document.querySelector('#ostali-edit-close').style.display = 'none';
     // disable other two
-    alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-prijevoznih-troskova', '', 1);
 
     for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
       document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
@@ -186,29 +160,6 @@ var storageObjOstali = [];
     }
   });
 
-  // SAVE PRIJEVOZNI
-  document.querySelector('#prijevozni-save').addEventListener('click', function() {
-    createPreviewContainerFirstRow(
-      'edit-prijevozni',
-      'delete-prijevozni',
-      'number-prijevozni',
-      document.querySelectorAll('.dp-prijevozni')
-        ? document.querySelectorAll('.dp-prijevozni').length + 1
-        : 1,
-      '#data-preview-prijevozni',
-      'modify-operation-prijevozni',
-      'preview-edit-prijevozni',
-      'preview-delete-prijevozni',
-      'data-preview-prijevozni',
-      'dp-prijevozni',
-      addPreviewListenerPrijevozni
-    );
-    createPreviewContainerSecondRow('.flag-prijevozni', '.dp-prijevozni');
-    clearSectionInput('.flag-prijevozni');
-    for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
-      document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
-    }
-  });
 
   // SAVE OSTALI
   document.querySelector('#ostali-save').addEventListener('click', function() {
@@ -320,7 +271,6 @@ function updatePreviewContainerSecondRow() {
   }
   // parametrizirati
   clearSectionInput('.flag-obracun');
-  clearSectionInput('.flag-prijevozni');
 }
 
 function addPreviewListenerObracun(className, fn, tag) {
@@ -338,7 +288,6 @@ function addPreviewListenerObracun(className, fn, tag) {
         '#plus-minus-dnevnica-holder-obracun'
       );
       alternatePointerEventsOpacity(
-        '#obracun-prijevoznih-troskova',
         '#obracun-ostalih-troskova',
         'none',
         opacityValue
@@ -354,7 +303,6 @@ function addPreviewListenerObracun(className, fn, tag) {
         '#obracun-edit-close'
       );
       alternatePointerEventsOpacity(
-        '#obracun-prijevoznih-troskova',
         '#obracun-ostalih-troskova',
         '',
         1
@@ -366,43 +314,7 @@ function addPreviewListenerObracun(className, fn, tag) {
     }
   });
 }
-function addPreviewListenerPrijevozni(className, fn, tag) {
-  document.querySelector(className).addEventListener('click', function(e) {
-    if (tag === 'edit') {
-      fn(
-        e,
-        '.preview-edit-prijevozni',
-        '.dp-prijevozni',
-        '.flag-prijevozni',
-        '#prijevozni-edit-close',
-        '#prijevozni-save',
-        '#prijevozni-edit',
-        'prijevozni-edit',
-        '#plus-minus-prijevozni-holder'
-      );
-      alternatePointerEventsOpacity(
-        '#obracun-dnevnica',
-        '#obracun-ostalih-troskova',
-        'none',
-        opacityValue
-      );
-    }
-    if (tag === 'delete') {
-      fn(
-        e,
-        '.number-prijevozni',
-        '.flag-prijevozni',
-        '#prijevozni-save',
-        '#prijevozni-edit',
-        '#prijevozni-edit-close'
-      );
-      alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-ostalih-troskova', '', 1);
-      for (var i = 0; i < document.querySelectorAll('.preview-edit-prijevozni').length; i++) {
-        document.querySelectorAll('.preview-edit-prijevozni')[i].style.pointerEvents = 'auto';
-      }
-    }
-  });
-}
+
 function addPreviewListenerOstali(className, fn, tag) {
   document.querySelector(className).addEventListener('click', function(e) {
     if (tag === 'edit') {
@@ -419,14 +331,13 @@ function addPreviewListenerOstali(className, fn, tag) {
       );
       alternatePointerEventsOpacity(
         '#obracun-dnevnica',
-        '#obracun-prijevoznih-troskova',
         'none',
         opacityValue
       );
     }
     if (tag === 'delete') {
       fn(e, '.number-ostali', '.flag-ostali', '#ostali-save', '#ostali-edit', '#ostali-edit-close');
-      alternatePointerEventsOpacity('#obracun-dnevnica', '#obracun-prijevoznih-troskova', '', 1);
+      alternatePointerEventsOpacity('#obracun-dnevnica', '', 1);
       for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
         document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
       }
@@ -672,11 +583,9 @@ function resetRedInputBorderOstali(digitOnly, dateOnly) {
   document.querySelectorAll(dateOnly)[1].style.border = '';
 }
 
-function alternatePointerEventsOpacity(dnevnicaID, prijevozniID, pointerValue, opacityValue) {
+function alternatePointerEventsOpacity(dnevnicaID, pointerValue, opacityValue) {
   document.querySelector(dnevnicaID).style.pointerEvents = pointerValue;
-  document.querySelector(prijevozniID).style.pointerEvents = pointerValue;
   document.querySelector(dnevnicaID).style.opacity = opacityValue;
-  document.querySelector(prijevozniID).style.opacity = opacityValue;
 }
 // MAIN FUNCTION DECLARATION END
 // data-preview-ostali
@@ -719,5 +628,5 @@ function extraFillObracun(array) {
 function extraFillOstali(array) {
   var tempArr = array[array.length - 1];
   var getLast = tempArr[tempArr.length - 1];
-  array[array.length - 1].splice(3, 4, getLast, 7.67, 'nepriznato', parseFloat(tempArr[2]) * 7.67);
+  array[array.length - 1].splice(3, 4, getLast, 7.67, '_adfasfas', parseFloat(tempArr[2]) * 7.67);
 }

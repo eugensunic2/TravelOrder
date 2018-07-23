@@ -14,15 +14,6 @@
   var fontSizeGeneral = filtrateAllApart();
   var fontSize = 0;
 
-  appendLinkTag();
-  appendScriptTag();
-  // better solution callback;
-  setTimeout(function() {
-    hidePrintPage();
-  }, 500);
-
-  // open sheet in preview mode
-
   //SETTINGS BEGIN
 
   //default font size
@@ -134,24 +125,6 @@
   });
 })();
 
-function appendScriptTag() {
-  script = document.createElement('script');
-  script.src = './js/print.js';
-  script.async = false;
-  document.body.appendChild(script);
-}
-
-function appendLinkTag() {
-  var head = document.getElementsByTagName('head')[0];
-  link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = './css/print.css';
-  head.appendChild(link);
-}
-
-function hidePrintPage() {
-  document.querySelector('#main-print-container').style.display = 'none';
-}
 
 function getSeparateSpan() {
   var array = document.querySelectorAll('span');
