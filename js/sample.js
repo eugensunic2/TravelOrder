@@ -19,9 +19,13 @@ var storageObjOstali = [];
       // first section
       localStorage.setItem('first-section', JSON.stringify(retrieveFirstSection()));
       // second section
-      retrievePreviewSection('data-preview-obracun', extraFillObracun, storageObjObracun);
+      if (document.querySelectorAll('.data-preview-obracun').length > 0) {
+        retrievePreviewSection('data-preview-obracun', extraFillObracun, storageObjObracun);
+      }
       // third section
-      //retrievePreviewSection('data-preview-ostali', extraFillOstali, storageObjOstali);
+      if (document.querySelectorAll('.data-preview-ostali').length > 0) {
+        retrievePreviewSection('data-preview-ostali', extraFillOstali, storageObjOstali);
+      }
 
       localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
       localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
@@ -29,11 +33,9 @@ var storageObjOstali = [];
     } else {
       window.scrollTo(0, 0);
       if (!isNumberOnly('#redni-broj')) {
-        console.log('went first');
         document.querySelector('#redni-broj').style.border = '2px solid #ff88a0';
       }
       if (!isValideMonthYear('.is-medium', 1)) {
-        console.log('wnet second');
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
       }
     }
@@ -147,7 +149,7 @@ var storageObjOstali = [];
         'dp-obracun',
         addPreviewListenerObracun
       );
-      createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun');
+      createPreviewContainerSecondRow('.flag-obracun', '.dp-obracun', true);
       clearSectionInput('.flag-obracun');
       for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
         document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
@@ -192,7 +194,7 @@ var storageObjOstali = [];
         'dp-ostali',
         addPreviewListenerOstali
       );
-      createPreviewContainerSecondRow('.flag-ostali', '.dp-ostali');
+      createPreviewContainerSecondRow('.flag-ostali', '.dp-ostali', false);
       clearSectionInput('.flag-ostali');
       for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
         document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
@@ -251,7 +253,7 @@ function createPreviewContainerFirstRow(
   callbackPreviewListener('.' + del + order.toString(), delFunc, 'delete');
 }
 
-function createPreviewContainerSecondRow(selectors, holder) {
+function createPreviewContainerSecondRow(selectors, holder, enableFriendStay) {
   var elements = document.querySelectorAll(selectors);
   for (var i = 0; i < elements.length; i++) {
     var spanContainer = document.createElement('span');
@@ -262,12 +264,13 @@ function createPreviewContainerSecondRow(selectors, holder) {
       [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
   }
   // total sub value
-
-  spanContainer.classList.add('loopme');
-  spanContainer.textContent = modifyTotalValueSub('.loopme', '#friend-stay') + '€';
-  document
-    .querySelectorAll(holder)
-    [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
+  if (enableFriendStay) {
+    spanContainer.classList.add('loopme');
+    spanContainer.textContent = modifyTotalValueSub('.loopme', '#friend-stay') + '€';
+    document
+      .querySelectorAll(holder)
+      [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
+  }
 }
 
 function updatePreviewContainerSecondRow() {
@@ -655,25 +658,21 @@ function retrievePreviewSection(dataPreviewSeletor, callback, callbackParam) {
 function extraFillObracun(array) {
   var tempArr = array[array.length - 1];
   var getLast = tempArr[tempArr.length - 1];
+
   var days = dateTimeToDays(tempArr[2], tempArr[3]);
-  console.log(getLast.substring(0, getLast.length - 1));
+  var sati = days * 24;
+  var jedinicneDnevnice = parseInt(getLast.substring(0, getLast.length - 1)) % 50 === 0 ? 350 : 500;
+  var iznos = jedinicneDnevnice * days;
+
   if (array.length !== 0) {
-    array[array.length - 1].splice(
-      4,
-      4,
-      dateTimeToDays(tempArr[2], tempArr[3]) * 24,
-      days,
-      parseInt(getLast.substring(0, getLast.length - 1)) % 50 === 0 ? 350 : 500,
-      parseInt(getLast.substring(0, getLast.length - 1)) * days
-    );
+    array[array.length - 1].splice(4, 4, sati, days, jedinicneDnevnice, iznos.toFixed(2));
   }
 }
 
 function extraFillOstali(array) {
   var tempArr = array[array.length - 1];
-  var getLast = tempArr[tempArr.length - 1];
-  console.log(getLast);
-  console.log('extra fill ostali');
-  console.log(array);
-  array[array.length - 1].splice(4, 3, getLast, 'nepriznato', parseFloat(tempArr[2]) * getLast);
+  var tecaj = tempArr[tempArr.length - 1];
+  var iznosPrvi = parseFloat(tempArr[2]);
+
+  array[array.length - 1].splice(4, 3, tecaj, '_', (iznosPrvi * tecaj).toFixed(2));
 }

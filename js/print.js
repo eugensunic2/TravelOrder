@@ -37,7 +37,7 @@
     'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0]
   );
   setIntermediateHeader();
-  if (localStorage.getItem('obracun-table')) {
+  if (JSON.parse(localStorage.getItem('obracun-table')).length > 1) {
     generateTable(
       JSON.parse(localStorage.getItem('obracun-table')).length,
       JSON.parse(localStorage.getItem('obracun-table')),
@@ -48,7 +48,7 @@
       'obracun-table'
     );
   }
-  if (localStorage.getItem('ostali-table')) {
+  if (JSON.parse(localStorage.getItem('ostali-table')).length > 1) {
     generateTable(
       JSON.parse(localStorage.getItem('ostali-table')).length,
       JSON.parse(localStorage.getItem('ostali-table')),
@@ -122,7 +122,7 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
     }
   }
   document.querySelector('#main-print-container').appendChild(table);
-  setResultFooter('Ukupno:', getSubAmountValue(storeID) + ' HRK');
+  setResultFooter('Ukupno:', getSubAmountValue(storeID).toFixed(2) + ' HRK');
 }
 
 function setTableTitle(titleTxt) {
@@ -259,7 +259,7 @@ function overallPriceDisplay(totalSum) {
   first_p.innerHTML = totalSum;
   second_p.innerHTML = '0 HRK';
   third_p.innerHTML = '0 HRK';
-  fourth_p.innerHTML = 'HRK';
+  fourth_p.innerHTML = totalSum
 
   // appending
   leftElement.appendChild(first);
@@ -344,21 +344,30 @@ function getSubAmountValue(localStorageId) {
 
 function getTotalSumValue() {
   console.log(document.querySelectorAll('.take-me')[0].innerHTML.trim());
-
+  if (document.querySelectorAll('.take-me')[1]) {
+    return (
+      (
+        parseFloat(
+          document
+            .querySelectorAll('.take-me')[0]
+            .innerHTML.trim()
+            .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
+        ) +
+        parseFloat(
+          document
+            .querySelectorAll('.take-me')[1]
+            .innerHTML.trim()
+            .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.length - 1)
+        )
+      ).toFixed(2) + ' HRK'
+    );
+  }
   return (
-    (
-      parseFloat(
-        document
-          .querySelectorAll('.take-me')[0]
-          .innerHTML.trim()
-          .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
-      ) +
-      parseFloat(
-        document
-          .querySelectorAll('.take-me')[1]
-          .innerHTML.trim()
-          .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.length - 1)
-      )
+    parseFloat(
+      document
+        .querySelectorAll('.take-me')[0]
+        .innerHTML.trim()
+        .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
     ).toFixed(2) + ' HRK'
   );
 }
