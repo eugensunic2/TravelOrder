@@ -268,14 +268,3 @@ $('.the-spending .typeahead').typeahead(
   }
 );
 
-$('.the-transport .typeahead').typeahead(
-  {
-    hint: true,
-    highlight: true,
-    minLength: 1
-  },
-  {
-    name: 'transportation',
-    source: substringMatcher(transportation)
-  }
-);

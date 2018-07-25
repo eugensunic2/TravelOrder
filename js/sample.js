@@ -15,25 +15,44 @@ var storageObjOstali = [];
   // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
+    if (isNumberOnly('#redni-broj') && isValideMonthYear('.is-medium', 1)) {
+      // first section
+      localStorage.setItem('first-section', JSON.stringify(retrieveFirstSection()));
+      // second section
+      retrievePreviewSection('data-preview-obracun', extraFillObracun, storageObjObracun);
+      // third section
+      //retrievePreviewSection('data-preview-ostali', extraFillOstali, storageObjOstali);
+
+      localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
+      localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
+      // window.location.href = './print.html';
+    } else {
+      window.scrollTo(0, 0);
+      if (!isNumberOnly('#redni-broj')) {
+        console.log('went first');
+        document.querySelector('#redni-broj').style.border = '2px solid #ff88a0';
+      }
+      if (!isValideMonthYear('.is-medium', 1)) {
+        console.log('wnet second');
+        document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
+      }
+    }
     // first section
-    localStorage.setItem('first-section', JSON.stringify(retrieveFirstSection()));
-
-    // second section
-    retrievePreviewSection('data-preview-obracun', storageObjObracun);
-    extraFillObracun(storageObjObracun);
-
-    // third section
-    retrievePreviewSection('data-preview-ostali', storageObjOstali);
-    extraFillOstali(storageObjOstali);
-
-    localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
-    localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
-    window.location.href = './print.html';
   });
 
   document.querySelector('#obracun-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
+
+  // redni broj
+  document.getElementsByClassName('is-medium')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+
+  // datum
+  document.getElementsByClassName('is-medium')[1].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
 
   // friend-change
   document.querySelector('#friend-stay').addEventListener('change', function(e) {
@@ -77,17 +96,12 @@ var storageObjOstali = [];
     document.querySelector('#obracun-edit').style.display = 'none';
     document.querySelector('#obracun-edit-close').style.display = 'none';
     // disable other two
-    alternatePointerEventsOpacity(
-      '#obracun-ostalih-troskova',
-      '',
-      1
-    );
+    alternatePointerEventsOpacity('#obracun-ostalih-troskova', '', 1);
 
     for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
       document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
     }
   });
-
 
   // OSTALI CLOSE
   document.querySelector('#ostali-edit-close').addEventListener('click', function() {
@@ -142,7 +156,7 @@ var storageObjOstali = [];
       // modifyTotalValueSub('.loopme', '#total-obracun');
       // reset html here
       document.querySelector('#friend-stay').checked = false;
-      resetRedInputBorder('.date-only', '.date1', '.date2', 0);
+      resetRedInputBorder('.date-only', '.date1', 0);
     } else {
       // put red borders
       if (validateDateOnly('.date-only', 0)) {
@@ -159,7 +173,6 @@ var storageObjOstali = [];
       }
     }
   });
-
 
   // SAVE OSTALI
   document.querySelector('#ostali-save').addEventListener('click', function() {
@@ -184,7 +197,7 @@ var storageObjOstali = [];
       for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
         document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
       }
-      resetRedInputBorderOstali('digit-only', '.date-only');
+      resetRedInputBorderOstali('.digit-only', '.date-only');
     } else {
       if (validateDateOnly('.date-only', 1)) {
         document.querySelectorAll('.date-only')[1].style.border = '2px solid #ff88a0';
@@ -287,11 +300,7 @@ function addPreviewListenerObracun(className, fn, tag) {
         'obracun-edit',
         '#plus-minus-dnevnica-holder-obracun'
       );
-      alternatePointerEventsOpacity(
-        '#obracun-ostalih-troskova',
-        'none',
-        opacityValue
-      );
+      alternatePointerEventsOpacity('#obracun-ostalih-troskova', 'none', opacityValue);
     }
     if (tag === 'delete') {
       fn(
@@ -302,11 +311,7 @@ function addPreviewListenerObracun(className, fn, tag) {
         '#obracun-edit',
         '#obracun-edit-close'
       );
-      alternatePointerEventsOpacity(
-        '#obracun-ostalih-troskova',
-        '',
-        1
-      );
+      alternatePointerEventsOpacity('#obracun-ostalih-troskova', '', 1);
 
       for (var i = 0; i < document.querySelectorAll('.preview-edit-obracun').length; i++) {
         document.querySelectorAll('.preview-edit-obracun')[i].style.pointerEvents = 'auto';
@@ -329,11 +334,7 @@ function addPreviewListenerOstali(className, fn, tag) {
         'ostali-edit',
         '#plus-minus-ostali-holder'
       );
-      alternatePointerEventsOpacity(
-        '#obracun-dnevnica',
-        'none',
-        opacityValue
-      );
+      alternatePointerEventsOpacity('#obracun-dnevnica', 'none', opacityValue);
     }
     if (tag === 'delete') {
       fn(e, '.number-ostali', '.flag-ostali', '#ostali-save', '#ostali-edit', '#ostali-edit-close');
@@ -464,7 +465,10 @@ function resetNumberOrder(selector) {
 }
 
 function modifyTotalValueSub(selector, friendStay) {
-  var parent = document.getElementsByClassName('data-preview-obracun')[0];
+  // get last element
+  var parent = document.getElementsByClassName('data-preview-obracun')[
+    document.getElementsByClassName('data-preview-obracun').length - 1
+  ];
   elmLength = parent.childNodes.length;
 
   var begin = parent.childNodes[elmLength - 3].innerHTML.trimStart().trimEnd();
@@ -527,6 +531,41 @@ function validateDateOnly(selector, index) {
     : true;
 }
 
+function isValideMonthYear(selector, index) {
+  var temp =
+    document
+      .querySelectorAll(selector)
+      [index].value.trimStart()
+      .trimEnd()
+      .match(/^(\d{2})\.(\d{4})$/) !== null
+      ? true
+      : false;
+
+  if (
+    temp &&
+    parseInt(
+      document
+        .querySelectorAll(selector)
+        [index].value.trimStart()
+        .trimEnd()
+        .substring(0, 2),
+      10
+    ) <= 12 &&
+    parseInt(
+      document
+        .querySelectorAll(selector)
+        [index].value.trimStart()
+        .trimEnd()
+        .substring(0, 2),
+      10
+    ) > 0
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 function isEndDateSmaller(selector1, selector2, index) {
   var begin = document
     .querySelectorAll(selector1)
@@ -572,10 +611,9 @@ function dateTimeToDays(begin, end) {
   return hours / 24;
 }
 
-function resetRedInputBorder(date0, date1, date2, index) {
+function resetRedInputBorder(date0, date1, index) {
   document.querySelectorAll(date0)[index].style.border = '';
   document.querySelectorAll(date1)[index].style.border = '';
-  document.querySelectorAll(date2)[index].style.border = '';
 }
 
 function resetRedInputBorderOstali(digitOnly, dateOnly) {
@@ -590,6 +628,7 @@ function alternatePointerEventsOpacity(dnevnicaID, pointerValue, opacityValue) {
 // MAIN FUNCTION DECLARATION END
 // data-preview-ostali
 // 'data-preview-obracun'
+
 function retrieveFirstSection() {
   var array = [];
   for (var i = 0; i < document.getElementsByClassName('is-medium').length; i++) {
@@ -597,8 +636,9 @@ function retrieveFirstSection() {
   }
   return array;
 }
-function retrievePreviewSection(dataPreviewSeletor, arr) {
-  arr.push([]);
+
+function retrievePreviewSection(dataPreviewSeletor, callback, callbackParam) {
+  callbackParam.push([]);
   for (var i = 0; i < document.getElementsByClassName(dataPreviewSeletor).length; i++) {
     var parent = document.getElementsByClassName(dataPreviewSeletor)[i];
     var tempArray = [];
@@ -607,26 +647,33 @@ function retrievePreviewSection(dataPreviewSeletor, arr) {
         tempArray.push(parent.childNodes[j].innerHTML.trim());
       }
     }
-    arr.push(tempArray);
-    console.log(arr);
+    callbackParam.push(tempArray);
+    callback(callbackParam);
   }
 }
 
 function extraFillObracun(array) {
   var tempArr = array[array.length - 1];
   var getLast = tempArr[tempArr.length - 1];
-  array[array.length - 1].splice(
-    4,
-    4,
-    dateTimeToDays(tempArr[2], tempArr[3]) * 24,
-    dateTimeToDays(tempArr[2], tempArr[3]),
-    tempArr[tempArr.length - 1] % 7 == 0 ? 350 : 500,
-    getLast
-  );
+  var days = dateTimeToDays(tempArr[2], tempArr[3]);
+  console.log(getLast.substring(0, getLast.length - 1));
+  if (array.length !== 0) {
+    array[array.length - 1].splice(
+      4,
+      4,
+      dateTimeToDays(tempArr[2], tempArr[3]) * 24,
+      days,
+      parseInt(getLast.substring(0, getLast.length - 1)) % 50 === 0 ? 350 : 500,
+      parseInt(getLast.substring(0, getLast.length - 1)) * days
+    );
+  }
 }
 
 function extraFillOstali(array) {
   var tempArr = array[array.length - 1];
   var getLast = tempArr[tempArr.length - 1];
-  array[array.length - 1].splice(3, 4, getLast, 7.67, '_adfasfas', parseFloat(tempArr[2]) * 7.67);
+  console.log(getLast);
+  console.log('extra fill ostali');
+  console.log(array);
+  array[array.length - 1].splice(4, 3, getLast, 'nepriznato', parseFloat(tempArr[2]) * getLast);
 }
