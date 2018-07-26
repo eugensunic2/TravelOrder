@@ -259,7 +259,7 @@ function overallPriceDisplay(totalSum) {
   first_p.innerHTML = totalSum;
   second_p.innerHTML = '0 HRK';
   third_p.innerHTML = '0 HRK';
-  fourth_p.innerHTML = totalSum
+  fourth_p.innerHTML = totalSum;
 
   // appending
   leftElement.appendChild(first);
@@ -281,8 +281,16 @@ function overallPriceDisplay(totalSum) {
 function setSignatureForm() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
-  container.style =
-    'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:30px; margin-top:30px;background: #efefef;';
+  if (
+    JSON.parse(localStorage.getItem('obracun-table')).length <= 2 &&
+    JSON.parse(localStorage.getItem('obracun-table')).length <= 2
+  ) {
+    container.style =
+      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:20px;background: #efefef;';
+  } else {
+    container.style =
+      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:80px;background: #efefef;';
+  }
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
