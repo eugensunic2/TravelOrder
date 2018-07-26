@@ -18,6 +18,7 @@ td {
 }
 .float-right {
   float: right;
+  clear: both;
 }
 .fw-600 {
   font-weight: 600;
@@ -77,3 +78,4 @@ td {
   display: inline-block;
   text-align: center;
 }
+

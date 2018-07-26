@@ -28,7 +28,7 @@
     'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
   );
   setCompanyAddress(
-    'Comsysto Reply d.o.o. &#8226; Ilirska33 &#8226;  10000Zagreb &#8226; comsystoreply.de &#8226; kontakt.comsysto@reply.de'
+    'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de'
   );
 
   setIntroHeader(
