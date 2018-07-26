@@ -143,7 +143,7 @@ function setCompanyLogo(imgPath) {
 function setCompanyAddress(address) {
   var adr = document.createElement('p');
   adr.setAttribute('class', 'center');
-  adr.style = 'color:grey;margin-top:10px;font-size:13px;margin-bottom:30px';
+  adr.style = 'color:grey;margin-top:10px;font-size:12px;margin-bottom:30px';
   adr.innerHTML = address;
 
   document.querySelector('#main-print-container').appendChild(adr);
