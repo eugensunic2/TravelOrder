@@ -30,7 +30,6 @@
   setCompanyAddress(
     'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de'
   );
-
   setIntroHeader(
     'PUTNI RAČUN',
     JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
@@ -61,7 +60,6 @@
   }
 
   overallPriceDisplay(getTotalSumValue());
-
   setSignatureForm();
 })();
 
@@ -393,4 +391,12 @@ function getDateFormatDDMMYYYY() {
     mm = '0' + mm;
   }
   return dd + '.' + mm + '.' + yyyy;
+}
+
+function dotToSlash(value) {
+  newValue = '';
+  for (var i = 0; i < value.length; i++) {
+    newValue += value[i].replace('.', ',');
+  }
+  return newValue;
 }
