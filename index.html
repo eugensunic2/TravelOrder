@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="./css/typeheading.css">
   <link rel="stylesheet" href="./css/print.css">
   <link href="https://fonts.googleapis.com/css?family=Happy+Monkey" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -119,7 +121,8 @@
           <li>confluence link</li>
           <li>friend stay dnevnica</li>
           <li>normal dnevnica</li>
-          <li><=8, 12-24</li>
+          <li>
+            <=8, 12-24</li>
         </ul>
       </div>
       <div id="style-preference" class="settings-section column cancel-mg-rgt">
@@ -250,7 +253,7 @@
             </div>
           </div>
           <span>Vrsta troska</span>
-          <div id="" class="the-spending mg-btm-10">
+          <div id="" class="mg-btm-10">
             <input class="typeahead flag-ostali typehead-specialize" type="text" placeholder="Select trosak">
           </div>
           <span class="">Iznos</span>
@@ -262,16 +265,45 @@
             </div>
           </div>
           <div class="inline-block width-90">
-            <div class="field">
-              <div class="control">
-                <input class="typeahead input is-small flag-ostali the-currency btm-1" type="text" placeholder="$,£,€,HRK">
+            <div id="currency-drop" class="dropdown">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                  <span id="currency-text">Currency</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                <div class="dropdown-content">
+                  <span class="dropdown-item">
+                    HRK (Kuna)
+                  </span>
+                  <span class="dropdown-item">
+                    € (Euro)
+                  </span>
+                  <span class="dropdown-item">
+                    $ (Dollar)
+                  </span>
+                  <span class="dropdown-item">
+                    KM (marka)
+                  </span>
+                  <span class="dropdown-item">
+                    CHF (Swiss Franc)
+                  </span>
+                  <span class="dropdown-item">
+                    RSD (Serbian Dinar)
+                  </span>
+                </div>
               </div>
             </div>
           </div>
           <p></p>
-          <span>Currency rate: </span>
-          <div class="inline-block">
-            <input class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">
+          <div class="mg-tp-30">
+            <span>Currency rate: </span>
+            <div class="inline-block">
+              <input class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">
+            </div>
           </div>
         </div>
       </div>

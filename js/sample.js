@@ -210,6 +210,21 @@ var storageObjOstali = [];
     }
   });
 
+  // CURRENCY DROPDOWN EVENTS
+  document.querySelector('#currency-drop').addEventListener('click', function(e) {
+    if (this.className.indexOf('is-active') > -1) {
+      this.classList.remove('is-active');
+    } else {
+      this.classList.add('is-active');
+    }
+  });
+
+  for (var i = 0; i < document.querySelectorAll('.dropdown-item').length; i++) {
+    document.querySelectorAll('.dropdown-item')[i].addEventListener('click', function(e) {
+      document.querySelector('#currency-text').innerHTML = e.target.innerHTML;
+    });
+  }
+
   // MAIN FUNCTION CALL END
 })();
 

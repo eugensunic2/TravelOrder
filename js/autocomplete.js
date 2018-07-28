@@ -1,15 +1,8 @@
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex;
-
-    // an array that will be populated with substring matches
     matches = [];
-
-    // regex used to determine if a string contains the substring `q`
     substrRegex = new RegExp(q, 'i');
-
-    // iterate through the pool of strings and for any string that
-    // contains the substring `q`, add it to the `matches` array
     $.each(strs, function(i, str) {
       if (substrRegex.test(str)) {
         matches.push(str);
@@ -19,7 +12,7 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
-var currency = ['$', 'EUR', 'HRK'];
+var currency = ['$', '£', '€', 'CHF', 'HRK', 'bosna'];
 var countries = [
   'Afghanistan',
   'Albania',
@@ -228,22 +221,26 @@ var countries = [
   'Virgin Islands (US)',
   'Yemen',
   'Zambia',
-  'Zimbabwe'
+  'Zimbabwe',
+  'Njemačka',
+  'Španjolska',
+  'Italija',
+  'Hrvatska',
+  'Slovenija',
+  'Srbija',
+  'Austrija',
+  'Belgija',
+  'Bosna i Hercegovina',
+  'Francuska',
+  'Ujedinjeno Kraljevstvo',
+  'Cipar',
+  'Rusija',
+  'Švedska',
+  'Norveška',
+  'Danska',
+  'Nizozemska'
 ];
-var spending = ['some', 'And'];
-var transportation = ['bus', 'tram'];
 
-$('.the-currency .typeahead').typeahead(
-  {
-    hint: true,
-    highlight: true,
-    minLength: 1
-  },
-  {
-    name: 'currency',
-    source: substringMatcher(currency)
-  }
-);
 $('.the-country .typeahead').typeahead(
   {
     hint: true,
@@ -255,16 +252,3 @@ $('.the-country .typeahead').typeahead(
     source: substringMatcher(countries)
   }
 );
-
-$('.the-spending .typeahead').typeahead(
-  {
-    hint: true,
-    highlight: true,
-    minLength: 1
-  },
-  {
-    name: 'spending',
-    source: substringMatcher(spending)
-  }
-);
-
