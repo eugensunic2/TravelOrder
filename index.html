@@ -32,8 +32,8 @@
     <span id="hide-show-btn" class="flt-lft toggle-button">hide</span>
     <div id="settings-section" class="columns flt-clr-lft">
 
-      <div id="language" class="settings-section column">
-        <span class="flt-lft left-corner-text">Language</span>
+      <div id="language" class="settings-section column mg-btm-10">
+        <span class="flt-lft left-corner-text">Language & links</span>
         <?xml version="1.0" encoding="iso-8859-1"?>
         <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
           y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -110,22 +110,30 @@
           <path style="fill:#D80027;" d="M322.783,189.219L322.783,189.219L437.02,74.981c-5.252-5.254-10.743-10.266-16.435-15.047
         		l-97.802,97.803V189.219z" />
         </svg>
+        <p></p>
+        <a class="dp-block" href="www.google.hr">
+          <span>Number sheet (google drive)</span>
+        </a>
+        <a class="dp-block" href="www.google.hr">
+          <span>Confluence info</span>
+        </a>
       </div>
 
 
-      <div id="color-mode" class="settings-section column">
-        <span class="flt-lft left-corner-text">Tech</span>
+      <div id="color-mode" class="settings-section column mg-btm-10">
+        <span class="flt-lft left-corner-text mg-btm-5">Tech</span>
         <p style="clear:both"></p>
-        <ul>
-          <li>google drive link</li>
-          <li>confluence link</li>
-          <li>friend stay dnevnica</li>
-          <li>normal dnevnica</li>
-          <li>
-            <=8, 12-24</li>
-        </ul>
+        <p> </p>
+        <span class="tech">Friend stay dnevnica: </span>
+        <span>70€ or 500HRK</span>
+        <p> </p>
+        <span class="tech">Full dnevnica:</span>
+        <span>50€ or 350HRK </span>
+        <p> </p>
+        <span class="tech" s>Dnevnica rule: </span>
+        <span>value</span>
       </div>
-      <div id="style-preference" class="settings-section column cancel-mg-rgt">
+      <div id="style-preference" class="settings-section column cancel-mg-rgt mg-btm-10">
         <span class="flt-lft left-corner-text">Style preference</span>
         <div id="zooms">
           <?xml version="1.0" encoding="iso-8859-1"?>
@@ -157,12 +165,12 @@
         <span id="highlight-heading" class="inline-block hlt">hlt</span>
         <span id="night-mode" class="inline-block colorize">night</span>
         <span id="row-default" class="inline-block colorize columns-inline">default</span>
-        <span id="row-default" class="inline-block colorize columns-inline">annotate</span>
+        <span id="annotate-columns" class="inline-block colorize columns-inline annotate-btn">annotate</span>
       </div>
     </div>
 
 
-    <div id="main-date-section columns" class="box-center box-border">
+    <div id="main-date-section" class="columns box-center box-border">
       <div class="column">
         <span class="left-corner-text-main">date section</span>
         <p class="flt-clr-lft">Content description here, some text to explain what this section is about</p>
@@ -268,7 +276,7 @@
             <div id="currency-drop" class="dropdown">
               <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                  <span id="currency-text">Currency</span>
+                  <span id="currency-text" class="flag-ostali" value="">Currency</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -299,7 +307,7 @@
             </div>
           </div>
           <p></p>
-          <div class="mg-tp-30">
+          <div id="currency-rate" class="mg-tp-30">
             <span>Currency rate: </span>
             <div class="inline-block">
               <input class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">

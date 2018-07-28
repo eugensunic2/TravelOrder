@@ -52,6 +52,9 @@ input {
   padding: 1px 5px;
   box-shadow: 1px 1px 1px #949494;
 }
+.mg-btm-5 {
+  margin-bottom: 5px;
+}
 .mg-btm-10 {
   margin-bottom: 10px;
 }
@@ -66,6 +69,9 @@ input {
 }
 .inline-block {
   display: inline-block;
+}
+.dp-block {
+  display: block;
 }
 
 .toggle-button {
@@ -427,4 +433,15 @@ input {
   background: #ececec;
   cursor: pointer;
   font-size: 15px;
+}
+span.tech {
+  color: #3c71c7cf;
+  font-weight: 600;
+}
+.annotate-main-column {
+  border: 2px solid #696868;
+  border-radius: 5px;
+}
+.annotate-btn {
+  background: #eaeaea45;
 }

@@ -4,6 +4,8 @@
   var highlight_mode_toggle = false;
   var hide_show_btn = false;
   var fontFlag = false;
+  
+  var annotateColumn = false;
   var script;
   var link;
   var tempMain;
@@ -15,6 +17,19 @@
   var fontSize = 0;
 
   //SETTINGS BEGIN
+  // annotate mane columns
+  document.querySelector('#annotate-columns').addEventListener('click', function() {
+    annotateColumn = !annotateColumn;
+    if (annotateColumn) {
+      document.querySelector('#main-date-section').classList.add('annotate-main-column');
+      document.querySelector('#obracun-dnevnica').classList.add('annotate-main-column');
+      document.querySelector('#obracun-ostalih-troskova').classList.add('annotate-main-column');
+    } else {
+      document.querySelector('#main-date-section').classList.remove('annotate-main-column');
+      document.querySelector('#obracun-dnevnica').classList.remove('annotate-main-column');
+      document.querySelector('#obracun-ostalih-troskova').classList.remove('annotate-main-column');
+    }
+  });
 
   //default font size
   document.querySelector('#row-default').addEventListener('click', function() {
@@ -124,7 +139,6 @@
     }
   });
 })();
-
 
 function getSeparateSpan() {
   var array = document.querySelectorAll('span');

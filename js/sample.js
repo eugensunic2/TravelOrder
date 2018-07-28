@@ -11,6 +11,7 @@ var storageObjOstali = [];
   // on load
   var globalObjHTML;
   var globalSpanClass;
+  // document
 
   // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
@@ -221,7 +222,13 @@ var storageObjOstali = [];
 
   for (var i = 0; i < document.querySelectorAll('.dropdown-item').length; i++) {
     document.querySelectorAll('.dropdown-item')[i].addEventListener('click', function(e) {
+      if (e.target.innerHTML.indexOf('HRK') > -1) {
+        document.querySelector('#currency-rate').style.display = 'none';
+      } else {
+        document.querySelector('#currency-rate').style.display = '';
+      }
       document.querySelector('#currency-text').innerHTML = e.target.innerHTML;
+      document.querySelector('#currency-text').value = e.target.innerHTML;
     });
   }
 
