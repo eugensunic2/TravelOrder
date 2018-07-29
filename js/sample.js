@@ -687,14 +687,14 @@ function extraFillObracun(array) {
       days = Math.ceil(days);
     }
     var iznos = jedinicneDnevnice * days;
-    tempArr.splice(4, 4, sati, days, jedinicneDnevnice, iznos.toFixed(2));
+    tempArr.splice(4, 4, sati, days.toFixed(2), jedinicneDnevnice, iznos.toFixed(2));
   }
 }
 
 function extraFillOstali(array) {
   // add iznos element
   tempArr = array[array.length - 1];
-  tempArr[2].toFixed(2);
+  parseFloat(tempArr[2].replace(',', '.')).toFixed(2);
   if (tempArr[3].trim().indexOf('HRK') < 0) {
     tempArr.push((parseFloat(tempArr[2].trim()) * parseFloat(tempArr[4].trim())).toFixed(2));
   } else {

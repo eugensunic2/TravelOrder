@@ -112,9 +112,9 @@
         </svg>
         <p></p>
         <a class="dp-block" href="www.google.hr">
-          <span>Number sheet (google drive)</span>
+          <span class="lang-link">Number sheet (google drive)</span>
         </a>
-        <a class="dp-block" href="www.google.hr">
+        <a class="dp-block lang-link" href="www.google.hr">
           <span>Confluence info</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
     </div>
 
 
-    <div id="main-date-section" class="columns box-center box-border">
+    <div id="main-date-section" class="columns box-center box-border only-lower-screen">
       <div class="column">
         <span class="left-corner-text-main">date section</span>
         <p class="flt-clr-lft">Content description here, some text to explain what this section is about</p>
@@ -235,7 +235,7 @@
       <div id="data-preview-obracun" class="column">
       </div>
     </div>
-    <div class="account-result flt-rgt pdg-rgt-15">
+    <div class="account-result flt-rgt pdg-rgt-15 not-visible">
       <span class="ft-sz-20">Total:</span>
       <span id="total-obracun" class="total-value">0 €</span>
     </div>
@@ -319,28 +319,26 @@
       <div id="data-preview-ostali" class="column">
       </div>
     </div>
-    <div class="account-result flt-rgt pdg-rgt-15">
-      <span class="ft-sz-20">Total:</span>
-      <span class="total-value">0 €</span>
+
+    <div id="predujam-section" class="columns box-center box-border">
+      <div class="column">
+        <span class="left-corner-text-main">predujam/kredit section</span>
+        <div class="dp-block width-150">
+          <input class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">
+        </div>
+        <span class="inline-block annotate-hr">HRK</span>
+
+      </div>
+
     </div>
 
-    <div id="izvjesce" class="content-center mg-btm-30 mg-tp-100 container">
-      <p class="mg-btm-10">Extra trip description</p>
-      <textarea name="" id="" cols="30" rows="3" class="width-100 ft-sz-18"></textarea>
-    </div>
-    <hr>
-    <div class="account-result overall">
-      <span class="ft-sz-20">Overall:</span>
-      <span id="total-ostali" class="total-value">0 €</span>
-    </div>
-
-    <a id="preview-mode" class="button is-primary preview-mode">Preview mode</a>
-  </div>
+    <a id="preview-mode" class="button is-primary preview-mode">Print mode</a>
 
 
-  <script src="./js/autocomplete.js"></script>
-  <script src="./js/sample.js"></script>
-  <script src="./js/settings.js"></script>
+
+    <script src="./js/autocomplete.js"></script>
+    <script src="./js/sample.js"></script>
+    <script src="./js/settings.js"></script>
 
 </body>
 

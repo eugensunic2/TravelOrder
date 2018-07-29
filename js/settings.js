@@ -4,7 +4,7 @@
   var highlight_mode_toggle = false;
   var hide_show_btn = false;
   var fontFlag = false;
-  
+
   var annotateColumn = false;
   var script;
   var link;
@@ -24,10 +24,12 @@
       document.querySelector('#main-date-section').classList.add('annotate-main-column');
       document.querySelector('#obracun-dnevnica').classList.add('annotate-main-column');
       document.querySelector('#obracun-ostalih-troskova').classList.add('annotate-main-column');
+      document.querySelector('#predujam-section').classList.add('annotate-main-column');
     } else {
       document.querySelector('#main-date-section').classList.remove('annotate-main-column');
       document.querySelector('#obracun-dnevnica').classList.remove('annotate-main-column');
       document.querySelector('#obracun-ostalih-troskova').classList.remove('annotate-main-column');
+      document.querySelector('#predujam-section').classList.add('annotate-main-column');
     }
   });
 
@@ -136,6 +138,16 @@
       nigth_mode_toggle
         ? document.querySelectorAll('.left-corner')[i].classList.add('left-corner2')
         : document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
+    }
+    for (var i = 0; i < document.querySelectorAll('.tech').length; i++) {
+      nigth_mode_toggle
+        ? (document.querySelectorAll('.tech')[i].style.color = '#a0d4a0cf')
+        : (document.querySelectorAll('.tech')[i].style.color = '#3c71c7cf');
+    }
+    for (var i = 0; i < document.querySelectorAll('.lang-link').length; i++) {
+      nigth_mode_toggle
+        ? (document.querySelectorAll('.lang-link')[i].style.color = '#a0d4a0cf')
+        : (document.querySelectorAll('.lang-link')[i].style.color = '#3c71c7cf');
     }
   });
 })();
