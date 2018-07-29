@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // on load
   var nigth_mode_toggle = false;
   var highlight_mode_toggle = false;
@@ -18,7 +18,7 @@
 
   //SETTINGS BEGIN
   // annotate mane columns
-  document.querySelector('#annotate-columns').addEventListener('click', function() {
+  document.querySelector('#annotate-columns').addEventListener('click', function () {
     annotateColumn = !annotateColumn;
     if (annotateColumn) {
       document.querySelector('#main-date-section').classList.add('annotate-main-column');
@@ -34,7 +34,7 @@
   });
 
   //default font size
-  document.querySelector('#row-default').addEventListener('click', function() {
+  document.querySelector('#row-default').addEventListener('click', function () {
     fontSize = 0;
     changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
     changeFontSizeSpan(fontSizeObject.array2, fontSizeObject.fontSize2, fontSize);
@@ -42,19 +42,21 @@
     changeFontSizeSpan(fontSizeGeneral.array, fontSizeGeneral.fontSize, fontSize);
   });
   // font change
-  document.querySelector('#fonts').addEventListener('click', function() {
+  document.querySelector('#fonts').addEventListener('click', function () {
     fontFlag = !fontFlag;
     for (var i = 0; i < document.querySelectorAll('span').length; i++) {
       fontFlag
-        ? document.querySelectorAll('span')[i].classList.add('new-font')
-        : document.querySelectorAll('span')[i].classList.remove('new-font');
+        ?
+        document.querySelectorAll('span')[i].classList.add('new-font') :
+        document.querySelectorAll('span')[i].classList.remove('new-font');
     }
     fontFlag
-      ? (this.querySelectorAll('span')[0].innerHTML = 'font2')
-      : (this.querySelectorAll('span')[0].innerHTML = 'font1');
+      ?
+      (this.querySelectorAll('span')[0].innerHTML = 'font2') :
+      (this.querySelectorAll('span')[0].innerHTML = 'font1');
   });
   // plus icon zoom
-  document.querySelector('#zoom-plus').addEventListener('click', function() {
+  document.querySelector('#zoom-plus').addEventListener('click', function () {
     fontSize = fontSize + 1;
     if (fontSize < 11) {
       changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
@@ -66,7 +68,7 @@
     }
   });
   // minus icon zoom
-  document.querySelector('#zoom-minus').addEventListener('click', function() {
+  document.querySelector('#zoom-minus').addEventListener('click', function () {
     fontSize = fontSize - 1;
     if (fontSize > -5) {
       changeFontSizeSpan(fontSizeObject.array1, fontSizeObject.fontSize1, fontSize);
@@ -77,30 +79,29 @@
       alert('Minimum size reached');
     }
   });
-  document.querySelector('#zoom-minus').addEventListener('click', function() {});
-  document.querySelector('#hide-show-btn').addEventListener('click', function() {
-    hide_show_btn = !hide_show_btn
-      ? (document.querySelector('#settings-section').style.display = 'none')
-      : (document.querySelector('#settings-section').style.display = null);
+  document.querySelector('#zoom-minus').addEventListener('click', function () {});
+  document.querySelector('#hide-show-btn').addEventListener('click', function () {
+    hide_show_btn = !hide_show_btn ?
+      (document.querySelector('#settings-section').style.display = 'none') :
+      (document.querySelector('#settings-section').style.display = null);
 
     hide_show_btn ? (this.innerHTML = 'show') : (this.innerHTML = 'hide');
   });
   //highlight
-  document.querySelector('#highlight-heading').addEventListener('click', function() {
+  document.querySelector('#highlight-heading').addEventListener('click', function () {
     highlight_mode_toggle = !highlight_mode_toggle;
     highlight_mode_toggle ? (this.innerHTML = 'unhlt') : (this.innerHTML = 'hlt');
     for (var i = 0; i < document.querySelectorAll('.left-corner-text-main').length; i++) {
       highlight_mode_toggle
-        ? document
-            .querySelectorAll('.left-corner-text-main')
-            [i].classList.add('left-corner-text-main2')
-        : document
-            .querySelectorAll('.left-corner-text-main')
-            [i].classList.remove('left-corner-text-main2');
+        ?
+        document
+        .querySelectorAll('.left-corner-text-main')[i].classList.add('left-corner-text-main2') :
+        document
+        .querySelectorAll('.left-corner-text-main')[i].classList.remove('left-corner-text-main2');
     }
   });
   //night-mode
-  document.querySelector('#night-mode').addEventListener('click', function() {
+  document.querySelector('#night-mode').addEventListener('click', function () {
     nigth_mode_toggle = !nigth_mode_toggle;
     if (nigth_mode_toggle) {
       document.querySelector('body').classList.add('body2');
@@ -115,39 +116,46 @@
     }
     for (var i = 0; i < document.querySelectorAll('.font-element').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.font-element')[i].classList.add('font-element2')
-        : document.querySelectorAll('.font-element')[i].classList.remove('font-element2');
+        ?
+        document.querySelectorAll('.font-element')[i].classList.add('font-element2') :
+        document.querySelectorAll('.font-element')[i].classList.remove('font-element2');
     }
     for (var i = 0; i < document.querySelectorAll('.left-corner-text').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.left-corner-text')[i].classList.add('left-corner-text2')
-        : document.querySelectorAll('.left-corner-text')[i].classList.remove('left-corner-text2');
+        ?
+        document.querySelectorAll('.left-corner-text')[i].classList.add('left-corner-text2') :
+        document.querySelectorAll('.left-corner-text')[i].classList.remove('left-corner-text2');
     }
 
     for (var i = 0; i < document.querySelectorAll('.input-number').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.input-number')[i].classList.add('input-number2')
-        : document.querySelectorAll('.input-number')[i].classList.remove('input-number2');
+        ?
+        document.querySelectorAll('.input-number')[i].classList.add('input-number2') :
+        document.querySelectorAll('.input-number')[i].classList.remove('input-number2');
     }
     for (var i = 0; i < document.querySelectorAll('.total-value').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.total-value')[i].classList.add('total-value2')
-        : document.querySelectorAll('.total-value')[i].classList.remove('total-value2');
+        ?
+        document.querySelectorAll('.total-value')[i].classList.add('total-value2') :
+        document.querySelectorAll('.total-value')[i].classList.remove('total-value2');
     }
     for (var i = 0; i < document.querySelectorAll('.left-corner').length; i++) {
       nigth_mode_toggle
-        ? document.querySelectorAll('.left-corner')[i].classList.add('left-corner2')
-        : document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
+        ?
+        document.querySelectorAll('.left-corner')[i].classList.add('left-corner2') :
+        document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
     }
     for (var i = 0; i < document.querySelectorAll('.tech').length; i++) {
       nigth_mode_toggle
-        ? (document.querySelectorAll('.tech')[i].style.color = '#a0d4a0cf')
-        : (document.querySelectorAll('.tech')[i].style.color = '#3c71c7cf');
+        ?
+        (document.querySelectorAll('.tech')[i].style.color = '#a0d4a0cf') :
+        (document.querySelectorAll('.tech')[i].style.color = '#3c71c7cf');
     }
     for (var i = 0; i < document.querySelectorAll('.lang-link').length; i++) {
       nigth_mode_toggle
-        ? (document.querySelectorAll('.lang-link')[i].style.color = '#a0d4a0cf')
-        : (document.querySelectorAll('.lang-link')[i].style.color = '#3c71c7cf');
+        ?
+        (document.querySelectorAll('.lang-link')[i].style.color = '#a0d4a0cf') :
+        (document.querySelectorAll('.lang-link')[i].style.color = '#3c71c7cf');
     }
   });
 })();
