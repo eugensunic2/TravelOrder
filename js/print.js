@@ -99,7 +99,7 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
       var td = document.createElement('td');
       td.style = 'text-align:center;';
       if (i === 0) {
-        td.style = 'font-weight:600;text-align:center;padding:2px';
+        td.style = 'font-weight:600;text-align:center;padding:2px;font-size:15px;';
         td.innerHTML = headerNamesArray[j];
       } else {
         if (j === 0) {
@@ -134,7 +134,7 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
 function setTableTitle(titleTxt) {
   var title = document.createElement('h2');
   title.innerHTML = titleTxt;
-  title.style = 'font-size:17px;font-weight:600;margin-bottom:10px;';
+  title.style = 'font-size:15px;font-weight:600;margin-bottom:10px;';
   document.querySelector('#main-print-container').appendChild(title);
 }
 
@@ -209,13 +209,13 @@ function setResultFooter(leftElementContent, rightElementContent) {
   divElement.style = 'background-color:#209cee30;padding:5px;margin-top:15px;margin-bottom:35px;';
   // create left element
   var leftElement = document.createElement('span');
-  leftElement.style = 'font-weight:600;';
+  leftElement.style = 'font-weight:600;font-size:15px;';
   leftElement.innerHTML = leftElementContent;
   divElement.appendChild(leftElement);
 
   // create right element
   var rightElement = document.createElement('span');
-  rightElement.style = 'clear:left;float:right; font-weight:600;';
+  rightElement.style = 'clear:left;float:right; font-weight:600; font-size:15px';
   rightElement.classList.add('take-me');
   rightElement.innerHTML = rightElementContent;
 
@@ -241,8 +241,6 @@ function overallPriceDisplay(totalSum) {
   first.setAttribute('class', 'blc float-right');
   var second = document.createElement('span');
   second.setAttribute('class', 'blc float-right');
-  var third = document.createElement('span');
-  third.setAttribute('class', 'blc float-right');
   var fourth = document.createElement('span');
   fourth.setAttribute('class', 'blc float-right fw-600');
   fourth.style = 'margin-top:20px;';
@@ -251,31 +249,25 @@ function overallPriceDisplay(totalSum) {
   first_p.setAttribute('class', 'blc');
   var second_p = document.createElement('span');
   second_p.setAttribute('class', 'blc');
-  var third_p = document.createElement('span');
-  third_p.setAttribute('class', 'blc');
   var fourth_p = document.createElement('span');
   fourth_p.style = 'margin-top:20px;';
   fourth_p.setAttribute('class', 'blc fw-600');
 
   first.innerHTML = 'Ukupni troškovi:';
   second.innerHTML = 'Ukupno primljeni predujam:';
-  third.innerHTML = 'Ukupno nepriznatih troškova:';
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
-  //handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
-  console.log(totalSum);
+
   first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   second_p.innerHTML = '0 HRK';
-  third_p.innerHTML = '0 HRK';
   fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   // appending
   leftElement.appendChild(first);
   leftElement.appendChild(second);
-  leftElement.appendChild(third);
   leftElement.appendChild(fourth);
 
   rightElement.appendChild(first_p);
   rightElement.appendChild(second_p);
-  rightElement.appendChild(third_p);
+
   rightElement.appendChild(fourth_p);
 
   container.appendChild(leftElement);
@@ -295,7 +287,7 @@ function setSignatureForm() {
       'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:20px;background: #efefef;';
   } else {
     container.style =
-      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:80px;background: #efefef;';
+      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:20px;background: #efefef;';
   }
 
   var div_1 = document.createElement('div');
