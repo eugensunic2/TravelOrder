@@ -200,7 +200,9 @@ var storageObjOstali = [];
       for (var i = 0; i < document.querySelectorAll('.preview-edit-ostali').length; i++) {
         document.querySelectorAll('.preview-edit-ostali')[i].style.pointerEvents = 'auto';
       }
+      //reseting after clicking save
       resetRedInputBorderOstali('.digit-only', '.date-only');
+      document.querySelector('#currency-text-sub').innerHTML = 'Currency';
     } else {
       if (validateDateOnly('.date-only', 1)) {
         document.querySelectorAll('.date-only')[1].style.border = '2px solid #ff88a0';
@@ -227,8 +229,8 @@ var storageObjOstali = [];
       } else {
         document.querySelector('#currency-rate').style.display = '';
       }
-      document.querySelector('#currency-text').innerHTML = e.target.innerHTML;
       document.querySelector('#currency-text').value = e.target.innerHTML;
+      document.querySelector('#currency-text-sub').innerHTML = e.target.innerHTML;
     });
   }
 
@@ -280,7 +282,7 @@ function createPreviewContainerSecondRow(selectors, holder, enableFriendStay) {
   for (var i = 0; i < elements.length; i++) {
     var spanContainer = document.createElement('span');
     spanContainer.classList.add('loopme');
-    spanContainer.textContent = elements[i].value + ' ';
+    spanContainer.textContent = elements[i].value.trim() + ' ';
     document
       .querySelectorAll(holder)
       [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
@@ -490,21 +492,10 @@ function resetNumberOrder(selector) {
 }
 
 function modifyTotalValueSub(selector, friendStay) {
-  // get last element
-  var parent = document.getElementsByClassName('data-preview-obracun')[
-    document.getElementsByClassName('data-preview-obracun').length - 1
-  ];
-  elmLength = parent.childNodes.length;
-
-  var begin = parent.childNodes[elmLength - 3].innerHTML.trimStart().trimEnd();
-  var end = parent.childNodes[elmLength - 2].innerHTML.trimStart().trimEnd();
-
-  var day = dateTimeToDays(begin, end);
   if (document.querySelector(friendStay)) {
-    var friendStay = document.querySelector(friendStay).checked ? 70 : 50;
+    return document.querySelector(friendStay).checked ? 70 : 50;
   }
-
-  return parseInt((friendStay * day).toFixed(2));
+  alert('ERROR OCCURED FILL FORM AGAIN!');
 }
 // date validation
 function validateDate(selector1, selector2) {
@@ -669,6 +660,7 @@ function retrievePreviewSection(dataPreviewSeletor, callback, callbackParam) {
     var tempArray = [];
     for (var j = 0; j < parent.childNodes.length; j++) {
       if (parent.childNodes[j].tagName === 'SPAN' && parent.childNodes[j].innerHTML.trim() !== '') {
+        console.log(parent.childNodes[j].innerHTML.trim());
         tempArray.push(parent.childNodes[j].innerHTML.trim());
       }
     }
@@ -684,17 +676,30 @@ function extraFillObracun(array) {
   var days = dateTimeToDays(tempArr[2], tempArr[3]);
   var sati = days * 24;
   var jedinicneDnevnice = parseInt(getLast.substring(0, getLast.length - 1)) % 50 === 0 ? 350 : 500;
-  var iznos = jedinicneDnevnice * days;
 
   if (array.length !== 0) {
-    array[array.length - 1].splice(4, 4, sati, days, jedinicneDnevnice, iznos.toFixed(2));
+    var remainder = sati % 24;
+    if (remainder >= 8 && remainder <= 12) {
+      // pola
+      days = Math.ceil(days) - 0.5;
+    } else if (remainder > 12 && remainder < 24) {
+      // cjeli broj
+      days = Math.ceil(days);
+    }
+    var iznos = jedinicneDnevnice * days;
+    tempArr.splice(4, 4, sati, days, jedinicneDnevnice, iznos.toFixed(2));
   }
 }
 
 function extraFillOstali(array) {
-  var tempArr = array[array.length - 1];
-  var tecaj = tempArr[tempArr.length - 1];
-  var iznosPrvi = parseFloat(tempArr[2]);
-
-  array[array.length - 1].splice(4, 3, tecaj, '_', (iznosPrvi * tecaj).toFixed(2));
+  // add iznos element
+  tempArr = array[array.length - 1];
+  tempArr[2].toFixed(2);
+  if (tempArr[3].trim().indexOf('HRK') < 0) {
+    tempArr.push((parseFloat(tempArr[2].trim()) * parseFloat(tempArr[4].trim())).toFixed(2));
+  } else {
+    // if it contains HRK
+    tempArr.push('_');
+    tempArr.push(parseFloat(tempArr[2].trim()).toFixed(2));
+  }
 }

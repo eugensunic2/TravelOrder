@@ -12,7 +12,6 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
-var currency = ['$', '£', '€', 'CHF', 'HRK', 'bosna'];
 var countries = [
   'Afghanistan',
   'Albania',

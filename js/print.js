@@ -17,7 +17,6 @@
     'Iznos',
     'Valuta',
     'Tečaj',
-    'Nepriznato',
     'Iznos u Kn'
   ];
   var mainContainer = document.createElement('div');
@@ -54,7 +53,7 @@
       300,
       obracunOstaliArray,
       'OBRAČUN OSTALIH TROŠKOVA',
-      8,
+      7,
       'ostali-table'
     );
   }
@@ -111,7 +110,13 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
         if (newData[j]) {
           var td = document.createElement('td');
           td.style = 'text-align:center;padding:2px';
-          td.innerHTML = newData[j];
+          if (storeID === 'obracun-table') {
+            if (j > 3) td.innerHTML = handleMoreThan3Digit(replaceDot(newData[j]));
+            else td.innerHTML = newData[j];
+          } else if (storeID === 'ostali-table') {
+            if (j > 1) td.innerHTML = handleMoreThan3Digit(replaceDot(newData[j]));
+            else td.innerHTML = newData[j];
+          }
         }
       }
       if (td.innerHTML.trim()) {
@@ -120,13 +125,16 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
     }
   }
   document.querySelector('#main-print-container').appendChild(table);
-  setResultFooter('Ukupno:', getSubAmountValue(storeID).toFixed(2) + ' HRK');
+  setResultFooter(
+    'Ukupno:',
+    handleMoreThan3Digit(replaceDot(getSubAmountValue(storeID).toFixed(2))) + ' HRK'
+  );
 }
 
 function setTableTitle(titleTxt) {
   var title = document.createElement('h2');
   title.innerHTML = titleTxt;
-  title.style = 'font-size: 17px;font-weight: 600;margin-bottom:10px;';
+  title.style = 'font-size:17px;font-weight:600;margin-bottom:10px;';
   document.querySelector('#main-print-container').appendChild(title);
 }
 
@@ -253,12 +261,12 @@ function overallPriceDisplay(totalSum) {
   second.innerHTML = 'Ukupno primljeni predujam:';
   third.innerHTML = 'Ukupno nepriznatih troškova:';
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
-
-  first_p.innerHTML = totalSum;
+  //handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
+  console.log(totalSum);
+  first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   second_p.innerHTML = '0 HRK';
   third_p.innerHTML = '0 HRK';
-  fourth_p.innerHTML = totalSum;
-
+  fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   // appending
   leftElement.appendChild(first);
   leftElement.appendChild(second);
@@ -349,33 +357,35 @@ function getSubAmountValue(localStorageId) {
 }
 
 function getTotalSumValue() {
-  console.log(document.querySelectorAll('.take-me')[0].innerHTML.trim());
   if (document.querySelectorAll('.take-me')[1]) {
     return (
-      (
-        parseFloat(
-          document
-            .querySelectorAll('.take-me')[0]
-            .innerHTML.trim()
-            .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
-        ) +
-        parseFloat(
-          document
-            .querySelectorAll('.take-me')[1]
-            .innerHTML.trim()
-            .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.length - 1)
-        )
-      ).toFixed(2) + ' HRK'
-    );
+      parseFloat(
+        document
+          .querySelectorAll('.take-me')[0]
+          .innerHTML.trim()
+          .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.indexOf('H'))
+          .trim()
+          .replace('.', '')
+          .replace(',', '.')
+      ) +
+      parseFloat(
+        document
+          .querySelectorAll('.take-me')[1]
+          .innerHTML.trim()
+          .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.indexOf('H'))
+          .trim()
+          .replace('.', '')
+          .replace(',', '.')
+      )
+    ).toFixed(2);
   }
-  return (
-    parseFloat(
-      document
-        .querySelectorAll('.take-me')[0]
-        .innerHTML.trim()
-        .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
-    ).toFixed(2) + ' HRK'
-  );
+
+  return parseFloat(
+    document
+      .querySelectorAll('.take-me')[0]
+      .innerHTML.trim()
+      .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
+  ).toFixed(2);
 }
 
 function getDateFormatDDMMYYYY() {
@@ -393,10 +403,30 @@ function getDateFormatDDMMYYYY() {
   return dd + '.' + mm + '.' + yyyy;
 }
 
-function dotToSlash(value) {
+function replaceDot(value) {
+  // remove this later
+  value = value.toString();
   newValue = '';
   for (var i = 0; i < value.length; i++) {
     newValue += value[i].replace('.', ',');
   }
   return newValue;
+}
+function handleMoreThan3Digit(value) {
+  // remove this later
+  value = value.toString();
+
+  // 10.000
+  if (parseInt(value.substring(0, 5)) / 10000 >= 1) {
+    var part_2 = value.substring(2, value.length);
+    var part_1 = value[0] + value[1] + '.';
+    return part_1 + part_2;
+  }
+  // 1000
+  if (parseInt(value.substring(0, 4)) / 1000 >= 1) {
+    var part_2 = value.substring(1, value.length);
+    var part_1 = value[0] + '.';
+    return part_1 + part_2;
+  }
+  return value;
 }
