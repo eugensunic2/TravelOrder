@@ -279,16 +279,9 @@ function overallPriceDisplay(totalSum) {
 function setSignatureForm() {
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
-  if (
-    JSON.parse(localStorage.getItem('obracun-table')).length <= 2 &&
-    JSON.parse(localStorage.getItem('obracun-table')).length <= 2
-  ) {
-    container.style =
-      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:20px;background: #efefef;';
-  } else {
-    container.style =
-      'border: 1px solid #e7e5e5;margin-left:0px;margin-right:0px;margin-bottom:20px; margin-top:20px;background: #efefef;';
-  }
+
+  container.style =
+    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);position: absolute;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
