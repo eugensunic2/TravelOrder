@@ -29,7 +29,7 @@
       document.querySelector('#main-date-section').classList.remove('annotate-main-column');
       document.querySelector('#obracun-dnevnica').classList.remove('annotate-main-column');
       document.querySelector('#obracun-ostalih-troskova').classList.remove('annotate-main-column');
-      document.querySelector('#predujam-section').classList.add('annotate-main-column');
+      document.querySelector('#predujam-section').classList.remove('annotate-main-column');
     }
   });
 

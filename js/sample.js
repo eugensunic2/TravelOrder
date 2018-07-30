@@ -30,7 +30,7 @@ var storageObjOstali = [];
 
       localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
       localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
-      // window.location.href = './print.html';
+      window.location.href = './print.html';
     } else {
       window.scrollTo(0, 0);
       if (!isNumberOnly('#redni-broj')) {
