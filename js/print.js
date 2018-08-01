@@ -226,7 +226,6 @@ function setResultFooter(leftElementContent, rightElementContent) {
 }
 
 function overallPriceDisplay(totalSum) {
-  console.log(totalSum);
   container = document.createElement('div');
   container.style = 'background-color:#209cee30;width:100%%;margin-left:30%;margin-top:30px;';
   container.setAttribute('class', 'columns');
