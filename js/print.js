@@ -58,7 +58,7 @@
     );
   }
 
-  overallPriceDisplay(getTotalSumValue());
+  overallPriceDisplay(getTotalSumValue(), localStorage.getItem('kredit-value'));
   setSignatureForm();
 })();
 
@@ -225,7 +225,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
   document.querySelector('#main-print-container').appendChild(divElement);
 }
 
-function overallPriceDisplay(totalSum) {
+function overallPriceDisplay(totalSum, predujamValue) {
   container = document.createElement('div');
   container.style = 'background-color:#209cee30;width:100%%;margin-left:30%;margin-top:30px;';
   container.setAttribute('class', 'columns');
@@ -258,7 +258,7 @@ function overallPriceDisplay(totalSum) {
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
 
   first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
-  second_p.innerHTML = '0,00 HRK';
+  second_p.innerHTML = predujamValue ? handleMoreThan3Digit(replaceDot(predujamValue)) : '0,00 HRK';
   fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   // appending
   leftElement.appendChild(first);
@@ -401,6 +401,7 @@ function replaceDot(value) {
   }
   return newValue;
 }
+
 function handleMoreThan3Digit(value) {
   // remove this later
   value = value.toString();

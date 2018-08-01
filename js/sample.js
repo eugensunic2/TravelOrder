@@ -30,6 +30,10 @@ var storageObjOstali = [];
 
       localStorage.setItem('obracun-table', JSON.stringify(storageObjObracun));
       localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
+      localStorage.setItem(
+        'kredit-value',
+        parseFloat(document.querySelector('#predujam-value').value).toFixed(2)
+      );
       window.location.href = './print.html';
     } else {
       window.scrollTo(0, 0);
@@ -687,7 +691,14 @@ function extraFillObracun(array) {
       days = Math.ceil(days);
     }
     var iznos = jedinicneDnevnice * days;
-    tempArr.splice(4, 4, sati, days.toFixed(2), jedinicneDnevnice.toFixed(2), iznos.toFixed(2));
+    tempArr.splice(
+      4,
+      4,
+      sati.toFixed(1),
+      days.toFixed(2),
+      jedinicneDnevnice.toFixed(2),
+      iznos.toFixed(2)
+    );
   }
 }
 

@@ -92,6 +92,9 @@ input {
 .mg-tp-30 {
   margin-top: 30px;
 }
+.mg-tp-44 {
+  margin-top: 44px !important;
+}
 
 .inline-block {
   display: inline-block;
@@ -246,7 +249,8 @@ input {
   margin-bottom: 10px;
 }
 
-.content-description {}
+.content-description {
+}
 
 #remove-content {
   background: #ff1f4b29;
@@ -335,7 +339,8 @@ input {
 }
 
 @media print {
-  @page {}
+  @page {
+  }
   .header {
     position: fixed;
   }
