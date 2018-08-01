@@ -258,9 +258,9 @@ function overallPriceDisplay(totalSum) {
   second.innerHTML = 'Ukupno primljeni predujam:';
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
 
-  first_p.innerHTML = totalSum + ' HRK';
+  first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   second_p.innerHTML = '0,00 HRK';
-  fourth_p.innerHTML = totalSum + ' HRK';
+  fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   // appending
   leftElement.appendChild(first);
   leftElement.appendChild(second);
