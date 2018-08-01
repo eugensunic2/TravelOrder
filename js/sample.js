@@ -16,7 +16,11 @@ var storageObjOstali = [];
   // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
-    if (isNumberOnly('#redni-broj') && isValideMonthYear('.is-medium', 1)) {
+    if (
+      isNumberOnly('#redni-broj') &&
+      isValideMonthYear('.is-medium', 1) &&
+      document.querySelectorAll('.loopme')[0]
+    ) {
       // first section
       localStorage.setItem('first-section', JSON.stringify(retrieveFirstSection()));
       // second section
@@ -32,7 +36,9 @@ var storageObjOstali = [];
       localStorage.setItem('ostali-table', JSON.stringify(storageObjOstali));
       localStorage.setItem(
         'kredit-value',
-        parseFloat(document.querySelector('#predujam-value').value).toFixed(2)
+        document.querySelector('#predujam-value').value
+          ? parseFloat(document.querySelector('#predujam-value').value).toFixed(2)
+          : ''
       );
       window.location.href = './print.html';
     } else {
@@ -42,6 +48,8 @@ var storageObjOstali = [];
       }
       if (!isValideMonthYear('.is-medium', 1)) {
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
+      } else {
+        alert('Fill at least one main section (Obracun dnevnica or Ostali troskovi)');
       }
     }
     // first section
@@ -84,6 +92,22 @@ var storageObjOstali = [];
     this.style.border = '';
   });
   document.querySelectorAll('.digit-only')[0].addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // country validation
+  document.querySelector('#country-name').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // trosak validation
+  document.querySelector('#trosak-name').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // currency dropdown
+  document.querySelector('#currency-drop').addEventListener('click', function(e) {
+    this.style.border = '';
+  });
+  // currency rate value
+  document.querySelector('#currency-rate-value').addEventListener('click', function(e) {
     this.style.border = '';
   });
 
@@ -137,7 +161,8 @@ var storageObjOstali = [];
     if (
       validateDate('.date1', '.date2') &&
       !validateDateOnly('.date-only', 0) &&
-      !isEndDateSmaller('.date1', '.date2', 0)
+      !isEndDateSmaller('.date1', '.date2', 0) &&
+      isBasicValidation('#country-name')
     ) {
       createPreviewContainerFirstRow(
         'edit-obracun',
@@ -164,6 +189,7 @@ var storageObjOstali = [];
       // reset html here
       document.querySelector('#friend-stay').checked = false;
       resetRedInputBorder('.date-only', '.date1', 0);
+      document.querySelector('#country-name').style.border = '';
     } else {
       // put red borders
       if (validateDateOnly('.date-only', 0)) {
@@ -178,12 +204,21 @@ var storageObjOstali = [];
         document.querySelectorAll('.date1')[0].style.border = '2px solid #ff88a0';
         document.querySelectorAll('.date2')[0].style.border = '2px solid #ff88a0';
       }
+      if (!isBasicValidation('#country-name')) {
+        document.querySelector('#country-name').style.border = '2px solid #ff88a0';
+      }
     }
   });
 
   // SAVE OSTALI
   document.querySelector('#ostali-save').addEventListener('click', function() {
-    if (!validateDateOnly('.date-only', 1) && isNumberOnly('.digit-only')) {
+    if (
+      !validateDateOnly('.date-only', 1) &&
+      isNumberOnly('.digit-only') &&
+      isBasicValidation('#trosak-name') &&
+      isCurrencySelected() &&
+      isCurrencyRate()
+    ) {
       createPreviewContainerFirstRow(
         'edit-ostali',
         'delete-ostali',
@@ -213,6 +248,15 @@ var storageObjOstali = [];
       }
       if (!isNumberOnly('.digit-only')) {
         document.querySelectorAll('.digit-only')[0].style.border = '2px solid #ff88a0';
+      }
+      if (!isBasicValidation('#trosak-name')) {
+        document.querySelector('#trosak-name').style.border = '2px solid #ff88a0';
+      }
+      if (!isCurrencySelected()) {
+        document.querySelector('#currency-drop').style.border = '2px solid #ff88a0';
+      }
+      if (!isCurrencyRate()) {
+        document.querySelector('#currency-rate-value').style.border = '2px solid #ff88a0';
       }
     }
   });
@@ -607,7 +651,18 @@ function isNumberOnly(selector) {
 }
 
 function isBasicValidation(selector) {
-  return document.querySelectorAll(selector).value.length > 0;
+  return document.querySelector(selector).value.length > 3;
+}
+
+function isCurrencySelected() {
+  return document.querySelector('#currency-text-sub').innerHTML.trim() !== 'Currency';
+}
+
+function isCurrencyRate() {
+  if (document.querySelector('#currency-rate-value')) {
+    return document.querySelector('#currency-rate-value').value.trim().length > 1;
+  }
+  return true;
 }
 
 function dateTimeToDays(begin, end) {
@@ -705,7 +760,7 @@ function extraFillObracun(array) {
 function extraFillOstali(array) {
   // add iznos element
   tempArr = array[array.length - 1];
-  parseFloat(tempArr[2].replace(',', '.')).toFixed(2);
+  tempArr[2] = parseFloat(tempArr[2].replace(',', '.')).toFixed(2);
   if (tempArr[3].trim().indexOf('HRK') < 0) {
     tempArr.push((parseFloat(tempArr[2].trim()) * parseFloat(tempArr[4].trim())).toFixed(2));
   } else {

@@ -363,18 +363,14 @@ function getTotalSumValue() {
           .replace(',', '.')
       )
     ).toFixed(2);
-  } else if (document.querySelectorAll('.take-me')[1]) {
-    return document
-      .querySelectorAll('.take-me')[1]
-      .innerHTML.trim()
-      .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.indexOf('H'))
-      .trim();
   }
   return document
     .querySelectorAll('.take-me')[0]
     .innerHTML.trim()
     .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.indexOf('H'))
-    .trim();
+    .trim()
+    .replace('.', '')
+    .replace(',', '.');
 }
 
 function getDateFormatDDMMYYYY() {
