@@ -687,7 +687,7 @@ function extraFillObracun(array) {
       days = Math.ceil(days);
     }
     var iznos = jedinicneDnevnice * days;
-    tempArr.splice(4, 4, sati, days.toFixed(2), jedinicneDnevnice, iznos.toFixed(2));
+    tempArr.splice(4, 4, sati, days.toFixed(2), jedinicneDnevnice.toFixed(2), iznos.toFixed(2));
   }
 }
 

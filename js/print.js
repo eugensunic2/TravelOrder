@@ -226,6 +226,7 @@ function setResultFooter(leftElementContent, rightElementContent) {
 }
 
 function overallPriceDisplay(totalSum) {
+  console.log(totalSum);
   container = document.createElement('div');
   container.style = 'background-color:#209cee30;width:100%%;margin-left:30%;margin-top:30px;';
   container.setAttribute('class', 'columns');
@@ -257,9 +258,9 @@ function overallPriceDisplay(totalSum) {
   second.innerHTML = 'Ukupno primljeni predujam:';
   fourth.innerHTML = 'Ostaje za isplatu / vraćanje u kn:';
 
-  first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
-  second_p.innerHTML = '0 HRK';
-  fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
+  first_p.innerHTML = totalSum + ' HRK';
+  second_p.innerHTML = '0,00 HRK';
+  fourth_p.innerHTML = totalSum + ' HRK';
   // appending
   leftElement.appendChild(first);
   leftElement.appendChild(second);
@@ -342,7 +343,7 @@ function getSubAmountValue(localStorageId) {
 }
 
 function getTotalSumValue() {
-  if (document.querySelectorAll('.take-me')[1]) {
+  if (document.querySelectorAll('.take-me')[1] && document.querySelectorAll('.take-me')[0]) {
     return (
       parseFloat(
         document
@@ -363,14 +364,18 @@ function getTotalSumValue() {
           .replace(',', '.')
       )
     ).toFixed(2);
-  }
-
-  return parseFloat(
-    document
-      .querySelectorAll('.take-me')[0]
+  } else if (document.querySelectorAll('.take-me')[1]) {
+    return document
+      .querySelectorAll('.take-me')[1]
       .innerHTML.trim()
-      .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.length - 1)
-  ).toFixed(2);
+      .substring(0, document.querySelectorAll('.take-me')[1].innerHTML.indexOf('H'))
+      .trim();
+  }
+  return document
+    .querySelectorAll('.take-me')[0]
+    .innerHTML.trim()
+    .substring(0, document.querySelectorAll('.take-me')[0].innerHTML.indexOf('H'))
+    .trim();
 }
 
 function getDateFormatDDMMYYYY() {
