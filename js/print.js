@@ -23,6 +23,10 @@
   mainContainer.setAttribute('id', 'main-print-container');
   document.body.appendChild(mainContainer);
 
+  // FIRST PAGE -- PERSON INFO PAGE
+
+  // SECOND PAGE -- TRAVEL EXPENSE PAGE
+  
   setCompanyLogo(
     'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
   );

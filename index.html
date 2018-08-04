@@ -70,23 +70,6 @@
         <?xml version="1.0" encoding="iso-8859-1"?>
         <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
           y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-          <path style="fill:#FFDA44;" d="M15.923,345.043C52.094,442.527,145.929,512,256,512s203.906-69.473,240.077-166.957L256,322.783
-        	L15.923,345.043z" />
-          <path d="M256,0C145.929,0,52.094,69.472,15.923,166.957L256,189.217l240.077-22.261C459.906,69.472,366.071,0,256,0z" />
-          <path style="fill:#D80027;" d="M15.923,166.957C5.633,194.69,0,224.686,0,256s5.633,61.31,15.923,89.043h480.155
-        	C506.368,317.31,512,287.314,512,256s-5.632-61.31-15.923-89.043H15.923z" />
-        </svg>
-        <?xml version="1.0" encoding="iso-8859-1"?>
-        <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-          y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-          <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256" />
-          <path style="fill:#D80027;" d="M512,256c0-110.071-69.472-203.906-166.957-240.077v480.155C442.528,459.906,512,366.071,512,256z"
-          />
-          <path style="fill:#0052B4;" d="M0,256c0,110.071,69.473,203.906,166.957,240.077V15.923C69.473,52.094,0,145.929,0,256z" />
-        </svg>
-        <?xml version="1.0" encoding="iso-8859-1"?>
-        <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-          y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
           <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256" />
           <path style="fill:#0052B4;" d="M52.92,100.142c-20.109,26.163-35.272,56.318-44.101,89.077h133.178L52.92,100.142z" />
           <path style="fill:#0052B4;" d="M503.181,189.219c-8.829-32.758-23.993-62.913-44.101-89.076l-89.075,89.076H503.181z" />
@@ -132,7 +115,10 @@
         <span>50€ or 350HRK, Hrvatska: 170HRK </span>
         <p> </p>
         <span class="tech">Dnevnica rule: </span>
-        <span>[0,8> 0 dnevnica; [8, 12> 0.5 dnevnica; [12, 24] 1 dnevnica </span>
+        <span>
+          <span class="bold-me">[0,8></span> 0 dnevnica;
+          <span class="bold-me">[8, 12></span> 0.5 dnevnica;
+          <span class="bold-me">[12, 24]</span> 1 dnevnica </span>
       </div>
       <div id="style-preference" class="settings-section column cancel-mg-rgt mg-btm-10">
         <span class="flt-lft left-corner-text">Style preference</span>
@@ -185,6 +171,32 @@
             <div class="control">
               <input class="input is-medium" type="text" placeholder="mm.yyyy">
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="person-info-section" class="columns box-center box-border only-lower-screen">
+      <div class="column">
+        <span class="left-corner-text-main">person section</span>
+        <div class="flt-clr-bth mg-tp-50">
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="First name Last name">
+          </div>
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="Zvanje">
+          </div>
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="Radno mjesto">
+          </div>
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="Grad Drzava">
+          </div>
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="Gdje">
+          </div>
+          <div class="control inline-block">
+            <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="Dodatan opis">
           </div>
         </div>
       </div>
@@ -324,10 +336,14 @@
     <div id="predujam-section" class="columns box-center box-border mg-tp-44">
       <div class="column">
         <span class="left-corner-text-main">predujam/kredit section</span>
-        <div class="dp-block width-150">
-          <input id="predujam-value" class="input is-small digit-only" type="text" placeholder="xx.x">
+        <div class="flt-clr-bth">
+          <div class="inline-block predujam-section-add">
+            <div class="dp-block width-150">
+              <input id="predujam-value" class="input is-small digit-only" type="text" placeholder="xx.x">
+            </div>
+          </div>
+          <span class="inline-block annotate-hr extra-span-predujam">HRK</span>
         </div>
-        <span class="inline-block annotate-hr">HRK</span>
       </div>
     </div>
 
