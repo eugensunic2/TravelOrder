@@ -40,7 +40,7 @@ var storageObjOstali = [];
           ? parseFloat(document.querySelector('#predujam-value').value).toFixed(2)
           : ''
       );
-      window.location.href = './print.html';
+      //window.location.href = './print.html';
     } else {
       window.scrollTo(0, 0);
       if (!isNumberOnly('#redni-broj')) {
@@ -331,14 +331,6 @@ function createPreviewContainerSecondRow(selectors, holder, enableFriendStay) {
     var spanContainer = document.createElement('span');
     spanContainer.classList.add('loopme');
     spanContainer.textContent = elements[i].value.trim() + ' ';
-    document
-      .querySelectorAll(holder)
-      [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
-  }
-  // total sub value
-  if (enableFriendStay) {
-    spanContainer.classList.add('loopme');
-    spanContainer.textContent = modifyTotalValueSub('.loopme', '#friend-stay') + '€';
     document
       .querySelectorAll(holder)
       [document.querySelectorAll(holder).length - 1].appendChild(spanContainer);
@@ -714,27 +706,34 @@ function retrieveFirstSection() {
 
 function retrievePreviewSection(dataPreviewSeletor, callback, callbackParam) {
   callbackParam.push([]);
+  getOutCountry = '';
+  getOutFriendStay = '';
+
   for (var i = 0; i < document.getElementsByClassName(dataPreviewSeletor).length; i++) {
     var parent = document.getElementsByClassName(dataPreviewSeletor)[i];
     var tempArray = [];
     for (var j = 0; j < parent.childNodes.length; j++) {
       if (parent.childNodes[j].tagName === 'SPAN' && parent.childNodes[j].innerHTML.trim() !== '') {
-        console.log(parent.childNodes[j].innerHTML.trim());
+        if (dataPreviewSeletor === 'data-preview-obracun') {
+          getOutCountry = parent.childNodes[3].innerHTML.trim();
+          getOutFriendStay = parent.childNodes[parent.childNodes.length - 1].innerHTML.trim();
+        }
         tempArray.push(parent.childNodes[j].innerHTML.trim());
       }
     }
     callbackParam.push(tempArray);
-    callback(callbackParam);
+    callback(callbackParam, getOutCountry, getOutFriendStay);
   }
 }
 
-function extraFillObracun(array) {
+function extraFillObracun(array, countryInput, getFriend) {
   var tempArr = array[array.length - 1];
   var getLast = tempArr[tempArr.length - 1];
 
   var days = dateTimeToDays(tempArr[2], tempArr[3]);
   var sati = days * 24;
-  var jedinicneDnevnice = parseInt(getLast.substring(0, getLast.length - 1)) % 50 === 0 ? 350 : 500;
+  var jedinicneDnevnice = moneyAmountFromCountry(countryInput); // needs to be integer
+  jedinicneDnevnice = applyFriendStay(jedinicneDnevnice, getFriend);
 
   if (array.length !== 0) {
     var remainder = sati % 24;
@@ -768,4 +767,39 @@ function extraFillOstali(array) {
     tempArr.push('_');
     tempArr.push(parseFloat(tempArr[2].trim()).toFixed(2));
   }
+}
+
+function moneyAmountFromCountry(value) {
+  value = capitalizeFirstLetter(value);
+  console.log('went to moneyFromCountry' + value);
+  if (value === 'Hrvatska' || value === 'Croatia') {
+    return 170;
+  } else if (value === 'Njemacka' || value === 'Njemačka' || value === 'Germany') {
+    return 350;
+  } else if (value === 'Spanjolska' || value === 'Španjolska' || value === 'Spain') {
+    return 350;
+  }
+  return 350;
+}
+
+function applyFriendStay(integerValue, friendStayEnable) {
+  // check if applyFriendStay is enabled
+  console.log('went to apply friend stay' + friendStayEnable);
+  console.log(friendStayEnable.indexOf('friend') === -1);
+  if (friendStayEnable.indexOf('friend') === -1) {
+    console.log('integer value is: ' + integerValue);
+    return integerValue;
+  }
+  // friend stay money given
+  if (integerValue === 350) {
+    return 500;
+  } else if (integerValue === 170) {
+    // ovo treba provjerit
+    return 250;
+  }
+  return 500;
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
