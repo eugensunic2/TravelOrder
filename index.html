@@ -33,7 +33,7 @@
     <div id="settings-section" class="columns flt-clr-lft">
 
       <div id="language" class="settings-section column mg-btm-10">
-        <span class="flt-lft left-corner-text">Language & links</span>
+        <span class="flt-lft left-corner-text">Language-links-info</span>
         <?xml version="1.0" encoding="iso-8859-1"?>
         <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
           y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -104,6 +104,8 @@
         <a class="dp-block lang-link" href="https://confluence.comsysto.com/pages/viewpage.action?pageId=51249188" target="_blank">
           <span>word sheet</span>
         </a>
+        <p></p>
+        <span class="eng-cro">- decimalni iznosi moraju sadržavat točku ne zarez, na kraju godine nema točke</span>
       </div>
 
 
@@ -162,8 +164,8 @@
 
     <div id="main-date-section" class="columns box-center box-border only-lower-screen">
       <div class="column">
-        <span class="left-corner-text-main">date section</span>
-        <p class="flt-clr-lft">Content description here, some text to explain what this section is about</p>
+        <span class="left-corner-text-main eng-cro">R.broj i datum</span>
+        <p class="eng-cro flt-clr-lft">redni broj iz google drive sheeta i datum početka putovanja (mm.yyyy)</p>
         <div class="field inline-block order-number">
           <div class="control">
             <input id="redni-broj" class="input is-medium" type="text" placeholder="R.br">
@@ -181,8 +183,9 @@
 
     <div id="person-info-section" class="columns box-center box-border only-lower-screen">
       <div class="column">
-        <span class="left-corner-text-main">person section</span>
-        <div class="flt-clr-bth mg-tp-50">
+        <span class="left-corner-text-main eng-cro">Osoba</span>
+        <p class="eng-cro flt-clr-lft">Prezime Ime mora biti odvojeno spaceom kao i Grad država</p>
+        <div class="flt-clr-bth">
           <div class="control inline-block">
             <input id="redni-broj" class="input is-medium person-me" type="text" placeholder="First name Last name">
           </div>
@@ -214,7 +217,7 @@
 
     <div id="obracun-dnevnica" class="box-center flt-clr-bth columns mg-tp-44">
       <div class="column">
-        <span class="left-corner-text-main">obracun dnevnica</span>
+        <span class="left-corner-text-main eng-cro">obračun dnevnica</span>
         <div id="plus-minus-dnevnica-holder-obracun">
           <div id="obracun-save" class="back-button save-button">save</div>
           <div id="obracun-edit-close" class="back-button save-button" style="background-color:grey;color:#f2e9e9;">close</div>
@@ -223,7 +226,9 @@
           <label class="checkbox zindex-positive flt-clr-lft flt-lft">
             <input id="friend-stay" type="checkbox"> Friend stay
           </label>
-          <span class="flt-clr-lft flt-lft">Datum</span>
+          <span class="flt-clr-lft flt-lft eng-cro">Datum
+            <span class="eng-cro">(dd.mm.yyyy) datum polaska</span>
+          </span>
           <div class="date-width">
             <div class="field">
               <div class="control">
@@ -231,11 +236,15 @@
               </div>
             </div>
           </div>
-          <span>Drzava</span>
+          <span class="eng-cro">Država
+            <span class="eng-cro">(probajte ne sami upisivati već izaberite iz drop downa)</span>
+          </span>
           <div id="" class="mg-btm-10 the-country">
-            <input id="country-name" class="typeahead flag-obracun typehead-specialize" type="text" placeholder="Select country">
+            <input id="country-name" class="typeahead flag-obracun typehead-specialize" type="text" placeholder="Odabir države">
           </div>
-          <span class="inline-block">Polazak</span>
+          <span class="inline-block eng-cro">Polazak
+            <span class="eng-cro">(dd.mm.yyyy hh:mm)</span>
+          </span>
           <div class="inline-block">
             <div class="field">
               <div class="control">
@@ -243,7 +252,9 @@
               </div>
             </div>
           </div>
-          <span class="inline-block">Povratak</span>
+          <span class="inline-block eng-cro">Povratak
+            <span class="eng-cro">(dd.mm.yyyy hh:mm)</span>
+          </span>
           <div class="inline-block">
             <div class="field">
               <div class="control">
@@ -268,13 +279,15 @@
     <div id="obracun-ostalih-troskova" class="box-center box-border flt-clr-bth columns">
       <hr/>
       <div class="column">
-        <span class="left-corner-text-main">ostali troskovi</span>
+        <span class="left-corner-text-main eng-cro">ostali troškovi</span>
         <div id="plus-minus-ostali-holder">
           <div id="ostali-save" class="back-button save-button">save</div>
           <div id="ostali-edit-close" class="back-button save-button" style="background-color:grey;color:#f2e9e9;">close</div>
         </div>
         <div class="add-ostali">
-          <span class="flt-clr-lft flt-lft">Datum</span>
+          <span class="flt-clr-lft flt-lft eng-cro">Datum
+            <span class="eng-cro">(dd.mm.yyyy)</span>
+          </span>
           <div class="date-width">
             <div class="field">
               <div class="control">
@@ -282,11 +295,13 @@
               </div>
             </div>
           </div>
-          <span>Vrsta troska</span>
+          <span class="eng-cro">Vrsta troška
+            <span class="eng-cro">(kratak opis troška)</span>
+          </span>
           <div id="" class="mg-btm-10">
-            <input id="trosak-name" class="typeahead flag-ostali typehead-specialize" type="text" placeholder="Select trosak">
+            <input id="trosak-name" class="typeahead flag-ostali typehead-specialize" type="text" placeholder="Select trošak">
           </div>
-          <span class="">Iznos</span>
+          <span class="eng-cro">Iznos</span>
           <div class="inline-block">
             <div class="field">
               <div class="control">
@@ -299,7 +314,7 @@
               <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <input id="currency-text" class="flag-ostali" type="text" style="display:none;">
-                  <span id="currency-text-sub">Currency</span>
+                  <span id="currency-text-sub eng-cro">Tečaj</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -331,7 +346,7 @@
           </div>
           <p></p>
           <div id="currency-rate" class="mg-tp-30">
-            <span>Currency rate: </span>
+            <span class="eng-cro">Currency rate: </span>
             <div class="inline-block">
               <input id="currency-rate-value" class="input is-small flag-ostali digit-only" type="text" placeholder="xx.x">
             </div>
@@ -344,8 +359,11 @@
 
     <div id="predujam-section" class="columns box-center box-border mg-tp-44">
       <div class="column">
-        <span class="left-corner-text-main">predujam/kredit section</span>
+        <span class="left-corner-text-main eng-cro">predujam/kredit
+        </span>
         <div class="flt-clr-bth">
+          <span class="eng-cro">(ukoliko je uzeta neka dodatna svota novaca)</span>
+          <p></p>
           <div class="inline-block predujam-section-add">
             <div class="dp-block width-150">
               <input id="predujam-value" class="input is-small digit-only" type="text" placeholder="xx.x">
@@ -356,7 +374,7 @@
       </div>
     </div>
 
-    <a id="preview-mode" class="button is-primary preview-mode">Print mode</a>
+    <a id="preview-mode" class="button is-primary preview-mode eng-cro">Print mode</a>
 
 
 
