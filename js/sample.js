@@ -16,9 +16,15 @@ var storageObjOstali = [];
   // PREVIEW-MODE
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
+
     if (
       isNumberOnly('#redni-broj') &&
       isValideMonthYear('.is-medium', 1) &&
+      isBasicValidation('#redni-broj-fullname') &&
+      isBasicValidation('#redni-broj-zvanje') &&
+      isBasicValidation('#redni-broj-naziv-radnog') &&
+      isBasicValidation('#redni-broj-grad-drzava') &&
+      isBasicValidation('#redni-broj-gdje') &&
       document.querySelectorAll('.loopme')[0]
     ) {
       // first section
@@ -46,6 +52,24 @@ var storageObjOstali = [];
       if (!isNumberOnly('#redni-broj')) {
         document.querySelector('#redni-broj').style.border = '2px solid #ff88a0';
       }
+
+      // BEGIN-- INPUT FIRST WORD PAGE VALIDATION
+      if (!isBasicValidation('#redni-broj-fullname')) {
+        document.querySelector('#redni-broj-fullname').style.border = '2px solid #ff88a0';
+      }
+      if (!isBasicValidation('#redni-broj-zvanje')) {
+        document.querySelector('#redni-broj-zvanje').style.border = '2px solid #ff88a0';
+      }
+      if (!isBasicValidation('#redni-broj-naziv-radnog')) {
+        document.querySelector('#redni-broj-naziv-radnog').style.border = '2px solid #ff88a0';
+      }
+      if (!isBasicValidation('#redni-broj-grad-drzava')) {
+        document.querySelector('#redni-broj-grad-drzava').style.border = '2px solid #ff88a0';
+      }
+      if (!isBasicValidation('#redni-broj-gdje')) {
+        document.querySelector('#redni-broj-gdje').style.border = '2px solid #ff88a0';
+      }
+      // END-- INPUT FIRST WORD PAGE VALIDATION
       if (!isValideMonthYear('.is-medium', 1)) {
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
       } else {
@@ -58,7 +82,32 @@ var storageObjOstali = [];
   document.querySelector('#obracun-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
-
+  // FIRST WORD PAGE BEGIN
+  document.querySelector('#redni-broj-fullname').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-zvanje').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-naziv-radnog').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-grad-drzava').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-gdje').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-dodatan-opis').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-pocetno-stanje').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  document.querySelector('#redni-broj-zavrsno-stanje').addEventListener('input', function(e) {
+    this.style.border = '';
+  });
+  // FIRST WORD PAGE END
   // redni broj
   document.getElementsByClassName('is-medium')[0].addEventListener('input', function(e) {
     this.style.border = '';

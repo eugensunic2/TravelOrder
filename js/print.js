@@ -26,7 +26,7 @@
   // FIRST PAGE -- PERSON INFO PAGE
 
   // SECOND PAGE -- TRAVEL EXPENSE PAGE
-  
+
   setCompanyLogo(
     'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
   );
@@ -263,7 +263,12 @@ function overallPriceDisplay(totalSum, predujamValue) {
 
   first_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
   second_p.innerHTML = predujamValue ? handleMoreThan3Digit(replaceDot(predujamValue)) : '0,00 HRK';
-  fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
+  if (!predujamValue) {
+    fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(totalSum)) + ' HRK';
+  } else {
+    var outputValue = totalSum - predujamValue;
+    fourth_p.innerHTML = handleMoreThan3Digit(replaceDot(outputValue)) + ' HRK';
+  }
   // appending
   leftElement.appendChild(first);
   leftElement.appendChild(second);
