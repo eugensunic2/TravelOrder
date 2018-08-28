@@ -28,14 +28,14 @@
   ];
   var english_array = [
     'Order number and date',
-    'Order number from google drive and trip begin date(mm.yyyy)',
+    'Order number from google drive and trip begin date (mm.yyyy)',
     'Person',
     'Lastname firstname, city, country must be separated with a comma',
     'Trip accountment',
     'Date',
     '(dd.mm.yyyy) start date',
     'Country',
-    '(dont write here choose from dropdown instead)',
+    '(don&#39;t write here choose from dropdown instead)',
     'Trip start',
     '(dd.mm.yyyy hh:mm)',
     'Trip end',
@@ -60,28 +60,47 @@
     document.querySelectorAll('.header-lang')[0].innerHTML = '- decimal values must contain';
     document.querySelectorAll('.header-lang')[1].innerHTML = 'a dot';
     document.querySelectorAll('.header-lang')[2].innerHTML =
-      'not a comma, at the end of the year(yyyy) dot character doesnt exist';
-    // odabir države
-    // select trosak
+      'not a comma, at the end of the year(yyyy) dot character doesn&#39;t exist';
+
+    // odabir države, select trosak
     document.querySelector('#country-name').placeholder = 'Choose country';
     document.querySelector('#trosak-name').placeholder = 'Expense name';
+
+    // input section person
+    document.querySelectorAll('.person-me')[0].placeholder = 'First Lastname';
+    document.querySelectorAll('.person-me')[1].placeholder = 'Title';
+    document.querySelectorAll('.person-me')[2].placeholder = 'Job title';
+    document.querySelectorAll('.person-me')[3].placeholder = 'City Country';
+    document.querySelectorAll('.person-me')[4].placeholder = 'Where (client-description)';
+    document.querySelectorAll('.person-me')[5].placeholder = 'Trip description';
+    document.querySelectorAll('.person-me')[6].placeholder = 'Counter begin (Km)';
+    document.querySelectorAll('.person-me')[7].placeholder = 'Counter end (Km)';
   });
 
+  // CROATIAN
   document.querySelector('#croatian-language').addEventListener('click', function() {
     for (var i = 0; i < document.querySelectorAll('.eng-cro').length; i++) {
       document.querySelectorAll('.eng-cro')[i].innerHTML = croatian_array[i];
     }
 
     // language links info
-    console.log(document.querySelectorAll('.header-lang').length);
     document.querySelectorAll('.header-lang')[0].innerHTML = '- decimalni iznosi moraju sadržavat';
     document.querySelectorAll('.header-lang')[1].innerHTML = 'točku';
     document.querySelectorAll('.header-lang')[2].innerHTML =
       'ne zarez, na kraju godine (yyyy) nema točke';
 
-    // odabir države
-    // select trosak
+    // odabir države, select trosak
     document.querySelector('#country-name').placeholder = 'Odabir države';
     document.querySelector('#trosak-name').placeholder = 'Odabir troška';
+
+    // input section person
+    document.querySelectorAll('.person-me')[0].placeholder = 'Ime Prezime';
+    document.querySelectorAll('.person-me')[1].placeholder = 'Zvanje';
+    document.querySelectorAll('.person-me')[2].placeholder = 'Naziv radnog mjesta';
+    document.querySelectorAll('.person-me')[3].placeholder = 'Grad Drzava';
+    document.querySelectorAll('.person-me')[4].placeholder = 'Gdje (kod klijenta-opis)';
+    document.querySelectorAll('.person-me')[5].placeholder = 'Dodatan opis putovanja';
+    document.querySelectorAll('.person-me')[6].placeholder = 'Pocetno stanje (Km)';
+    document.querySelectorAll('.person-me')[7].placeholder = 'Zavrsno stanje (Km)';
   });
 })();

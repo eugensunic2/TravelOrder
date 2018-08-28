@@ -156,15 +156,10 @@
         ? document.querySelectorAll('.left-corner')[i].classList.add('left-corner2')
         : document.querySelectorAll('.left-corner')[i].classList.remove('left-corner2');
     }
-    for (var i = 0; i < document.querySelectorAll('.tech').length; i++) {
+    for (var i = 0; i < document.querySelectorAll('.ch-link').length; i++) {
       nigth_mode_toggle
-        ? (document.querySelectorAll('.tech')[i].style.color = '#a0d4a0cf')
-        : (document.querySelectorAll('.tech')[i].style.color = '#3c71c7cf');
-    }
-    for (var i = 0; i < document.querySelectorAll('.lang-link').length; i++) {
-      nigth_mode_toggle
-        ? (document.querySelectorAll('.lang-link')[i].style.color = '#a0d4a0cf')
-        : (document.querySelectorAll('.lang-link')[i].style.color = '#3c71c7cf');
+        ? (document.querySelectorAll('.ch-link')[i].style.color = '#a0d4a0cf')
+        : (document.querySelectorAll('.ch-link')[i].style.color = '');
     }
   });
 })();
