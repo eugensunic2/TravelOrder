@@ -374,7 +374,7 @@ input {
 }
 
 .body2 {
-  background: #363636d4;
+  background: #363636d4!important;
   color: white;
 }
 

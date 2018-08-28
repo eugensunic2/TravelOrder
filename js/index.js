@@ -83,6 +83,13 @@ var storageObjOstali = [];
   document.querySelector('#ostali-edit-close').style.display = 'none';
   // MAIN FUNCTION CALL BEGIN
   // FIRST WORD PAGE BEGIN
+  // window.addEventListener('click', function(event) {
+  //   console.log(event.target)
+  //   if (event.target !== document.querySelector('#currency-drop')) {
+  //     document.querySelector('#dropdown-menu3').style.display = 'none';
+  //   }
+  // });
+
   document.querySelector('#redni-broj-fullname').addEventListener('input', function(e) {
     this.style.border = '';
   });
@@ -149,10 +156,6 @@ var storageObjOstali = [];
   });
   // trosak validation
   document.querySelector('#trosak-name').addEventListener('input', function(e) {
-    this.style.border = '';
-  });
-  // currency dropdown
-  document.querySelector('#currency-drop').addEventListener('click', function(e) {
     this.style.border = '';
   });
   // currency rate value
@@ -317,6 +320,11 @@ var storageObjOstali = [];
     } else {
       this.classList.add('is-active');
     }
+    this.style.border = '';
+
+    setTimeout(() => {
+      window.addEventListener('click', boundInfiniteScroll);
+    }, 1);
   });
 
   for (var i = 0; i < document.querySelectorAll('.dropdown-item').length; i++) {
@@ -851,4 +859,12 @@ function applyFriendStay(integerValue, friendStayEnable) {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function boundInfiniteScroll() {
+  if (document.querySelector('#currency-drop').className.indexOf('is-active') > -1) {
+    document.querySelector('#currency-drop').classList.remove('is-active');
+  }
+
+  window.removeEventListener('click', this.boundInfiniteScroll);
+  return;
 }

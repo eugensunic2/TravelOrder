@@ -237,7 +237,9 @@ var countries = [
   'Švedska',
   'Norveška',
   'Danska',
-  'Nizozemska'
+  'Nizozemska',
+  'Budimpešta',
+  'Spanjolska'
 ];
 
 $('.the-country .typeahead').typeahead(
