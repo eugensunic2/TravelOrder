@@ -35,8 +35,8 @@
       <div id="language" class="settings-section column mg-btm-10">
         <span class="flt-lft left-corner-text">Language-links-info</span>
         <?xml version="1.0" encoding="iso-8859-1"?>
-        <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-          y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        <svg version="1.1" id="croatian-language" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
           <path style="fill:#F0F0F0;" d="M512,256c0-31.314-5.633-61.311-15.923-89.043L256,155.826l-240.077,11.13
         	C5.633,194.689,0,224.686,0,256s5.633,61.311,15.923,89.043L256,356.174l240.077-11.13C506.367,317.311,512,287.314,512,256z"
           />
@@ -68,8 +68,8 @@
           <path style="fill:#D80027;" d="M273.809,345.036v31.607c13.153-2.68,25.258-8.271,35.617-16.066v-15.541H273.809z" />
         </svg>
         <?xml version="1.0" encoding="iso-8859-1"?>
-        <svg version="1.1" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-          y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        <svg version="1.1" id="english-language" class="svg-language" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
           <circle style="fill:#F0F0F0;" cx="256" cy="256" r="256" />
           <path style="fill:#0052B4;" d="M52.92,100.142c-20.109,26.163-35.272,56.318-44.101,89.077h133.178L52.92,100.142z" />
           <path style="fill:#0052B4;" d="M503.181,189.219c-8.829-32.758-23.993-62.913-44.101-89.076l-89.075,89.076H503.181z" />
@@ -105,8 +105,11 @@
           <span>word sheet</span>
         </a>
         <p></p>
-        <span class="eng-cro">- decimalni iznosi moraju sadržavat
-          <span style="font-weight:600; text-decoration:underline;">točku</span> ne zarez, na kraju godine (yyyy) nema točke</span>
+        <div class="">
+          <span class="header-lang">- decimalni iznosi moraju sadržavat</span>
+          <span class="header-lang" style="font-weight:600; text-decoration:underline;">točku</span>
+          <span class="header-lang">ne zarez, na kraju godine (yyyy) nema točke</span>
+        </div>
       </div>
 
 
@@ -153,11 +156,11 @@
           <span class="font-element">font 1</span>
         </div>
         <div id="remove-content">
-          <span class="remove-content-text">show content</span>
+          <span class="remove-content-text">hide-content</span>
         </div>
         <span id="highlight-heading" class="inline-block hlt">hlt</span>
         <span id="night-mode" class="inline-block colorize">night</span>
-        <span id="row-default" class="inline-block colorize columns-inline">default</span>
+        <span id="row-default" class="inline-block colorize columns-inline">default-size</span>
         <span id="annotate-columns" class="inline-block colorize columns-inline annotate-btn">annotate</span>
       </div>
     </div>
@@ -165,9 +168,9 @@
 
     <div id="main-date-section" class="columns box-center box-border only-lower-screen">
       <div class="column">
-        <span class="left-corner-text-main eng-cro">R.broj i datum</span>
-        <p class="eng-cro flt-clr-lft">
-          <span>redni broj iz google drive sheeta i datum početka putovanja (mm.yyyy)</span>
+        <span class="left-corner-text-main eng-cro">Redni broj i datum</span>
+        <p class="flt-clr-lft">
+          <span class="eng-cro show-hide">redni broj iz google drive sheeta i datum početka putovanja (mm.yyyy)</span>
         </p>
         <div class="field inline-block order-number">
           <div class="control">
@@ -187,8 +190,8 @@
     <div id="person-info-section" class="columns box-center box-border only-lower-screen">
       <div class="column">
         <span class="left-corner-text-main eng-cro">Osoba</span>
-        <p class="eng-cro flt-clr-lft">
-          <span>Prezime Ime mora biti odvojeno razmakom kao i Grad država</span>
+        <p class="flt-clr-lft">
+          <span class="eng-cro show-hide">Prezime Ime mora biti odvojeno razmakom kao i Grad država</span>
         </p>
         <div class="flt-clr-bth">
           <div class="control inline-block">
@@ -232,8 +235,9 @@
             <input id="friend-stay" type="checkbox">
             <span>Friend stay</span>
           </label>
-          <span class="flt-clr-lft flt-lft eng-cro">Datum
-            <span class="eng-cro">(dd.mm.yyyy) datum polaska</span>
+          <span class="flt-clr-lft flt-lft">
+            <span class="eng-cro show-hide">Datum</span>
+            <span class="eng-cro show-hide">(dd.mm.yyyy) datum polaska</span>
           </span>
           <div class="date-width">
             <div class="field">
@@ -242,13 +246,15 @@
               </div>
             </div>
           </div>
-          <span class="eng-cro">Država
-            <span class="eng-cro">(ne upisivati već izaberite iz dropdowna menu)</span>
+          <span>
+            <span class="eng-cro show-hide">Država</span>
+            <span class="eng-cro show-hide">(ne upisivati već izaberite iz dropdowna menu)</span>
           </span>
           <div id="" class="mg-btm-10 the-country">
             <input id="country-name" class="typeahead flag-obracun typehead-specialize" type="text" placeholder="Odabir države">
           </div>
-          <span class="inline-block eng-cro">Polazak
+          <span class="inline-block">
+            <span class="eng-cro show-hide">Polazak</span>
             <span class="eng-cro">(dd.mm.yyyy hh:mm)</span>
           </span>
           <div class="inline-block">
@@ -258,7 +264,8 @@
               </div>
             </div>
           </div>
-          <span class="inline-block eng-cro">Povratak
+          <span class="inline-block">
+            <span class="eng-cro show-hide">Povratak</span>
             <span class="eng-cro">(dd.mm.yyyy hh:mm)</span>
           </span>
           <div class="inline-block">
@@ -291,8 +298,9 @@
           <div id="ostali-edit-close" class="back-button save-button" style="background-color:grey;color:#f2e9e9;">close</div>
         </div>
         <div class="add-ostali">
-          <span class="flt-clr-lft flt-lft eng-cro">Datum
-            <span class="eng-cro">(dd.mm.yyyy)</span>
+          <span class="flt-clr-lft flt-lft">
+            <span class="eng-cro show-hide">Datum</span>
+            <span class="eng-cro show-hide">(dd.mm.yyyy)</span>
           </span>
           <div class="date-width">
             <div class="field">
@@ -301,11 +309,12 @@
               </div>
             </div>
           </div>
-          <span class="eng-cro">Vrsta troška
-            <span class="eng-cro">(kratak opis troška)</span>
+          <span class="">
+            <span class="eng-cro show-hide">Vrsta troška</span>
+            <span class="eng-cro show-hide">(kratak opis troška)</span>
           </span>
           <div id="" class="mg-btm-10">
-            <input id="trosak-name" class="typeahead flag-ostali typehead-specialize" type="text" placeholder="Select trošak">
+            <input id="trosak-name" class="typeahead flag-ostali typehead-specialize" type="text" placeholder="Odabir troška">
           </div>
           <span class="eng-cro">Iznos</span>
           <div class="inline-block">
@@ -365,10 +374,9 @@
 
     <div id="predujam-section" class="columns box-center box-border mg-tp-44">
       <div class="column">
-        <span class="left-corner-text-main eng-cro">predujam/kredit
-        </span>
+        <span class="left-corner-text-main eng-cro">predujam/kredit</span>
         <div class="flt-clr-bth">
-          <span class="eng-cro">(ukoliko je uzeta neka dodatna svota novaca)</span>
+          <span class="eng-cro show-hide">(ukoliko je uzeta neka dodatna svota novaca)</span>
           <p></p>
           <div class="inline-block predujam-section-add">
             <div class="dp-block width-150">
@@ -380,13 +388,14 @@
       </div>
     </div>
 
-    <a id="preview-mode" class="button is-primary preview-mode eng-cro">Print mode</a>
+    <a id="preview-mode" class="button is-primary preview-mode">Print mode</a>
 
 
 
     <script src="./js/autocomplete.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/settings.js"></script>
+    <script src="./js/translate.js"></script>
 
 </body>
 
