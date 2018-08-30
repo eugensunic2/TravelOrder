@@ -19,58 +19,93 @@
     'Tečaj',
     'Iznos u Kn'
   ];
+  var zeroContainer = document.createElement('div');
+  zeroContainer.setAttribute('id', 'zero-print-container');
+  zeroContainer.style = 'margin-bottom:800px;';
+  document.body.appendChild(zeroContainer);
+
   var mainContainer = document.createElement('div');
   mainContainer.setAttribute('id', 'main-print-container');
   document.body.appendChild(mainContainer);
 
   // FIRST PAGE -- PERSON INFO PAGE
-  setPersonInfoTable();
+  setCompanyLogo(
+    'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg',
+    'zero-print-container'
+  );
+  setCompanyAddress(
+    'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de',
+    'zero-print-container'
+  );
+  setIntroHeader(
+    'PUTNI RAČUN',
+    JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
+    'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0],
+    'zero-print-container'
+  );
+
+  setPersonInfoTable(JSON.parse(localStorage.getItem('first-section')));
   setPersonFooter();
 
   // SECOND PAGE -- TRAVEL EXPENSE PAGE
+  setCompanyLogo(
+    'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg',
+    'main-print-container'
+  );
+  setCompanyAddress(
+    'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de',
+    'main-print-container'
+  );
+  setIntroHeader(
+    'PUTNI RAČUN',
+    JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
+    'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0],
+    'main-print-container'
+  );
 
-  // setCompanyLogo(
-  //   'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
-  // );
-  // setCompanyAddress(
-  //   'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de'
-  // );
-  // setIntroHeader(
-  //   'PUTNI RAČUN',
-  //   JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
-  //   'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0]
-  // );
-  // setIntermediateHeader();
-  // if (JSON.parse(localStorage.getItem('obracun-table')).length > 1) {
-  //   generateTable(
-  //     JSON.parse(localStorage.getItem('obracun-table')).length,
-  //     JSON.parse(localStorage.getItem('obracun-table')),
-  //     300,
-  //     obracunDnevniceArray,
-  //     'OBRAČUN DNEVNICE',
-  //     9,
-  //     'obracun-table'
-  //   );
-  // }
-  // if (JSON.parse(localStorage.getItem('ostali-table')).length > 1) {
-  //   generateTable(
-  //     JSON.parse(localStorage.getItem('ostali-table')).length,
-  //     JSON.parse(localStorage.getItem('ostali-table')),
-  //     300,
-  //     obracunOstaliArray,
-  //     'OBRAČUN OSTALIH TROŠKOVA',
-  //     7,
-  //     'ostali-table'
-  //   );
-  // }
+  setIntermediateHeader();
+  if (JSON.parse(localStorage.getItem('obracun-table')).length > 1) {
+    generateTable(
+      JSON.parse(localStorage.getItem('obracun-table')).length,
+      JSON.parse(localStorage.getItem('obracun-table')),
+      300,
+      obracunDnevniceArray,
+      'OBRAČUN DNEVNICE',
+      9,
+      'obracun-table'
+    );
+  }
+  if (JSON.parse(localStorage.getItem('ostali-table')).length > 1) {
+    generateTable(
+      JSON.parse(localStorage.getItem('ostali-table')).length,
+      JSON.parse(localStorage.getItem('ostali-table')),
+      300,
+      obracunOstaliArray,
+      'OBRAČUN OSTALIH TROŠKOVA',
+      7,
+      'ostali-table'
+    );
+  }
 
-  // overallPriceDisplay(getTotalSumValue(), localStorage.getItem('kredit-value'));
-  // setSignatureForm();
+  overallPriceDisplay(getTotalSumValue(), localStorage.getItem('kredit-value'));
+  setSignatureForm();
 })();
 
 // PERSON INFORMATION BEGIN
 
-function setPersonInfoTable() {
+function setPersonInfoTable(storageArray) {
+  var array_left = [
+    ' Određujem da:',
+    ' Zvanje: ',
+    'Radno mjesto:',
+    'službeno otputuje dana:',
+    'u:',
+    'opis:',
+    'Putovanje može trajati: ',
+    'Odobravamo upotrebu:',
+    'Početno stanje brojila km: ',
+    'Završno stanje brojila km: '
+  ];
   var container = document.createElement('div');
   container.setAttribute('class', 'columns');
   container.style =
@@ -83,14 +118,23 @@ function setPersonInfoTable() {
   div_2.setAttribute('class', 'column');
   div_2.style = 'border-left: 1px solid #d8d4d4;';
 
-  div_1.innerHTML =
-    '<p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p><p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p><p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p>  <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p>';
-  div_2.innerHTML =
-    '<p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Comsysto Zagreb</p>';
+  for (var i = 0; i < storageArray.length; i++) {
+    if (storageArray[i] !== '') {
+      var column_left = document.createElement('p');
+      column_left.className = 'person-info-table-left';
+      column_left.innerHTML = array_left[i];
+      div_1.appendChild(column_left);
+
+      var column_right = document.createElement('p');
+      column_right.className = 'mg-btm-5';
+      column_right.innerHTML = storageArray[i];
+      div_2.appendChild(column_right);
+    }
+  }
 
   container.appendChild(div_1);
   container.appendChild(div_2);
-  document.body.appendChild(container);
+  document.querySelector('#zero-print-container').appendChild(container);
 }
 
 function setPersonFooter() {
@@ -124,7 +168,7 @@ function setPersonFooter() {
   container.appendChild(div_2);
   container.appendChild(div_3);
 
-  document.body.appendChild(container);
+  document.querySelector('#zero-print-container').appendChild(container);
 }
 
 // PERSON INFORMATION END
@@ -206,24 +250,24 @@ function setTableTitle(titleTxt) {
   document.querySelector('#main-print-container').appendChild(title);
 }
 
-function setCompanyLogo(imgPath) {
+function setCompanyLogo(imgPath, id) {
   var image = document.createElement('img');
   image.setAttribute('src', imgPath);
   image.setAttribute('id', 'logo');
 
-  document.querySelector('#main-print-container').appendChild(image);
+  document.querySelector('#' + id).appendChild(image);
 }
 
-function setCompanyAddress(address) {
+function setCompanyAddress(address, id) {
   var adr = document.createElement('p');
   adr.setAttribute('class', 'center');
   adr.style = 'color:grey;margin-top:10px;font-size:12px;margin-bottom:30px';
   adr.innerHTML = address;
 
-  document.querySelector('#main-print-container').appendChild(adr);
+  document.querySelector('#' + id).appendChild(adr);
 }
 
-function setIntroHeader(titleTxt, dateTxt, numberTxt) {
+function setIntroHeader(titleTxt, dateTxt, numberTxt, id) {
   // parent
   var container = document.createElement('div');
   container.setAttribute('class', 'intro-header-container');
@@ -244,7 +288,7 @@ function setIntroHeader(titleTxt, dateTxt, numberTxt) {
   container.appendChild(date);
   container.appendChild(number);
 
-  document.querySelector('#main-print-container').appendChild(container);
+  document.querySelector('#' + id).appendChild(container);
 }
 
 function setIntermediateHeader() {
@@ -354,7 +398,7 @@ function setSignatureForm() {
   container.setAttribute('class', 'columns');
 
   container.style =
-    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);position: absolute;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
+    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);position:relative;top:281px;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
