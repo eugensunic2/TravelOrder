@@ -24,48 +24,112 @@
   document.body.appendChild(mainContainer);
 
   // FIRST PAGE -- PERSON INFO PAGE
+  setPersonInfoTable();
+  setPersonFooter();
 
   // SECOND PAGE -- TRAVEL EXPENSE PAGE
 
-  setCompanyLogo(
-    'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
-  );
-  setCompanyAddress(
-    'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de'
-  );
-  setIntroHeader(
-    'PUTNI RAČUN',
-    JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
-    'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0]
-  );
-  setIntermediateHeader();
-  if (JSON.parse(localStorage.getItem('obracun-table')).length > 1) {
-    generateTable(
-      JSON.parse(localStorage.getItem('obracun-table')).length,
-      JSON.parse(localStorage.getItem('obracun-table')),
-      300,
-      obracunDnevniceArray,
-      'OBRAČUN DNEVNICE',
-      9,
-      'obracun-table'
-    );
-  }
-  if (JSON.parse(localStorage.getItem('ostali-table')).length > 1) {
-    generateTable(
-      JSON.parse(localStorage.getItem('ostali-table')).length,
-      JSON.parse(localStorage.getItem('ostali-table')),
-      300,
-      obracunOstaliArray,
-      'OBRAČUN OSTALIH TROŠKOVA',
-      7,
-      'ostali-table'
-    );
-  }
+  // setCompanyLogo(
+  //   'https://global-uploads.webflow.com/5ad0acc69f356a98471287a3/5ae073d500595f83d49e713a_logo_Comsysto-Reply_color.svg'
+  // );
+  // setCompanyAddress(
+  //   'Comsysto Reply d.o.o. &#8226; Ilirska 33 &#8226;  10000 Zagreb &#8226; comsystoreply.de &#8226; office-zg.comsysto@reply.de'
+  // );
+  // setIntroHeader(
+  //   'PUTNI RAČUN',
+  //   JSON.parse(localStorage.getItem('first-section'))[1].replace('.', '/'),
+  //   'Br.:' + JSON.parse(localStorage.getItem('first-section'))[0]
+  // );
+  // setIntermediateHeader();
+  // if (JSON.parse(localStorage.getItem('obracun-table')).length > 1) {
+  //   generateTable(
+  //     JSON.parse(localStorage.getItem('obracun-table')).length,
+  //     JSON.parse(localStorage.getItem('obracun-table')),
+  //     300,
+  //     obracunDnevniceArray,
+  //     'OBRAČUN DNEVNICE',
+  //     9,
+  //     'obracun-table'
+  //   );
+  // }
+  // if (JSON.parse(localStorage.getItem('ostali-table')).length > 1) {
+  //   generateTable(
+  //     JSON.parse(localStorage.getItem('ostali-table')).length,
+  //     JSON.parse(localStorage.getItem('ostali-table')),
+  //     300,
+  //     obracunOstaliArray,
+  //     'OBRAČUN OSTALIH TROŠKOVA',
+  //     7,
+  //     'ostali-table'
+  //   );
+  // }
 
-  overallPriceDisplay(getTotalSumValue(), localStorage.getItem('kredit-value'));
-  setSignatureForm();
+  // overallPriceDisplay(getTotalSumValue(), localStorage.getItem('kredit-value'));
+  // setSignatureForm();
 })();
 
+// PERSON INFORMATION BEGIN
+
+function setPersonInfoTable() {
+  var container = document.createElement('div');
+  container.setAttribute('class', 'columns');
+  container.style =
+    'border: 2px solid #e2e1e1;margin-left:0px; margin-right:0px;margin-bottom:30px;';
+
+  var div_1 = document.createElement('div');
+  var div_2 = document.createElement('div');
+
+  div_1.setAttribute('class', 'column');
+  div_2.setAttribute('class', 'column');
+  div_2.style = 'border-left: 1px solid #d8d4d4;';
+
+  div_1.innerHTML =
+    '<p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p><p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p><p style=float:right;clear:both;margin-bottom:5px;>Određujem da:</p> <p style=float:right;clear:both;margin-bottom:5px;>Zvanje: </p> <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p>  <p style=float:right;clear:both;margin-bottom:5px;>Radno mjesto:</p>';
+  div_2.innerHTML =
+    '<p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Eugen Sunic</p> <p class="mg-btm-5">mag.ing</p> <p class="mg-btm-5">Comsysto Zagreb</p><p class="mg-btm-5">Comsysto Zagreb</p>';
+
+  container.appendChild(div_1);
+  container.appendChild(div_2);
+  document.body.appendChild(container);
+}
+
+function setPersonFooter() {
+  var container = document.createElement('div');
+  container.setAttribute('class', 'columns');
+
+  container.style =
+    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);position: absolute;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
+
+  var div_1 = document.createElement('div');
+  var div_2 = document.createElement('div');
+  var div_3 = document.createElement('div');
+
+  div_1.setAttribute('class', 'column');
+  div_2.setAttribute('class', 'column center');
+  div_3.setAttribute('class', 'column center');
+
+  div_2.style = 'border-left: 2px solid #ffffff;';
+  div_3.style = 'border-left: 2px solid #ffffff;';
+
+  div_1.innerHTML = 'Zagreb, ' + getDateFormatDDMMYYYY();
+  div_2.innerHTML = 'M.P';
+
+  var span_3 = document.createElement('span');
+  span_3.innerHTML = 'Nalogodavac';
+  span_3.style = 'position:relative;border-top:1px solid grey;top:10px;padding-top:2px;';
+
+  div_3.appendChild(span_3);
+
+  container.appendChild(div_1);
+  container.appendChild(div_2);
+  container.appendChild(div_3);
+
+  document.body.appendChild(container);
+}
+
+// PERSON INFORMATION END
+
+// TRAVEL INFORMATION PART
 function appendBackButton() {
   var newdiv = document.createElement('div');
   newdiv.innerHTML = 'go back';

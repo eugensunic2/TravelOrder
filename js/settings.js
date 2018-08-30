@@ -161,6 +161,11 @@
         ? (document.querySelectorAll('.ch-link')[i].style.color = '#a0d4a0cf')
         : (document.querySelectorAll('.ch-link')[i].style.color = '');
     }
+    for (var i = 0; i < document.querySelectorAll('.tech').length; i++) {
+      nigth_mode_toggle
+        ? (document.querySelectorAll('.tech')[i].style.color = '#a0d4a0cf')
+        : (document.querySelectorAll('.tech')[i].style.color = '');
+    }
   });
 })();
 

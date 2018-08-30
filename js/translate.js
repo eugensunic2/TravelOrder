@@ -100,7 +100,7 @@
     document.querySelectorAll('.person-me')[3].placeholder = 'Grad Drzava';
     document.querySelectorAll('.person-me')[4].placeholder = 'Gdje (kod klijenta-opis)';
     document.querySelectorAll('.person-me')[5].placeholder = 'Dodatan opis putovanja';
-    document.querySelectorAll('.person-me')[6].placeholder = 'Pocetno stanje (Km)';
-    document.querySelectorAll('.person-me')[7].placeholder = 'Zavrsno stanje (Km)';
+    document.querySelectorAll('.person-me')[6].placeholder = 'Početno stanje (Km)';
+    document.querySelectorAll('.person-me')[7].placeholder = 'Završno stanje (Km)';
   });
 })();
