@@ -10,6 +10,7 @@
     'Jedinične <br/>Dnevnice',
     'Iznos u Kn'
   ];
+
   var obracunOstaliArray = [
     'Br.',
     'Datum',
@@ -19,9 +20,12 @@
     'Tečaj',
     'Iznos u Kn'
   ];
+
+  renderPrintButton('PRINT DOCUMENT');
+
   var zeroContainer = document.createElement('div');
   zeroContainer.setAttribute('id', 'zero-print-container');
-  zeroContainer.style = 'margin-bottom:800px;';
+  zeroContainer.style = 'margin-bottom:1000px;';
   document.body.appendChild(zeroContainer);
 
   var mainContainer = document.createElement('div');
@@ -127,7 +131,7 @@ function setPersonInfoTable(storageArray) {
 
       var column_right = document.createElement('p');
       column_right.className = 'mg-btm-5';
-      column_right.innerHTML = storageArray[i];
+      column_right.innerHTML = storageArray[i + 2];
       div_2.appendChild(column_right);
     }
   }
@@ -223,7 +227,9 @@ function generateTable(rowNum, data, totalValue, headerNamesArray, tableTitle, c
           var td = document.createElement('td');
           td.style = 'text-align:center;padding:2px';
           if (storeID === 'obracun-table') {
-            if (j > 3) td.innerHTML = handleMoreThan3Digit(replaceDot(newData[j]));
+            if (j === 4) {
+              td.innerHTML = newData[j].substring(0, newData[j].length - 2);
+            } else if (j > 3) td.innerHTML = handleMoreThan3Digit(replaceDot(newData[j]));
             else td.innerHTML = newData[j];
           } else if (storeID === 'ostali-table') {
             if (j > 1) td.innerHTML = handleMoreThan3Digit(replaceDot(newData[j]));
@@ -398,7 +404,7 @@ function setSignatureForm() {
   container.setAttribute('class', 'columns');
 
   container.style =
-    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);position:relative;top:281px;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
+    'border: 1px solid rgb(231, 229, 229);background: rgb(239, 239, 239);top:328px;right: 0; bottom: 0;left: 0;background-color: #efefef;text-align: center;margin-bottom: 10px;';
 
   var div_1 = document.createElement('div');
   var div_2 = document.createElement('div');
@@ -443,7 +449,11 @@ function setSignatureForm() {
   container.appendChild(div_1);
   container.appendChild(div_par);
 
-  document.querySelector('#main-print-container').appendChild(container);
+  var wrapperContainer = document.createElement('div');
+  wrapperContainer.classList.add('signature-wrapper');
+  wrapperContainer.appendChild(container);
+
+  document.querySelector('#main-print-container').appendChild(wrapperContainer);
 }
 
 function getSubAmountValue(localStorageId) {
@@ -532,4 +542,13 @@ function handleMoreThan3Digit(value) {
     return part_1 + part_2;
   }
   return value;
+}
+function renderPrintButton(text) {
+  var button = document.createElement('div');
+  button.className = 'print-document';
+  button.innerHTML = text;
+  button.addEventListener('click', function() {
+    window.print();
+  });
+  document.body.appendChild(button);
 }

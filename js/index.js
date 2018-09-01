@@ -46,7 +46,7 @@ var storageObjOstali = [];
           ? parseFloat(document.querySelector('#predujam-value').value).toFixed(2)
           : ''
       );
-      //window.location.href = './print.html';
+      window.location.href = './print.html';
     } else {
       window.scrollTo(0, 0);
       if (!isNumberOnly('#redni-broj')) {

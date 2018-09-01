@@ -87,3 +87,35 @@ td {
   clear: both;
   margin-bottom: 5px;
 }
+
+.print-document {
+  text-align: center;
+  border: 1px solid #dad9d9;
+  font-size: 24px;
+  cursor: pointer;
+  position: fixed;
+  background: #f7f7f7;
+  padding: 2px;
+  z-index: 100;
+  color: #e91e63db;
+  box-shadow: 1px 1px 1px #0a0a0a;
+}
+
+.signature-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 1912px;
+  visibility: hidden;
+}
+
+@media print {
+  .signature-wrapper {
+    visibility: visible;
+  }
+  .print-document {
+    display: none;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+}

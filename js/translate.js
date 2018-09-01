@@ -31,7 +31,7 @@
     'Order number from google drive and trip begin date (mm.yyyy)',
     'Person',
     'Lastname firstname, city, country must be separated with a comma',
-    'Trip section',
+    'Travel section',
     'Date',
     '(dd.mm.yyyy) start date',
     'Country',
@@ -61,10 +61,12 @@
     document.querySelectorAll('.header-lang')[1].innerHTML = 'a dot';
     document.querySelectorAll('.header-lang')[2].innerHTML =
       'not a comma, at the end of the year(yyyy) dot character doesn&#39;t exist';
+    document.querySelector('#main-heading').innerHTML = 'Travel order';
 
     // odabir države, select trosak
     document.querySelector('#country-name').placeholder = 'Choose country';
     document.querySelector('#trosak-name').placeholder = 'Expense name';
+    document.querySelector('#redni-broj').placeholder = 'num';
 
     // input section person
     document.querySelectorAll('.person-me')[0].placeholder = 'First Lastname';
@@ -89,9 +91,11 @@
     document.querySelectorAll('.header-lang')[2].innerHTML =
       'ne zarez, na kraju godine (yyyy) nema točke';
 
+    document.querySelector('#main-heading').innerHTML = 'Putni nalog';
     // odabir države, select trosak
     document.querySelector('#country-name').placeholder = 'Odabir države';
     document.querySelector('#trosak-name').placeholder = 'Odabir troška';
+    document.querySelector('#redni-broj').placeholder = 'R.br.';
 
     // input section person
     document.querySelectorAll('.person-me')[0].placeholder = 'Ime Prezime';
