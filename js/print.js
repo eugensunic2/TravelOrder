@@ -99,6 +99,8 @@
 
 function setPersonInfoTable(storageArray) {
   var array_left = [
+    '',
+    '',
     ' Određujem da:',
     ' Zvanje: ',
     'Radno mjesto:',
@@ -122,8 +124,9 @@ function setPersonInfoTable(storageArray) {
   div_2.setAttribute('class', 'column');
   div_2.style = 'border-left: 1px solid #d8d4d4;';
 
-  for (var i = 0; i < storageArray.length; i++) {
+  for (var i = 2; i < storageArray.length; i++) {
     if (storageArray[i] !== '') {
+      console.log(storageArray[i]);
       var column_left = document.createElement('p');
       column_left.className = 'person-info-table-left';
       column_left.innerHTML = array_left[i];
@@ -131,7 +134,7 @@ function setPersonInfoTable(storageArray) {
 
       var column_right = document.createElement('p');
       column_right.className = 'mg-btm-5';
-      column_right.innerHTML = storageArray[i + 2];
+      column_right.innerHTML = storageArray[i];
       div_2.appendChild(column_right);
     }
   }
