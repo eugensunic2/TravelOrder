@@ -73,7 +73,7 @@
     document.querySelectorAll('.person-me')[1].placeholder = 'Title';
     document.querySelectorAll('.person-me')[2].placeholder = 'Job title';
     document.querySelectorAll('.person-me')[3].placeholder = 'City Country';
-    document.querySelectorAll('.person-me')[4].placeholder = 'Where (client-description)';
+    document.querySelectorAll('.person-me')[4].placeholder = 'Where (client)';
     document.querySelectorAll('.person-me')[5].placeholder = 'Trip description';
     document.querySelectorAll('.person-me')[6].placeholder = 'Counter begin (Km)';
     document.querySelectorAll('.person-me')[7].placeholder = 'Counter end (Km)';

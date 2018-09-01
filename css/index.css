@@ -5,7 +5,6 @@ input {
   font-weight: 600 !important;
 }
 
-
 .btm-1 {
   bottom: 1px;
 }
@@ -170,6 +169,9 @@ input {
 #hide-show-btn {
   font-size: 16px;
   float: left;
+  position: absolute;
+  top: -40px;
+  left: 10px;
 }
 
 .logo {
@@ -374,7 +376,7 @@ input {
 }
 
 .body2 {
-  background: #363636d4!important;
+  background: #363636d4 !important;
   color: white;
 }
 

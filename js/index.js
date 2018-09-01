@@ -13,7 +13,7 @@ var storageObjOstali = [];
   var globalSpanClass;
   // document
 
-  // PREVIEW-MODE
+  // PREVIEW-MODE BEGIN
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
     e.preventDefault();
 
@@ -21,8 +21,8 @@ var storageObjOstali = [];
       isNumberOnly('#redni-broj') &&
       isValideMonthYear('.is-medium', 1) &&
       isBasicValidation('#redni-broj-fullname') &&
-      isBasicValidation('#redni-broj-zvanje') &&
       isBasicValidation('#redni-broj-naziv-radnog') &&
+      isBasicValidationOne('#redni-broj-zvanje') &&
       isBasicValidation('#redni-broj-grad-drzava') &&
       isBasicValidation('#redni-broj-gdje') &&
       document.querySelectorAll('.loopme')[0]
@@ -52,12 +52,10 @@ var storageObjOstali = [];
       if (!isNumberOnly('#redni-broj')) {
         document.querySelector('#redni-broj').style.border = '2px solid #ff88a0';
       }
-
-      // BEGIN-- INPUT FIRST WORD PAGE VALIDATION
       if (!isBasicValidation('#redni-broj-fullname')) {
         document.querySelector('#redni-broj-fullname').style.border = '2px solid #ff88a0';
       }
-      if (!isBasicValidation('#redni-broj-zvanje')) {
+      if (!isBasicValidationOne('#redni-broj-zvanje')) {
         document.querySelector('#redni-broj-zvanje').style.border = '2px solid #ff88a0';
       }
       if (!isBasicValidation('#redni-broj-naziv-radnog')) {
@@ -69,26 +67,17 @@ var storageObjOstali = [];
       if (!isBasicValidation('#redni-broj-gdje')) {
         document.querySelector('#redni-broj-gdje').style.border = '2px solid #ff88a0';
       }
-      // END-- INPUT FIRST WORD PAGE VALIDATION
       if (!isValideMonthYear('.is-medium', 1)) {
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
       } else {
         alert('Fill at least one main section (Obracun dnevnica or Ostali troskovi)');
       }
     }
-    // first section
+    // PREVIEW-MODE END
   });
 
   document.querySelector('#obracun-edit-close').style.display = 'none';
   document.querySelector('#ostali-edit-close').style.display = 'none';
-  // MAIN FUNCTION CALL BEGIN
-  // FIRST WORD PAGE BEGIN
-  // window.addEventListener('click', function(event) {
-  //   console.log(event.target)
-  //   if (event.target !== document.querySelector('#currency-drop')) {
-  //     document.querySelector('#dropdown-menu3').style.display = 'none';
-  //   }
-  // });
 
   document.querySelector('#redni-broj-fullname').addEventListener('input', function(e) {
     this.style.border = '';
@@ -701,6 +690,9 @@ function isNumberOnly(selector) {
 
 function isBasicValidation(selector) {
   return document.querySelector(selector).value.length > 3;
+}
+function isBasicValidationOne(selector) {
+  return document.querySelector(selector).value.length > 1;
 }
 
 function isCurrencySelected() {
