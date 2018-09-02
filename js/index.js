@@ -16,12 +16,7 @@ var storageObjOstali = [];
   // document
   document.addEventListener('click', function(e) {
     e.stopPropagation();
-    if (
-      e.target !== document.querySelector('#dropdown-menu3') &&
-      e.target !== document.querySelector('#main-wrapper')
-    ) {
-      console.log('here');
-
+    if (e.target !== document.querySelector('#dropdown-menu3')) {
       document.querySelector('#currency-drop').classList.remove('is-active');
     }
   });
