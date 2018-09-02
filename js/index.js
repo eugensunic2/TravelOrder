@@ -9,9 +9,22 @@ var storageObjOstali = [];
 
 (function() {
   // on load
+  // because of some bug
+  document.querySelector('#reset-currency-input').value = '';
   var globalObjHTML;
   var globalSpanClass;
   // document
+  document.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (
+      e.target !== document.querySelector('#dropdown-menu3') &&
+      e.target !== document.querySelector('#main-wrapper')
+    ) {
+      console.log('here');
+
+      document.querySelector('#currency-drop').classList.remove('is-active');
+    }
+  });
 
   // PREVIEW-MODE BEGIN
   document.querySelector('#preview-mode').addEventListener('click', function(e) {
@@ -257,8 +270,7 @@ var storageObjOstali = [];
       !validateDateOnly('.date-only', 1) &&
       isNumberOnly('.digit-only') &&
       isBasicValidation('#trosak-name') &&
-      isCurrencySelected() &&
-      isCurrencyRate()
+      isCurrencySelected()
     ) {
       createPreviewContainerFirstRow(
         'edit-ostali',
@@ -304,16 +316,13 @@ var storageObjOstali = [];
 
   // CURRENCY DROPDOWN EVENTS
   document.querySelector('#currency-drop').addEventListener('click', function(e) {
+    e.stopPropagation();
     if (this.className.indexOf('is-active') > -1) {
       this.classList.remove('is-active');
     } else {
       this.classList.add('is-active');
     }
     this.style.border = '';
-
-    setTimeout(() => {
-      window.addEventListener('click', boundInfiniteScroll);
-    }, 1);
   });
 
   for (var i = 0; i < document.querySelectorAll('.dropdown-item').length; i++) {
@@ -843,7 +852,7 @@ function applyFriendStay(integerValue, friendStayEnable) {
   if (integerValue === 350) {
     return 500;
   } else if (integerValue === 170) {
-    // ovo treba provjerit
+    // ovo treba provjerit, OVO NEZNAMO KOLKO JE
     return 250;
   }
   return 500;
@@ -851,12 +860,4 @@ function applyFriendStay(integerValue, friendStayEnable) {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-function boundInfiniteScroll() {
-  if (document.querySelector('#currency-drop').className.indexOf('is-active') > -1) {
-    document.querySelector('#currency-drop').classList.remove('is-active');
-  }
-
-  window.removeEventListener('click', this.boundInfiniteScroll);
-  return;
 }
