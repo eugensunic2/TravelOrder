@@ -77,9 +77,7 @@ var storageObjOstali = [];
       }
       if (!isValideMonthYear('.is-medium', 1)) {
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
-      } else {
-        alert('Fill at least one main section (Obracun dnevnica or Ostali troskovi)');
-      }
+      } 
     }
     // PREVIEW-MODE END
   });

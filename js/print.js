@@ -101,14 +101,12 @@ function setPersonInfoTable(storageArray) {
   var array_left = [
     '',
     '',
-    ' Određujem da:',
-    ' Zvanje: ',
+    'Određujem da:',
+    'Zvanje: ',
     'Radno mjesto:',
-    'službeno otputuje dana:',
+    'Datum polaska:',
     'u:',
     'opis:',
-    'Putovanje može trajati: ',
-    'Odobravamo upotrebu:',
     'Početno stanje brojila km: ',
     'Završno stanje brojila km: '
   ];
@@ -126,7 +124,6 @@ function setPersonInfoTable(storageArray) {
 
   for (var i = 2; i < storageArray.length; i++) {
     if (storageArray[i] !== '') {
-      console.log(storageArray[i]);
       var column_left = document.createElement('p');
       column_left.className = 'person-info-table-left';
       column_left.innerHTML = array_left[i];
@@ -547,9 +544,22 @@ function handleMoreThan3Digit(value) {
   return value;
 }
 function renderPrintButton(text) {
+  var extraString = `
+  <div style="font-size:14px; color:black">
+  <p>Layout: portrait</p>
+  <p>Colour: colour</p>
+  <p>Paper size: A4</p>
+  <p>Margins: Default</p>
+  <p>Scale: 109</p>
+  <div>Options:
+      <p>uncheck:Header and footers, Two-sided</p>
+      <p>check: Background graphics</p>
+  </div>
+</div>`;
   var button = document.createElement('div');
   button.className = 'print-document';
-  button.innerHTML = text;
+  button.innerHTML = text + extraString;
+
   button.addEventListener('click', function() {
     window.print();
   });
