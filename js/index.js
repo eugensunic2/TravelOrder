@@ -11,6 +11,7 @@ var storageObjOstali = [];
   // on load
   // because of some bug
   document.querySelector('#reset-currency-input').value = '';
+  document.querySelector('#currency-rate-value').value = '';
   var globalObjHTML;
   var globalSpanClass;
   // document
