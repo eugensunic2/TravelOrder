@@ -78,7 +78,7 @@ var storageObjOstali = [];
       }
       if (!isValideMonthYear('.is-medium', 1)) {
         document.querySelectorAll('.is-medium')[1].style.border = '2px solid #ff88a0';
-      } 
+      }
     }
     // PREVIEW-MODE END
   });
