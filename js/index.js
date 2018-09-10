@@ -588,14 +588,14 @@ function modifyTotalValueSub(selector, friendStay) {
 }
 // date validation
 function validateDate(selector1, selector2) {
-  var begin = document
-    .querySelector(selector1)
-    .value.trimStart()
-    .trimEnd();
-  var end = document
-    .querySelector(selector2)
-    .value.trimStart()
-    .trimEnd();
+  if (document.querySelector(selector1).value === 'undefined') {
+    document.querySelector(selector2).value = '';
+  }
+  if (document.querySelector(selector2).value === 'undefined') {
+    document.querySelector(selector2).value = '';
+  }
+  var begin = document.querySelector(selector1).value.trim();
+  var end = document.querySelector(selector2).value.trim();
 
   if (
     begin.match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null &&
@@ -609,8 +609,7 @@ function validateDate(selector1, selector2) {
 function validateBeginDate(selector, index) {
   return document
     .querySelectorAll(selector)
-    [index].value.trimStart()
-    .trimEnd()
+    [index].value.trim()
     .match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null
     ? false
     : true;
@@ -619,8 +618,7 @@ function validateBeginDate(selector, index) {
 function validateEndDate(selector, index) {
   return document
     .querySelectorAll(selector)
-    [index].value.trimStart()
-    .trimEnd()
+    [index].value.trim()
     .match(/^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2})$/) !== null
     ? false
     : true;
@@ -629,8 +627,7 @@ function validateEndDate(selector, index) {
 function validateDateOnly(selector, index) {
   return document
     .querySelectorAll(selector)
-    [index].value.trimStart()
-    .trimEnd()
+    [index].value.trim()
     .match(/^(\d{2})\.(\d{2})\.(\d{4})$/) !== null
     ? false
     : true;
@@ -640,8 +637,7 @@ function isValideMonthYear(selector, index) {
   var temp =
     document
       .querySelectorAll(selector)
-      [index].value.trimStart()
-      .trimEnd()
+      [index].value.trim()
       .match(/^(\d{2})\.(\d{4})$/) !== null
       ? true
       : false;
@@ -651,16 +647,14 @@ function isValideMonthYear(selector, index) {
     parseInt(
       document
         .querySelectorAll(selector)
-        [index].value.trimStart()
-        .trimEnd()
+        [index].value.trim()
         .substring(0, 2),
       10
     ) <= 12 &&
     parseInt(
       document
         .querySelectorAll(selector)
-        [index].value.trimStart()
-        .trimEnd()
+        [index].value.trim()
         .substring(0, 2),
       10
     ) > 0
@@ -674,20 +668,17 @@ function isValideMonthYear(selector, index) {
 function isEndDateSmaller(selector1, selector2, index) {
   var begin = document
     .querySelectorAll(selector1)
-    [index].value.trimStart()
-    .trimEnd();
+    [index].value.trim();
   var end = document
     .querySelectorAll(selector2)
-    [index].value.trimStart()
-    .trimEnd();
+    [index].value.trim();
   return dateTimeToDays(begin, end) < 0;
 }
 
 function isNumberOnly(selector) {
   var value = document
     .querySelector(selector)
-    .value.trimStart()
-    .trimEnd();
+    .value.trim();
   return value.length > 0 && value % 1 >= 0;
 }
 
